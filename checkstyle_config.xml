@@ -8,6 +8,7 @@
   https://google.github.io/styleguide/javaguide.html
  -->
 
+
 <module name="Checker">
   <property name="charset" value="UTF-8"/>
 
