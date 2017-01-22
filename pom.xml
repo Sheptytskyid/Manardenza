@@ -16,6 +16,15 @@
         </dependency>
     </dependencies>
 
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -59,6 +68,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
+                    <serviceName>travis-ci</serviceName>
                     <repoToken>ejHLSgdRbSgVUc7BImQ6O4Mmugx63Rptm</repoToken>
                 </configuration>
             </plugin>
