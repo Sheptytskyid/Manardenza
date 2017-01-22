@@ -18,7 +18,6 @@ If you discover a security vulnerability within Manardenza, please send an e-mai
 The our product is open-sourced software licensed under the MIT license.
 
 ## Authors
-* **Andrew Koziulia**
 * **Artem Koliusko**
 * **Denys Sheptytskyi**
 * **Enver Abseliamov**
