@@ -29,7 +29,6 @@ local.properties
 /log/
 *.log
 
-
 ### Package files ###
 *.jar
 *.war
