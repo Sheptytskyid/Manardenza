@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Sheptytskyid/JavaCoreFinalProjectGroup6.svg?branch=master)](https://travis-ci.org/Sheptytskyid/JavaCoreFinalProjectGroup6)
+[![Coverage Status](https://coveralls.io/repos/github/Sheptytskyid/JavaCoreFinalProjectGroup6/badge.svg?branch=coveralls_integration)](https://coveralls.io/github/Sheptytskyid/JavaCoreFinalProjectGroup6?branch=coveralls_integration)
 
 ## About Manardenza
 Manardenza.com, the world leader in booking accommodations online. Each day, over 1,000,000 room nights are reserved on Manardenza.com. The Manardenza.com website and apps attract visitors from both the leisure and business sectors worldwide.
