@@ -5,4 +5,8 @@ public class Main {
         // Unauthorized commit to master
     }
 
+    public int test() {
+        return 1;
+    }
+
 }
