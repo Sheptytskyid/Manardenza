@@ -23,9 +23,3 @@ The our product is open-sourced software licensed under the MIT license.
 * **Enver Abseliamov**
 * **Maxim Semyonov**
 * **Zakhar Kyrychenko**
-
-
-
-
-
-
