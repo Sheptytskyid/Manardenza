@@ -2,11 +2,16 @@ package servise;
 
 import entities.Hotel;
 import entities.Room;
+import entities.User;
 
 import java.util.List;
 import java.util.Map;
 
 public class Service {
+
+    public  void userRegistration(User userToRegistration) {
+
+    }
 
     public List<Hotel> findHotelByName(String hotelName) {
         return null;

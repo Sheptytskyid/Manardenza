@@ -28,4 +28,12 @@ public class Controller<T> {
     public List<T> getAll() {
         return null;
     }
+
+    public ArrayList<Hotel> getHotelsByName(String hotelName) {
+        return null;
+    }
+
+    public ArrayList<Hotel> getHotelsByCity(String hotelCity) {
+        return null;
+    }
 }

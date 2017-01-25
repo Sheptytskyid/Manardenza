@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 public class CurrentUser {
 
-    public static User currentUser;
+    private User user;
+    private static CurrentUser loggedUser = new CurrentUser();
 }
