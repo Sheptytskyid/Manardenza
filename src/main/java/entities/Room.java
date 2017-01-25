@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.commons.lang3.tuple.Triple;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -15,5 +15,5 @@ public class Room {
     private String name;
     private int person;
     private int price;
-    private List<Triple<Date, Date, User>> userReserved;
+    private List<Triple<LocalDate, LocalDate, User>> userReserved;
 }

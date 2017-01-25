@@ -6,13 +6,13 @@ import entities.Room;
 import java.util.List;
 import java.util.Map;
 
-public class Servise {
+public class Service {
 
     public List<Hotel> findHotelByName(String hotelName) {
         return null;
     }
 
-    public List<Hotel> findHotelByCity(String cityNname) {
+    public List<Hotel> findHotelByCity(String cityName) {
         return null;
     }
 
