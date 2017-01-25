@@ -1,4 +1,4 @@
 package dao;
 
-public class UserDAOImpl implements DAO {
+public class UserDAOImpl extends AbstractDAO{
 }

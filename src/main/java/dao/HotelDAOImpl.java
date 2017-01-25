@@ -1,4 +1,4 @@
 package dao;
 
-public class HotelDAOImpl implements DAO {
+public class HotelDAOImpl extends AbstractDAO{
 }

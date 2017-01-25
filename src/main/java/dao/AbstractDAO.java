@@ -1,11 +1,11 @@
-package controller;
+package dao;
 
 import entities.Hotel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller<T> {
+public abstract class AbstractDAO<T> {
 
     ArrayList<Hotel> hotelArrayList = new ArrayList();
 
