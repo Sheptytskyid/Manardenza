@@ -5,7 +5,7 @@ import entities.Hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDao<T> {
 
     ArrayList<Hotel> hotelArrayList = new ArrayList();
 
