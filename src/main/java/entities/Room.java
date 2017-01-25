@@ -2,7 +2,8 @@ package entities;
 
 import lombok.Data;
 
-public @Data class Room {
+@Data
+public class Room {
 
     private long id;
     private int person;

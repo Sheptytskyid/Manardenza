@@ -2,10 +2,10 @@ package entities;
 
 import lombok.Data;
 
-public @Data class User {
+@Data
+public class User {
 
     private long id;
     private String firstName;
     private String lastName;
-
 }

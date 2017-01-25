@@ -1,11 +1,9 @@
 package entities;
 
-
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
-public @Data class Hotel extends Room {
+@Data
+public class Hotel {
 
     private long id;
     private String name;
