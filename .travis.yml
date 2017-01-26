@@ -5,6 +5,11 @@ language: java
 jdk:
   - oraclejdk8
 
+addons:
+  sonarqube:
+    github_token:
+      secure: atEZjk9vFt5yg1cSouBGxNPa1a748wod1vv4Mj746e6cqbweiZju5tDsujKz+GSYl8NTV6u69zduBQron2vf+avonQdgXNGIAq/9aoIyNzZJeb+FBbik/YXlczGsfukNReuA+vy4R+jEMuRJ3MwhJuOtacEqLUr57aSKBCmd3fovHd7GWmJLbZu50RJgG6xeCPfObpp41UGPWk70msMsAy7paG630ivVhsUUNAf1a6kHa3HBiS9uTcBpuedBEBhm5fbSKB+/JqV/2T2f96ZUkROECojY8M5I6f65VqzXIeInOQIlzMzcF7fbxGddVMgDdOKdcX3DsegV3QJv7I8AwlR/xf/lMhxPpQuTliXZs5eiw22NES33Sv5gdZitds4SdZZLrkdnxgwC5cZ7hNK9euJpebB9LAry92DUg4U7lOX2esf2Q01keB/1eCKkqu99IrmBkRT6w3k3AhvZTGdJI00szRxoNYXpB9+91c4QlGQFTSAM61d+u0cnHJBmGtl+Ikkk72LFbMCqMSwXhTYsOlB1RaMRhXZr6LmJeBEzY+n48mq286qBsrLwBsdlqvqlU53JPwWuJaJUJ8pNP4AX4RnmkBa5Z8zS0YE26gNtVX+pzq1dyy4BOk856Ye1k578Jq6pwq86f++zixUypnM75ZLMxVitF/ct4zIGqwcCrIU=
+
 cache:
   directories:
     - $HOME/.m2
