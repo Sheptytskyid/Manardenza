@@ -1,4 +1,4 @@
-package manardenza.com;
+package com.manardenza;
 
 public class Main {
 

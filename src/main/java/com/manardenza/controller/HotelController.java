@@ -1,9 +1,9 @@
-package manardenza.com.controller;
+package com.manardenza.controller;
 
-import manardenza.com.entity.Hotel;
-import manardenza.com.entity.Room;
-import manardenza.com.entity.User;
-import manardenza.com.servise.HotelService;
+import com.manardenza.entity.Hotel;
+import com.manardenza.entity.Room;
+import com.manardenza.entity.User;
+import com.manardenza.servise.HotelService;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class HotelController {
     private static HotelController instance;
     private HotelService hotelService;
 
-    public HotelController() {
+    private HotelController() {
         hotelService = HotelService.getInstance();
     }
 
@@ -36,12 +36,12 @@ public class HotelController {
         return hotelService.findHotelByCity(cityName);
     }
 
-    public Room bookRoom(long roomId, long userId, long hotelId) {
-        return hotelService.bookRoom(roomId, userId, hotelId);
+    public Room bookRoom(long roomId, long userId, long hotelId, long bookingFrom) {
+        return hotelService.bookRoom(roomId, userId, hotelId, bookingFrom);
     }
 
-    public boolean cancelReservation(long roomId, long userId, long hotelId) {
-        return hotelService.cancelReservation(roomId, userId, hotelId);
+    public boolean cancelReservation(long roomId, long userId, long hotelId, long bookingId) {
+        return hotelService.cancelReservation(roomId, userId, hotelId, bookingId);
     }
 
     public List<Room> findRoom(Map<String, String> params) {

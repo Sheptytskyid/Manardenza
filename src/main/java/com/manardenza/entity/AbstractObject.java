@@ -1,4 +1,4 @@
-package manardenza.com.entity;
+package com.manardenza.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

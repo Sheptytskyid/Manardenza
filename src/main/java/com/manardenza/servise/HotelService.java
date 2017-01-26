@@ -1,11 +1,12 @@
-package manardenza.com.servise;
+package com.manardenza.servise;
 
-import manardenza.com.dao.HotelDaoImpl;
-import manardenza.com.dao.UserDaoImpl;
-import manardenza.com.entity.Hotel;
-import manardenza.com.entity.Room;
-import manardenza.com.entity.User;
+import com.manardenza.dao.HotelDaoImpl;
+import com.manardenza.dao.UserDaoImpl;
+import com.manardenza.entity.Room;
+import com.manardenza.entity.User;
+import com.manardenza.entity.Hotel;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +40,11 @@ public final class HotelService {
         return null;
     }
 
-    public Room bookRoom(long roomId, long userId, long hotelId) {
+    public Room bookRoom(long roomId, long userId, long hotelId, long bookingId) {
         return null;
     }
 
-    public boolean cancelReservation(long roomId, long userId, long hotelId) {
+    public boolean cancelReservation(long roomId, long userId, long hotelId, long bookingId) {
         return false;
     }
 

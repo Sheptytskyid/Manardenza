@@ -1,4 +1,4 @@
-package manardenza.com.console;
+package com.manardenza.console;
 
 public class ConsoleMain {
 

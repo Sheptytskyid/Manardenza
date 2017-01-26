@@ -1,6 +1,6 @@
-package manardenza.com.login;
+package com.manardenza.login;
 
-import manardenza.com.entity.User;
+import com.manardenza.entity.User;
 import lombok.Data;
 
 @Data
@@ -14,5 +14,8 @@ public class CurrentUser {
             loggedUser = new CurrentUser();
         }
         return loggedUser;
+    }
+
+    private CurrentUser() {
     }
 }

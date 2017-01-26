@@ -1,4 +1,4 @@
-import manardenza.com.Main;
+import com.manardenza.Main;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
