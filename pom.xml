@@ -21,6 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <sonar.language>java</sonar.language>
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
+
     </properties>
 
     <build>
