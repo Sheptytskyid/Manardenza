@@ -23,6 +23,7 @@
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
         <sonar.login>e14d6af39d2708458d41a5ed5121a8947ce7a0a6</sonar.login>
         <sonar.name>JavaCoreFinalProjectGroup6</sonar.name>
+        <sonar.github.repository>Sheptytskyid/JavaCoreFinalProjectGroup6</sonar.github.repository>
     </properties>
 
     <build>
