@@ -1,9 +1,6 @@
 dist: trusty
 
 language: java
-before_install:
-- chmod +x travis.sh
-install: true
 
 jdk:
   - oraclejdk8
@@ -14,7 +11,5 @@ cache:
     - $HOME/.sonar
 
 script:
-  - mvn clean test jacoco:report coveralls:report
-
-  - ./travis.sh
+  - mvn clean test jacoco:report coveralls:report sonar-scanner
 
