@@ -1,13 +1,21 @@
-package dao;
+package manardenza.com.dao;
 
-import entities.Hotel;
+import manardenza.com.entity.Hotel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractDao<T> {
 
-    ArrayList<Hotel> hotelArrayList = new ArrayList();
+    private static AbstractDao instance;
+
+    public static AbstractDao getInstance() {
+        if (instance == null) {
+            instance = new AbstractDao() {
+            };
+        }
+        return instance;
+    }
 
     public T save(T obj) {
         return obj;

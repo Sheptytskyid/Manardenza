@@ -1,4 +1,4 @@
-package utils;
+package manardenza.com.utils;
 
 public class DatabaseSeeder {
 
