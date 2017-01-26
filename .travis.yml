@@ -12,7 +12,6 @@ addons:
     github_token:
       secure: QZ3xUaoLa3DRDyo2XMskFCb4wtaaMxmCezcpVzbn6Y8D9vs1bhL8AUEGG9AJ/OU2hFnb+pHsaZyMIP0pjP0NbaT8KM6hrI4Y77RIwBiZ/nONCTlgNm+ZgAj7dEP6gzNLKVirhwnDN5gsc7CegGcrnMDkQ9o5ND16ZOON1bYaYkmUFxBzlkul0aYDq/F8/88RmVJ0nV+gfSEtiy/oBkaDsNELc17RQybJrtzmtjRFo0CIB3Ijlfw7X4XB5cEoaugDtjJtcL+6IlwEwocgpLFFjl3IJL/fw+2P3IPVGg5RmaGzGcZZu+pxxfVyG4AfMpwPzpCmQvdG6Afv2KlDR8upOgsSIBp4peHQzLg2mdNb3DDbQ9776TW/9qhHToxxvK2ddZvknv+/KDs+7JOHWu3PHY+sk+L7xrNSZJ79QT4EhZNAtvchbcUdF940buckt2Ur3ZzesHh3Wd4msoyxirtVoavtdaA/WxvW3zgiUPUT6dvlEmmRLSvLAPxYd2GKmckHdN+sB1ySLCArLKPITyv4ZFD5kDfbQgigZVUZ3KYfooOlrN5mRYKw6R+Z/c+AyCH6bR020VZ6yxHIqSKWneBuKla8cd6pFPN6Yb3vTpqqjhUI8YfS9J9IP78Wl89mrEHuLHqgesICSzWb/QK8I2uXV8/awfJSallgzslna19ycUw=
 
-
 cache:
   directories:
     - $HOME/.m2
