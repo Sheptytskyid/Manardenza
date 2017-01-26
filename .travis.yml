@@ -13,11 +13,5 @@ cache:
 script:
   - mvn clean test jacoco:report coveralls:report
 
-  - mvn sonar:sonar
-
-  - mvn sonar:sonar -Dsonar.analysis.mode=preview \
-                -Dsonar.github.repository=Sheptytskyid/JavaCoreFinalProjectGroup6 \
-                -Dsonar.github.oauth=72e695167543288d1b5cd6c696d12fa890fd891c \
-                -Dsonar.host.url=https://sonarqube.com \
-                -Dsonar.login=ebc3380b75d811c948db8a718213b5b7b4026ec0
+  ./travis.sh
 
