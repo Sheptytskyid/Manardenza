@@ -7,6 +7,8 @@ jdk:
 
 addons:
   sonarqube:
+    token:
+      secure: heOAlTGIL54LLa5rU53+NTv2p2CjwesPMtB+pyRxm69rxLoM4u0/NipkC/15vSsbDw8z3ZuKJSYBRytSRmzEv8i9xo2w5iI452wTjiP+PByfENbrtiHojErYCf93RSooNxKn0vh/0wHiNh9E60JlDyqAVKQZ0LGnq++E/c91aSk9ADjXmvFhM5BQvyQnyJ7B3fvwdq1T/Q05T7YlO81i9/y3PAAQjH9ryVqomREM2o8sKirC4Rm6MIxBMMoDhgkst5o84w+lpge++4ElZo5N+ApL36cS+Ge4655OM2wMXymFdRghEYWoA12Z2d/HztA5PvMVdSW036r7Nu7kcqXxN+3WmOMfFP3AzAPxaOqIIR3RQ408zDo3cBV/FuSBye+TJhR30uIcKK3CPkfSFGHsL2pvbwgMf9PPhv7/snMcMsKJHWerWDrjj2xfwvNJj8SCIHpdi3rNK08NUW+1hnhuf94vyRXnIL2EO0cWyuH60aAja6NhKhzSi5m5RBYy6HncMmtgeTdilqYdlrl4vrB82M/4aQ5pXjgP1OWHD0AxoEFu4Cgsut77e/+yBB3OZ4d1QycGtmADkBcNix4M8ipSWc5H0ZyGQWovAunxXXMbBxbrtMubBrCar+2tu89ThavpoBUlds/ubMbKXaMcWdJFofaMLPcJiTBQ6aBzjsoIFHY=
     github_token:
       secure: QZ3xUaoLa3DRDyo2XMskFCb4wtaaMxmCezcpVzbn6Y8D9vs1bhL8AUEGG9AJ/OU2hFnb+pHsaZyMIP0pjP0NbaT8KM6hrI4Y77RIwBiZ/nONCTlgNm+ZgAj7dEP6gzNLKVirhwnDN5gsc7CegGcrnMDkQ9o5ND16ZOON1bYaYkmUFxBzlkul0aYDq/F8/88RmVJ0nV+gfSEtiy/oBkaDsNELc17RQybJrtzmtjRFo0CIB3Ijlfw7X4XB5cEoaugDtjJtcL+6IlwEwocgpLFFjl3IJL/fw+2P3IPVGg5RmaGzGcZZu+pxxfVyG4AfMpwPzpCmQvdG6Afv2KlDR8upOgsSIBp4peHQzLg2mdNb3DDbQ9776TW/9qhHToxxvK2ddZvknv+/KDs+7JOHWu3PHY+sk+L7xrNSZJ79QT4EhZNAtvchbcUdF940buckt2Ur3ZzesHh3Wd4msoyxirtVoavtdaA/WxvW3zgiUPUT6dvlEmmRLSvLAPxYd2GKmckHdN+sB1ySLCArLKPITyv4ZFD5kDfbQgigZVUZ3KYfooOlrN5mRYKw6R+Z/c+AyCH6bR020VZ6yxHIqSKWneBuKla8cd6pFPN6Yb3vTpqqjhUI8YfS9J9IP78Wl89mrEHuLHqgesICSzWb/QK8I2uXV8/awfJSallgzslna19ycUw=
 
@@ -17,6 +19,4 @@ cache:
     - $HOME/.sonar
 
 script:
-  - mvn clean test jacoco:report coveralls:report
-  - mvn sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.github.repository=Sheptytskyid/JavaCoreFinalProjectGroup6
-
+  - mvn clean test jacoco:report coveralls:report sonar:sonar
