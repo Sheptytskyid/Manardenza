@@ -11,5 +11,4 @@ public class Main {
     public int test2() {
         return 2;
     }
-
 }
