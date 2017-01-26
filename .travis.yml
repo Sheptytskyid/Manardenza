@@ -1,6 +1,8 @@
 dist: trusty
 
 language: java
+before_install:
+- chmod +x travis.sh
 install: true
 
 jdk:
