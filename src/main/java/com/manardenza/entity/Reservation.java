@@ -1,20 +1,15 @@
 package com.manardenza.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
-public class Reservation extends AbstractObject {
+@AllArgsConstructor
+public class Reservation {
 
-    private LocalDate reservedFrom;
-    private LocalDate reservedTo;
+    private Date reservedFrom;
+    private Date reservedTo;
     private User reservedUser;
-
-    public Reservation(long id, LocalDate reservedFrom, LocalDate reservedTo, User reservedUser) {
-        super(id);
-        this.reservedFrom = reservedFrom;
-        this.reservedTo = reservedTo;
-        this.reservedUser = reservedUser;
-    }
 }
