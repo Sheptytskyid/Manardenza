@@ -21,8 +21,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <sonar.language>java</sonar.language>
         <sonar.host.url>https://sonarqube.com</sonar.host.url>
-        <sonar.login>ebc3380b75d811c948db8a718213b5b7b4026ec0</sonar.login>
-        <sonar.name>JavaCoreFinalProjectGroup6</sonar.name>
     </properties>
 
     <build>
@@ -84,6 +82,11 @@
                 <version>3.2</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
         </plugins>
     </build>
 
