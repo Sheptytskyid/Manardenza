@@ -10,6 +10,16 @@ import java.util.List;
 
 public class DatabaseSeeder {
 
+    private static final String KIEV = "Kiev";
+    private static final String ODESSA = "Odessa";
+    private static final String LVOV = "Lvov";
+    private static final String DONETSK = "Donetsk";
+    private static final String ZAPOROZHYE = "Zaporozhye";
+    private static final String MARRIOTT = "Marriott";
+    private static final String HOLIDAY_INN = "Holiday Inn";
+    private static final String REIKARTZ = "Reikartz";
+
+
     @Getter private static List<User> usersList = new ArrayList<>();
     @Getter private static List<Room> roomsList = new ArrayList<>();
     @Getter private static List<Hotel> hotelsList = new ArrayList<>();
@@ -31,28 +41,28 @@ public class DatabaseSeeder {
         usersList.add(new User(786146, "Scolastyka", "Machura"));
         usersList.add(new User(894664, "Ann", "Merryvether"));
 
-        roomsList.add(new Room(56464646, "SINGLE ROOM", 1, 200, null));
-        roomsList.add(new Room(78949466, "DOUBLE ROOM", 2, 300, null));
-        roomsList.add(new Room(74646566, "KING BEDROOM", 2, 350, null));
-        roomsList.add(new Room(68408949, "INTERCONNECTING ROOMS", 3, 400, null));
-        roomsList.add(new Room(54400088, "INTERCONNECTING ROOMS", 4, 450, null));
-        roomsList.add(new Room(84706849, "DUPLEX", 4, 700, null));
-        roomsList.add(new Room(80886444, "SUITE ROOM", 6, 1000, null));
+        roomsList.add(new Room("SINGLE ROOM", 1, 200, null));
+        roomsList.add(new Room("DOUBLE ROOM", 2, 300, null));
+        roomsList.add(new Room("KING BEDROOM", 2, 350, null));
+        roomsList.add(new Room("INTERCONNECTING ROOMS", 3, 400, null));
+        roomsList.add(new Room("INTERCONNECTING ROOMS", 4, 450, null));
+        roomsList.add(new Room("DUPLEX", 4, 700, null));
+        roomsList.add(new Room("SUITE ROOM", 6, 1000, null));
 
-        hotelsList.add(new Hotel(684464684, "Marriott", "Kiev", roomsList));
-        hotelsList.add(new Hotel(649464689, "Marriott", "Odessa", roomsList));
-        hotelsList.add(new Hotel(849849464, "Marriott", "Lvov", roomsList));
-        hotelsList.add(new Hotel(653548446, "Marriott", "Donetsk", roomsList));
-        hotelsList.add(new Hotel(876616656, "Marriott", "Zaporozhye", roomsList));
-        hotelsList.add(new Hotel(214546684, "Holiday Inn", "Kiev", roomsList));
-        hotelsList.add(new Hotel(756464564, "Holiday Inn", "Odessa", roomsList));
-        hotelsList.add(new Hotel(955545454, "Holiday Inn", "Lvov", roomsList));
-        hotelsList.add(new Hotel(735465465, "Holiday Inn", "Donetsk", roomsList));
-        hotelsList.add(new Hotel(315468787, "Holiday Inn", "Zaporozhye", roomsList));
-        hotelsList.add(new Hotel(346864847, "Reikartz", "Kiev", roomsList));
-        hotelsList.add(new Hotel(945425451, "Reikartz", "Lvov", roomsList));
-        hotelsList.add(new Hotel(345684884, "Reikartz", "Kiev", roomsList));
-        hotelsList.add(new Hotel(753456466, "Reikartz", "Donetsk", roomsList));
-        hotelsList.add(new Hotel(456468498, "Reikartz", "Zaporozhye", roomsList));
+        hotelsList.add(new Hotel(684464684, MARRIOTT, KIEV, roomsList));
+        hotelsList.add(new Hotel(649464689, MARRIOTT, ODESSA, roomsList));
+        hotelsList.add(new Hotel(849849464, MARRIOTT, LVOV, roomsList));
+        hotelsList.add(new Hotel(653548446, MARRIOTT, DONETSK, roomsList));
+        hotelsList.add(new Hotel(876616656, MARRIOTT, ZAPOROZHYE, roomsList));
+        hotelsList.add(new Hotel(214546684, HOLIDAY_INN, KIEV, roomsList));
+        hotelsList.add(new Hotel(756464564, HOLIDAY_INN, ODESSA, roomsList));
+        hotelsList.add(new Hotel(955545454, HOLIDAY_INN, LVOV, roomsList));
+        hotelsList.add(new Hotel(735465465, HOLIDAY_INN, DONETSK, roomsList));
+        hotelsList.add(new Hotel(315468787, HOLIDAY_INN, ZAPOROZHYE, roomsList));
+        hotelsList.add(new Hotel(346864847, REIKARTZ, KIEV, roomsList));
+        hotelsList.add(new Hotel(945425451, REIKARTZ, ODESSA, roomsList));
+        hotelsList.add(new Hotel(345684884, REIKARTZ, LVOV, roomsList));
+        hotelsList.add(new Hotel(753456466, REIKARTZ, DONETSK, roomsList));
+        hotelsList.add(new Hotel(456468498, REIKARTZ, ZAPOROZHYE, roomsList));
     }
 }
