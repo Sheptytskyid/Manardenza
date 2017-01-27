@@ -1,3 +1,4 @@
+package com.manardenza;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,4 +9,7 @@ public class Main {
         return 1;
     }
 
+    public int test2() {
+        return 2;
+    }
 }
