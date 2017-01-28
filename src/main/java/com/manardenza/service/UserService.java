@@ -20,12 +20,17 @@ public class UserService {
         return instance;
     }
 
-    public void registerUser(String firstName, String lastName) {
+    public void loginUser(String firstName, String lastName) {
         User user = UserDaoImpl.getInstance().getUserByName(firstName, lastName);
         if (user == null) {
-            user = new User(firstName, lastName);
-            UserDaoImpl.getInstance().save(user);
+            user = registerNewUser(firstName, lastName);
         }
         CurrentUser.getInstance().setUser(user);
+    }
+
+    private User registerNewUser(String firstName, String lastName) {
+        User user = new User(firstName, lastName);
+        UserDaoImpl.getInstance().save(user);
+        return user;
     }
 }
