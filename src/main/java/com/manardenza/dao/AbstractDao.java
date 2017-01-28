@@ -18,8 +18,8 @@ public abstract class AbstractDao<T extends AbstractObject> {
         return database.remove(obj);
     }
 
-    public boolean saveAll(List<T> obj) {
-        return database.addAll(obj);
+    public boolean saveAll(List<T> list) {
+        return database.addAll(list);
     }
 
     public List<T> getAll() {

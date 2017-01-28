@@ -11,8 +11,7 @@ public class Hotel extends AbstractObject {
     private String city;
     private List<Room> rooms;
 
-    public Hotel(long id, String name, String city, List<Room> rooms) {
-        super(id);
+    public Hotel(String name, String city, List<Room> rooms) {
         this.name = name;
         this.city = city;
         this.rooms = rooms;

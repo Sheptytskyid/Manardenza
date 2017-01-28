@@ -1,4 +1,4 @@
-package com.manardenza.servise;
+package com.manardenza.service;
 
 import com.manardenza.dao.HotelDaoImpl;
 import com.manardenza.entity.Reservation;

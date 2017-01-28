@@ -1,7 +1,6 @@
 package com.manardenza.controller;
 
-import com.manardenza.entity.User;
-import com.manardenza.servise.UserService;
+import com.manardenza.service.UserService;
 
 public class UserController {
 
@@ -19,7 +18,7 @@ public class UserController {
         return instance;
     }
 
-    public void registerUser(User userToRegistration) {
-        userService.registerUser(userToRegistration);
+    public void loginUser(String firstName, String lastName) {
+        userService.loginUser(firstName, lastName);
     }
 }
