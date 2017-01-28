@@ -27,8 +27,8 @@ public final class ReservationController {
         return reservationService.bookRoom(reservation);
     }
 
-    public boolean cancelReservation(long IdReservation) {
-        return reservationService.cancelReservation(IdReservation);
+    public boolean cancelReservation(long idReservation) {
+        return reservationService.cancelReservation(idReservation);
     }
 
     public List<Room> checkRoomReservation(Date reservedFrom, Date reservedTo, List<Room> findRooms) {

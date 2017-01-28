@@ -28,8 +28,8 @@ public final class ReservationService {
         return reservationDao.save(reservation).getId();
     }
 
-    public boolean cancelReservation(long IdReservation) {
-        return reservationDao.getAll().removeIf(p -> p.getId() == IdReservation);
+    public boolean cancelReservation(long idReservation) {
+        return reservationDao.getAll().removeIf(p -> p.getId() == idReservation);
     }
 
     public List<Room> checkRoomReservation(Date reservedFrom, Date reservedTo, List<Room> findRooms) {
