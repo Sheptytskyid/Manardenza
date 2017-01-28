@@ -20,17 +20,12 @@ public class UserDaoImpl extends AbstractDao<User> {
     }
 
     public User getUserByName(String firstName, String lastName) {
-        Optional<User> user = userList.stream().filter(param -> param.getFirstName().equals(firstName) && param
-            .getLastName().equals(lastName)).findFirst();
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            return null;
-        }
+        return database.stream().filter(param -> param.getFirstName().equals(firstName) && param.getLastName()
+            .equals(lastName)).findFirst().orElse(null);
     }
 
     @Override
     public List<User> getAll() {
-        return userList;
+        return database;
     }
 }

@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public void loginUser(String firstName, String lastName) {
-        User user = UserDaoImpl.getInstance().getUserByName(firstName, lastName);
+        User user = userDao.getUserByName(firstName, lastName);
         if (user == null) {
             user = registerNewUser(firstName, lastName);
         }
@@ -29,8 +29,6 @@ public class UserService {
     }
 
     private User registerNewUser(String firstName, String lastName) {
-        User user = new User(firstName, lastName);
-        UserDaoImpl.getInstance().save(user);
-        return user;
+        return userDao.save(new User(firstName, lastName));
     }
 }

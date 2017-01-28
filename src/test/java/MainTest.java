@@ -1,4 +1,3 @@
-
 import com.manardenza.Main;
 
 import org.junit.Test;

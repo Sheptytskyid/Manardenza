@@ -19,16 +19,16 @@ public class HotelDaoImpl extends AbstractDao<Hotel> {
         return instance;
     }
 
+    @Override
+    public List<Hotel> getAll() {
+        return database;
+    }
+
     public List<Hotel> getHotelsByName(String hotelName) {
         return new ArrayList<>();
     }
 
     public List<Hotel> getHotelsByCity(String hotelCity) {
         return new ArrayList<>();
-    }
-
-    @Override
-    public List<Hotel> getAll() {
-        return hotelList;
     }
 }
