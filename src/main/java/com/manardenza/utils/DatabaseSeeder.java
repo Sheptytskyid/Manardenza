@@ -9,7 +9,7 @@ import com.manardenza.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseSeeder {
+public final class DatabaseSeeder {
 
     private static final String KIEV = "Kiev";
     private static final String ODESSA = "Odessa";
