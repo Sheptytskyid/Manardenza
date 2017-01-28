@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class AbstractDao<T extends AbstractObject> {
 
     protected List<Hotel> hotelList = new ArrayList<>();
-    protected List<User> userlList = new ArrayList<>();
+    protected List<User> userList = new ArrayList<>();
 
     public T save(T obj) {
         return obj;
@@ -25,14 +25,6 @@ public abstract class AbstractDao<T extends AbstractObject> {
     }
 
     public List<T> getAll() {
-        return null;
-    }
-
-    public ArrayList<Hotel> getHotelsByName(String hotelName) {
-        return null;
-    }
-
-    public ArrayList<Hotel> getHotelsByCity(String hotelCity) {
         return null;
     }
 }

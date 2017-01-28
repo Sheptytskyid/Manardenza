@@ -10,8 +10,7 @@ public class Room extends AbstractObject {
     private int price;
     private Reservation reservation;
 
-    public Room(long id, String name, int person, int price, Reservation reservation) {
-        super(id);
+    public Room(String name, int person, int price, Reservation reservation) {
         this.name = name;
         this.person = person;
         this.price = price;
