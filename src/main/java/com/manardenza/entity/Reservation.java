@@ -7,9 +7,12 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class Reservation {
+public class Reservation extends AbstractObject {
 
     private Date reservedFrom;
     private Date reservedTo;
     private User reservedUser;
+    private Room reservedRoom;
+    private Hotel reservedHotel;
+
 }
