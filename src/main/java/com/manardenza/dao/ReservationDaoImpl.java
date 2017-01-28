@@ -1,6 +1,5 @@
 package com.manardenza.dao;
 
-import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 
 import java.util.List;
