@@ -42,6 +42,6 @@ public final class HotelService {
     }
 
     public List<Room> findRoom(Map<String, String> params) {
-        return new ArrayList<Room>();
+        return new ArrayList<>();
     }
 }

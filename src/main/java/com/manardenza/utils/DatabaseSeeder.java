@@ -22,7 +22,7 @@ public class DatabaseSeeder {
 
     private static List<Room> roomsSeederList = new ArrayList<>();
 
-    static {
+    public static void seedDatabase() {
         UserDaoImpl.getInstance().save(new User(464655, "Vasya", "Petrov"));
         UserDaoImpl.getInstance().save(new User(546466, "Anton", "Chechov"));
         UserDaoImpl.getInstance().save(new User(566656, "Natalia", "Novikova"));
