@@ -1,4 +1,3 @@
-/*
 
 import com.manardenza.Main;
 
@@ -12,4 +11,4 @@ public class MainTest {
     public void test() {
         assertEquals(1, new Main().test());
     }
-}*/
+}
