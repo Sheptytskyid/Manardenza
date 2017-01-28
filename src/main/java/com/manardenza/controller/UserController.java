@@ -1,6 +1,5 @@
 package com.manardenza.controller;
 
-import com.manardenza.entity.User;
 import com.manardenza.service.UserService;
 
 public class UserController {
