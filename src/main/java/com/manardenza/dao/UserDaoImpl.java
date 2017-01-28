@@ -3,7 +3,6 @@ package com.manardenza.dao;
 import com.manardenza.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> {
 
