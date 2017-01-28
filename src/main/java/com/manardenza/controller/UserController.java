@@ -19,7 +19,7 @@ public class UserController {
         return instance;
     }
 
-    public void registerUser(String firstName, String lastName) {
-        userService.registerUser(firstName, lastName);
+    public void loginUser(String firstName, String lastName) {
+        userService.loginUser(firstName, lastName);
     }
 }
