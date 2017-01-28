@@ -26,11 +26,11 @@ public final class HotelService {
     }
 
     public List<Hotel> findHotelByName(String hotelName) {
-        return new ArrayList<Hotel>();
+        return new ArrayList<>();
     }
 
     public List<Hotel> findHotelByCity(String cityName) {
-        return new ArrayList<Hotel>();
+        return new ArrayList<>();
     }
 
     public Room bookRoom(long roomId, long hotelId, Reservation reservation) {
