@@ -20,6 +20,6 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     @Override
     public List<User> getAll() {
-        return userlList;
+        return database;
     }
 }
