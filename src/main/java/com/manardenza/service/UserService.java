@@ -8,9 +8,11 @@ public class UserService {
 
     private static UserService instance;
     private UserDaoImpl userDao;
+    private CurrentUser currentUser;
 
     private UserService() {
         this.userDao = UserDaoImpl.getInstance();
+        this.currentUser = CurrentUser.getInstance();
     }
 
     public static UserService getInstance() {
@@ -25,7 +27,7 @@ public class UserService {
         if (user == null) {
             user = registerNewUser(firstName, lastName);
         }
-        CurrentUser.getInstance().setUser(user);
+        currentUser.setUser(user);
     }
 
     private User registerNewUser(String firstName, String lastName) {
