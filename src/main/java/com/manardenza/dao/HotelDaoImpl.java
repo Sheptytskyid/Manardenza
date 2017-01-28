@@ -2,6 +2,7 @@ package com.manardenza.dao;
 
 import com.manardenza.entity.Hotel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HotelDaoImpl extends AbstractDao<Hotel> {
@@ -20,6 +21,14 @@ public class HotelDaoImpl extends AbstractDao<Hotel> {
 
     @Override
     public List<Hotel> getAll() {
-        return hotelList;
+        return database;
+    }
+
+    public List<Hotel> getHotelsByName(String hotelName) {
+        return new ArrayList<>();
+    }
+
+    public List<Hotel> getHotelsByCity(String hotelCity) {
+        return new ArrayList<>();
     }
 }

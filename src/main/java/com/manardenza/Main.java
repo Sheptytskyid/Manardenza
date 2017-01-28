@@ -8,8 +8,4 @@ public class Main {
     public int test() {
         return 1;
     }
-
-    public int test2() {
-        return 2;
-    }
 }

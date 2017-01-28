@@ -8,8 +8,7 @@ public class User extends AbstractObject {
     private String firstName;
     private String lastName;
 
-    public User(long id, String firstName, String lastName) {
-        super(id);
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
