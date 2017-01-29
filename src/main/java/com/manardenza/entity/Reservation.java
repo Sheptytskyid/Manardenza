@@ -15,4 +15,23 @@ public class Reservation extends AbstractObject {
     private Room reservedRoom;
     private Hotel reservedHotel;
 
+    public boolean newReservedOk(Date newReservedFrom, Date newReservedTo) {
+        if (newReservedFrom.after(reservedFrom) && newReservedFrom.before(reservedTo)) {
+            return false;
+        } else if (newReservedTo.after(reservedFrom) && newReservedTo.before(reservedTo)) {
+            return false;
+        } else if (newReservedFrom.before(reservedFrom) && newReservedTo.after(reservedTo)) {
+            return false;
+        } else if (newReservedFrom.equals(reservedFrom)) {
+            return false;
+        } else if (newReservedFrom.equals(reservedTo)) {
+            return false;
+        } else if (newReservedTo.equals(reservedFrom)) {
+            return false;
+        } else if (newReservedTo.equals(reservedTo)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

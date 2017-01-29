@@ -13,7 +13,7 @@ public final class ReservationService {
     private static ReservationService instance;
     private ReservationDaoImpl reservationDao;
 
-    private ReservationService() {
+    ReservationService() {
         this.reservationDao = ReservationDaoImpl.getInstance();
     }
 
@@ -36,17 +36,12 @@ public final class ReservationService {
         List<Room> toDel = new ArrayList<>();
         for (Room findRoom : findRooms) {
             if (reservationDao.getAll().stream().filter(p -> p.getReservedRoom().equals(findRoom)
-                    && ((reservedFrom.after(p.getReservedFrom()) && reservedFrom.before(p.getReservedTo()))
-                    || (reservedTo.after(p.getReservedFrom()) && reservedTo.before(p.getReservedTo()))
-                    || (reservedFrom.before(p.getReservedFrom()) && reservedTo.after(p.getReservedTo()))
-                    || (reservedFrom.equals(p.getReservedFrom()))
-                    || (reservedFrom.equals(p.getReservedTo()))
-                    || (reservedTo.equals(p.getReservedFrom()))
-                    || (reservedTo.equals(p.getReservedTo())))).count() > 0) {
+                    && !p.newReservedOk(reservedFrom, reservedTo)).count() > 0) {
                 toDel.add(findRoom);
             }
         }
         findRooms.removeAll(toDel);
+
         return findRooms;
     }
 
