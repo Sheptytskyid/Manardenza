@@ -9,11 +9,8 @@ public class UserDaoImpl extends AbstractDao<User> {
 
     private static UserDaoImpl instance;
 
-    {
-        databaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
-    }
-
     private UserDaoImpl() {
+        databaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
     }
 
     public static UserDaoImpl getInstance() {

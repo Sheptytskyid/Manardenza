@@ -16,7 +16,7 @@ public abstract class AbstractDao<T extends AbstractObject> {
     protected List<T> database = new ArrayList<>();
     protected File databaseFile;
 
-    public void saveToFile() {
+    private void saveToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
             oos.writeObject(database);
         } catch (IOException e) {
@@ -25,12 +25,10 @@ public abstract class AbstractDao<T extends AbstractObject> {
 
     }
 
-    public void readFromFile() {
+    private void readFromFile() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
             database = (List<T>) ois.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
