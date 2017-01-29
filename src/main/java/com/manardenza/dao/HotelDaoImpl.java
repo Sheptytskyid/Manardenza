@@ -2,12 +2,17 @@ package com.manardenza.dao;
 
 import com.manardenza.entity.Hotel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HotelDaoImpl extends AbstractDao<Hotel> {
 
     private static HotelDaoImpl instance;
+
+    {
+        databaseFile = new File("src/main/resources/databaseFiles/databaseHotelsFile.bin");
+    }
 
     private HotelDaoImpl() {
     }
