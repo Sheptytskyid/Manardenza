@@ -40,10 +40,10 @@ public final class HotelService {
     }
 
     private List<Room> findRoom(Hotel hotel, int persons, int price) {
-        List<Room> test = hotel.getRooms().stream()
+        return hotel.getRooms().stream()
                 .filter(room -> room.getPerson() == persons)
                 .filter(room -> room.getPrice() <= price)
                 .collect(Collectors.toList());
-        return test;
+
     }
 }
