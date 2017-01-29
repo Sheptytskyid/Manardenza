@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
-        </layout>
-    </appender>
-    <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>JavaCoreFinalProjectGroup6/logs/application.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
-        </encoder>
+            <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+                </layout>
+            </appender>
+            <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>JavaCoreFinalProjectGroup6/logs/application.log</file>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+                </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/debug.%d.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxHistory>30</maxHistory>
-                <maxFileSize>50MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/debug.%d.log</fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <maxHistory>30</maxHistory>
+                        <maxFileSize>50MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                </rollingPolicy>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/debug.%d{yyyy-MM-dd}%i.log.zip</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>10</maxIndex>
-        </rollingPolicy>
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/debug.%d{yyyy-MM-dd}%i.log.zip</fileNamePattern>
+                    <minIndex>1</minIndex>
+                    <maxIndex>10</maxIndex>
+                </rollingPolicy>
 
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>20MB</maxFileSize>
-        </triggeringPolicy>
-    </appender>
-    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <file>JavaCoreFinalProjectGroup6/logs/application_errors.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-            </Pattern>
-        </encoder>
+                <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <maxFileSize>20MB</maxFileSize>
+                </triggeringPolicy>
+            </appender>
+            <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                    <level>ERROR</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+                <file>JavaCoreFinalProjectGroup6/logs/application_errors.log</file>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>
+                        %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+                    </Pattern>
+                </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>20MB</maxFileSize>
-                <maxHistory>60</maxHistory>
-                <totalSizeCap>200MB</totalSizeCap>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <maxFileSize>20MB</maxFileSize>
+                        <maxHistory>60</maxHistory>
+                        <totalSizeCap>200MB</totalSizeCap>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                </rollingPolicy>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/error.%d{yyyy-MM-dd}%i.log.zip</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>10</maxIndex>
-        </rollingPolicy>
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <fileNamePattern>JavaCoreFinalProjectGroup6/logs/archived/error.%d{yyyy-MM-dd}%i.log.zip</fileNamePattern>
+                    <minIndex>1</minIndex>
+                    <maxIndex>10</maxIndex>
+                </rollingPolicy>
 
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>20MB</maxFileSize>
-        </triggeringPolicy>
-    </appender>
-    <root level="INFO">
-        <appender-ref ref="FILE-AUDIT"/>
-        <appender-ref ref="FILE-ERROR"/>
-        <appender-ref ref="STDOUT"/>
-    </root>
-    
+                <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <maxFileSize>20MB</maxFileSize>
+                </triggeringPolicy>
+            </appender>
+            <root level="INFO">
+                <appender-ref ref="FILE-AUDIT"/>
+                <appender-ref ref="FILE-ERROR"/>
+                <appender-ref ref="STDOUT"/>
+            </root>
+
 </configuration>
