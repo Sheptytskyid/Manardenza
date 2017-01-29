@@ -19,12 +19,9 @@ public class UserDaoImpl extends AbstractDao<User> {
     }
 
     public User getUserByName(String firstName, String lastName) {
-        return database.stream().filter(user -> user.getFirstName().equals(firstName)).filter(user -> user.getLastName()
-            .equals(lastName)).findFirst().orElse(null);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return database;
+        return database.stream()
+                .filter(user -> user.getFirstName().equals(firstName))
+                .filter(user -> user.getLastName().equals(lastName))
+                .findFirst().orElse(null);
     }
 }
