@@ -33,4 +33,8 @@ public class UserService {
     private User registerNewUser(String firstName, String lastName) {
         return userDao.save(new User(firstName, lastName));
     }
+
+    public void logoutUser() {
+        currentUser.setUser(null);
+    }
 }
