@@ -1,7 +1,6 @@
 package com.manardenza.controller;
 
 import com.manardenza.entity.Hotel;
-import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.service.HotelService;
 

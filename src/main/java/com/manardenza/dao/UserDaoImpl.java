@@ -2,8 +2,6 @@ package com.manardenza.dao;
 
 import com.manardenza.entity.User;
 
-import java.util.List;
-
 public class UserDaoImpl extends AbstractDao<User> {
 
     private static UserDaoImpl instance;
