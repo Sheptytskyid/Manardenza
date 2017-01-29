@@ -1,13 +1,20 @@
 package com.manardenza.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public abstract class AbstractObject {
 
     private long id;
+
+    protected AbstractObject() {
+        id = generatePositiveRandId();
+    }
+
+    private static long generatePositiveRandId() {
+        long id = UUID.randomUUID().getMostSignificantBits();
+        if (id < 0) {
+            id = generatePositiveRandId();
+        }
+        return id;
+    }
 }

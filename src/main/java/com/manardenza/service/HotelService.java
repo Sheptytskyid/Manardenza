@@ -1,10 +1,11 @@
-package com.manardenza.servise;
+package com.manardenza.service;
 
 import com.manardenza.dao.HotelDaoImpl;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.Hotel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,11 +26,11 @@ public final class HotelService {
     }
 
     public List<Hotel> findHotelByName(String hotelName) {
-        return null;
+        return new ArrayList<>();
     }
 
     public List<Hotel> findHotelByCity(String cityName) {
-        return null;
+        return new ArrayList<>();
     }
 
     public Room bookRoom(long roomId, long hotelId, Reservation reservation) {
@@ -41,6 +42,6 @@ public final class HotelService {
     }
 
     public List<Room> findRoom(Map<String, String> params) {
-        return null;
+        return new ArrayList<>();
     }
 }

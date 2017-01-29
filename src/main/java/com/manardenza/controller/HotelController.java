@@ -3,7 +3,7 @@ package com.manardenza.controller;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
-import com.manardenza.servise.HotelService;
+import com.manardenza.service.HotelService;
 
 import java.util.List;
 import java.util.Map;
