@@ -3,17 +3,13 @@ package com.manardenza.dao;
 import com.manardenza.entity.User;
 
 import java.io.File;
-import java.util.List;
 
 public class UserDaoImpl extends AbstractDao<User> {
 
     private static UserDaoImpl instance;
 
-    {
-        databaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
-    }
-
     private UserDaoImpl() {
+        databaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
     }
 
     public static UserDaoImpl getInstance() {
