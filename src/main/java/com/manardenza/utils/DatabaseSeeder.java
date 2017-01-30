@@ -68,9 +68,5 @@ public final class DatabaseSeeder {
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, LVOV, roomsSeederList));
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, DONETSK, roomsSeederList));
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, ZAPOROZHYE, roomsSeederList));
-
-        RESERVATIONDAOIMPL.save(new Reservation(new Date(1484006400), new Date(1484438400),
-                USERDAOIMPL.getUserByName("Vasya", "Ivanov"), roomsSeederList.get(0),
-                HOTELDAOIMPL.getHotelsByName(MARRIOTT).get(0)));
     }
 }

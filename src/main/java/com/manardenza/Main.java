@@ -1,6 +1,5 @@
 package com.manardenza;
 
-import com.manardenza.utils.DatabaseSeeder;
 import org.slf4j.LoggerFactory;
 
 public class Main {
@@ -9,7 +8,6 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        DatabaseSeeder.seedDatabase();
     }
 
     public int test() {
