@@ -21,8 +21,4 @@ public abstract class AbstractObject implements Serializable{
         }
         return id;
     }
-
-    public long getId() {
-        return id;
-    }
 }

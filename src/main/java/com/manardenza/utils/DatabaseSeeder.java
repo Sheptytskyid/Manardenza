@@ -4,12 +4,10 @@ import com.manardenza.dao.HotelDaoImpl;
 import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.dao.UserDaoImpl;
 import com.manardenza.entity.Hotel;
-import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public final class DatabaseSeeder {

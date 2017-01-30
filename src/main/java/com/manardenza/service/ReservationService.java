@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class ReservationService {
 
@@ -42,16 +43,16 @@ public final class ReservationService {
     }
 
     private List<Room> selectAvailableRooms(Date reservedFrom, Date reservedTo, List<Room> rooms) {
-        List<Room> toDel = new ArrayList<>();
-        for (Room findRoom : rooms) {
+        List<Room> roomsToDelete = new ArrayList<>();
+        for (Room room : rooms) {
             if (reservationDao.getAll().stream()
-                    .filter(reservation -> reservation.getReservedRoom().equals(findRoom))
+                    .filter(reservation -> reservation.getReservedRoom().equals(room))
                     .filter(reservation -> reservation.overlaps(reservedFrom, reservedTo))
                     .count() > 0) {
-                toDel.add(findRoom);
+                roomsToDelete.add(room);
             }
         }
-        rooms.removeAll(toDel);
+        rooms.removeAll(roomsToDelete);
 
         return rooms;
     }
