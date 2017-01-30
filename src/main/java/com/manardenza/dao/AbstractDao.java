@@ -20,7 +20,9 @@ public abstract class AbstractDao<T extends AbstractObject> {
     protected FileInputStream fis = null;
     protected ObjectInputStream ois = null;
 
-    {
+    protected AbstractDao() {
+        databaseFile = new File("src/main/resources/databaseFiles/databaseAbstractFile.bin");
+
         try {
             fos = new FileOutputStream(databaseFile);
             oos = new ObjectOutputStream(fos);
@@ -35,7 +37,6 @@ public abstract class AbstractDao<T extends AbstractObject> {
     private void saveToFile() {
         try {
             oos.writeObject(database);
-            oos.close();
         } catch (IOException ex) { //FIXME: Either log or rethrow this exception.
             ex.printStackTrace(); //FIXME: Use a logger to log this exception.
         }
@@ -44,7 +45,6 @@ public abstract class AbstractDao<T extends AbstractObject> {
     private void readFromFile() {
         try {
             database = (List<T>) ois.readObject();
-            ois.close();
         } catch (IOException | ClassNotFoundException ex) { //FIXME: Either log or rethrow this exception.
             ex.printStackTrace(); //FIXME: Use a logger to log this exception.
         }
