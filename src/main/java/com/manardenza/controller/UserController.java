@@ -21,4 +21,8 @@ public class UserController {
     public void loginUser(String firstName, String lastName) {
         userService.loginUser(firstName, lastName);
     }
+
+    public void logoutUser() {
+        userService.logoutUser();
+    }
 }
