@@ -1,13 +1,13 @@
 package com.manardenza.service;
 
 import com.manardenza.dao.HotelDaoImpl;
-import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.Hotel;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class HotelService {
 
@@ -26,22 +26,24 @@ public final class HotelService {
     }
 
     public List<Hotel> findHotelByName(String hotelName) {
-        return new ArrayList<>();
+        return hotelDao.getHotelsByName(hotelName);
     }
 
     public List<Hotel> findHotelByCity(String cityName) {
-        return new ArrayList<>();
+        return hotelDao.getHotelsByCity(cityName);
     }
 
-    public Room bookRoom(long roomId, long hotelId, Reservation reservation) {
-        return null;
+    public Map<String, List<Room>> findPreliminaryRoom(String city, int persons, int price) {
+        Map<String, List<Room>> map = new HashMap<>();
+        hotelDao.getHotelsByCity(city).forEach(hotel -> map.put(hotel.getName(), findRoom(hotel, persons, price)));
+        return map;
     }
 
-    public boolean cancelReservation(long roomId, long userId, long hotelId, Reservation reservation) {
-        return false;
-    }
+    private List<Room> findRoom(Hotel hotel, int persons, int price) {
+        return hotel.getRooms().stream()
+                .filter(room -> room.getPerson() == persons)
+                .filter(room -> room.getPrice() <= price)
+                .collect(Collectors.toList());
 
-    public List<Room> findRoom(Map<String, String> params) {
-        return new ArrayList<>();
     }
 }
