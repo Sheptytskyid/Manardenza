@@ -1,8 +1,9 @@
 package com.manardenza.entity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractObject {
+public abstract class AbstractObject implements Serializable{
 
     private long id;
 
