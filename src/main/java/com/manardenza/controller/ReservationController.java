@@ -1,5 +1,6 @@
 package com.manardenza.controller;
 
+import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.service.ReservationService;
@@ -24,8 +25,8 @@ public final class ReservationController {
         return instance;
     }
 
-    public Long bookRoom(Reservation reservation) {
-        return reservationService.bookRoom(reservation);
+    public Long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
+        return reservationService.bookRoom(reservedFrom, reservedTo, room, hotel);
     }
 
     public boolean cancelReservation(long idReservation) {

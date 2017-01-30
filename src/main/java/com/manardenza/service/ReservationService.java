@@ -1,6 +1,7 @@
 package com.manardenza.service;
 
 import com.manardenza.dao.ReservationDaoImpl;
+import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.login.CurrentUser;
@@ -29,8 +30,11 @@ public final class ReservationService {
         return instance;
     }
 
-    public Long bookRoom(Reservation reservation) {
-        return reservationDao.save(reservation).getId();
+    public Long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
+        Reservation newReservation = new Reservation(reservedFrom, reservedTo, currentUser.getUser(), room, hotel);
+        reservationDao.save(newReservation);
+
+        return newReservation.getId();
     }
 
     public boolean cancelReservation(long idReservation) {
@@ -62,7 +66,7 @@ public final class ReservationService {
 
     public List<Reservation> getAllUserReservations() {
         return reservationDao.getAll().stream()
-                .filter(reservation -> reservation.getReservedUser().equals(currentUser))
+                .filter(reservation -> reservation.getReservedUser().equals(currentUser.getUser()))
                 .collect(Collectors.toList());
     }
 
