@@ -33,8 +33,8 @@ public final class ReservationService {
         return reservationDao.getAll().removeIf(p -> p.getId() == idReservation);
     }
 
-    public Map<String, List<Room>> checkRoomReservation
-            (Date reservedFrom, Date reservedTo, Map<String, List<Room>> rooms) {
+    public Map<String, List<Room>> checkRoomReservation(Date reservedFrom, Date reservedTo,
+                                                        Map<String, List<Room>> rooms) {
         for (String key : rooms.keySet()) {
             rooms.put(key, selectAvailableRooms(reservedFrom, reservedTo, rooms.get(key)));
         }
@@ -47,7 +47,7 @@ public final class ReservationService {
         for (Room findRoom : rooms) {
             if (reservationDao.getAll().stream()
                     .filter(reservation -> reservation.getReservedRoom().equals(findRoom))
-                    .filter(reservation -> reservation.Overlaps(reservedFrom, reservedTo))
+                    .filter(reservation -> reservation.overlaps(reservedFrom, reservedTo))
                     .count() > 0) {
                 toDel.add(findRoom);
             }

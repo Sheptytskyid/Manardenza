@@ -15,7 +15,7 @@ public class Reservation extends AbstractObject {
     private Room reservedRoom;
     private Hotel reservedHotel;
 
-    public boolean Overlaps(Date newReservedFrom, Date newReservedTo) {
+    public boolean overlaps(Date newReservedFrom, Date newReservedTo) {
         if (newReservedFrom.after(reservedFrom) && newReservedFrom.before(reservedTo)) {
             return true;
         }
