@@ -6,6 +6,7 @@ import com.manardenza.service.ReservationService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public final class ReservationController {
 
@@ -31,7 +32,8 @@ public final class ReservationController {
         return reservationService.cancelReservation(idReservation);
     }
 
-    public List<Room> checkRoomReservation(Date reservedFrom, Date reservedTo, List<Room> findRooms) {
-        return reservationService.checkRoomReservation(reservedFrom, reservedTo, findRooms);
+    public Map<String, List<Room>> checkRoomReservation(Date reservedFrom, Date reservedTo,
+                                                        Map<String, List<Room>> rooms) {
+        return reservationService.checkRoomReservation(reservedFrom, reservedTo, rooms);
     }
 }

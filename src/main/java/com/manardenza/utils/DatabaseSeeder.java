@@ -1,12 +1,15 @@
 package com.manardenza.utils;
 
 import com.manardenza.dao.HotelDaoImpl;
+import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.dao.UserDaoImpl;
 import com.manardenza.entity.Hotel;
+import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public final class DatabaseSeeder {
@@ -21,6 +24,7 @@ public final class DatabaseSeeder {
     private static final String REIKARTZ = "Reikartz";
     private static final UserDaoImpl USERDAOIMPL = UserDaoImpl.getInstance();
     private static final HotelDaoImpl HOTELDAOIMPL = HotelDaoImpl.getInstance();
+    private static final ReservationDaoImpl RESERVATIONDAOIMPL = ReservationDaoImpl.getInstance();
 
     private static List<Room> roomsSeederList = new ArrayList<>();
 
@@ -64,5 +68,9 @@ public final class DatabaseSeeder {
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, LVOV, roomsSeederList));
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, DONETSK, roomsSeederList));
         HOTELDAOIMPL.save(new Hotel(REIKARTZ, ZAPOROZHYE, roomsSeederList));
+
+        RESERVATIONDAOIMPL.save(new Reservation(new Date(1484006400), new Date(1484438400),
+                USERDAOIMPL.getUserByName("Vasya", "Ivanov"), roomsSeederList.get(0),
+                HOTELDAOIMPL.getHotelsByName(MARRIOTT).get(0)));
     }
 }
