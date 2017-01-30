@@ -35,10 +35,9 @@ public final class ReservationService {
 
     public Map<String, List<Room>> checkRoomReservation(Date reservedFrom, Date reservedTo,
                                                         Map<String, List<Room>> rooms) {
-        for (String key : rooms.keySet()) {
-            rooms.put(key, selectAvailableRooms(reservedFrom, reservedTo, rooms.get(key)));
+        for (Map.Entry<String, List<Room>> entry : rooms.entrySet()) {
+            entry.setValue(selectAvailableRooms(reservedFrom, reservedTo, entry.getValue()));
         }
-
         return rooms;
     }
 
