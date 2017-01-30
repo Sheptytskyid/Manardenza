@@ -11,7 +11,7 @@ public class HotelDaoImpl extends AbstractDao<Hotel> {
     private static HotelDaoImpl instance;
 
     private HotelDaoImpl() {
-        databaseFile = new File("src/main/resources/databaseFiles/databaseHotelsFile.bin");
+        super(new File("src/main/resources/databaseFiles/databaseHotelsFile.bin"));
     }
 
     public static HotelDaoImpl getInstance() {

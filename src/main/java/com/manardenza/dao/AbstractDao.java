@@ -14,7 +14,11 @@ import java.util.List;
 public abstract class AbstractDao<T extends AbstractObject> {
 
     protected List<T> database = new ArrayList<>();
-    protected File databaseFile;
+    private File databaseFile;
+
+    protected AbstractDao(File databaseFile) {
+        this.databaseFile = databaseFile;
+    }
 
     private void saveToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
