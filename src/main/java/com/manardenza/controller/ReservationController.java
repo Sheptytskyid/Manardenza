@@ -36,4 +36,8 @@ public final class ReservationController {
                                                         Map<String, List<Room>> rooms) {
         return reservationService.checkRoomReservation(reservedFrom, reservedTo, rooms);
     }
+
+    private List<Reservation> getAllUserReservations() {
+        return reservationService.getAllUserReservations();
+    }
 }

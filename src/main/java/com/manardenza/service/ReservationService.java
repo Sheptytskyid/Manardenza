@@ -60,9 +60,10 @@ public final class ReservationService {
         return rooms;
     }
 
-    private List<Reservation> getUserUserReservations() {
-        return reservationDao.getAll().stream().
-                filter(reservation -> reservation.getReservedUser().equals(currentUser)).collect(Collectors.toList());
+    public List<Reservation> getAllUserReservations() {
+        return reservationDao.getAll().stream()
+                .filter(reservation -> reservation.getReservedUser().equals(currentUser))
+                .collect(Collectors.toList());
     }
 
 }
