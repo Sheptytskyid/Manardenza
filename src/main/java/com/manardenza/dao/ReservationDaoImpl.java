@@ -2,13 +2,14 @@ package com.manardenza.dao;
 
 import com.manardenza.entity.Reservation;
 
-import java.util.List;
+import java.io.File;
 
 public class ReservationDaoImpl extends AbstractDao<Reservation> {
 
     private static ReservationDaoImpl instance;
 
     private ReservationDaoImpl() {
+        super(new File("src/main/resources/databaseFiles/databaseReservationsFile.bin"));
     }
 
     public static ReservationDaoImpl getInstance() {
@@ -16,15 +17,5 @@ public class ReservationDaoImpl extends AbstractDao<Reservation> {
             instance = new ReservationDaoImpl();
         }
         return instance;
-    }
-
-    @Override
-    public Reservation save(Reservation obj) {
-        return super.save(obj);
-    }
-
-    @Override
-    public List<Reservation> getAll() {
-        return super.getAll();
     }
 }
