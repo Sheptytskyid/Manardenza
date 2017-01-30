@@ -1,7 +1,6 @@
 package com.manardenza.utils;
 
 import com.manardenza.dao.HotelDaoImpl;
-import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.dao.UserDaoImpl;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Room;
@@ -22,7 +21,6 @@ public final class DatabaseSeeder {
     private static final String REIKARTZ = "Reikartz";
     private static final UserDaoImpl USERDAOIMPL = UserDaoImpl.getInstance();
     private static final HotelDaoImpl HOTELDAOIMPL = HotelDaoImpl.getInstance();
-    private static final ReservationDaoImpl RESERVATIONDAOIMPL = ReservationDaoImpl.getInstance();
 
     private static List<Room> roomsSeederList = new ArrayList<>();
 
