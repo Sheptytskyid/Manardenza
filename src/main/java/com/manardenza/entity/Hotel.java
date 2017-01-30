@@ -2,11 +2,10 @@ package com.manardenza.entity;
 
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class Hotel extends AbstractObject implements Serializable {
+public class Hotel extends AbstractObject {
 
     private String name;
     private String city;

@@ -15,21 +15,38 @@ public abstract class AbstractDao<T extends AbstractObject> {
 
     protected List<T> database = new ArrayList<>();
     protected File databaseFile;
+    protected FileOutputStream fos = null;
+    protected ObjectOutputStream oos = null;
+    protected FileInputStream fis = null;
+    protected ObjectInputStream ois = null;
+
+    {
+        try {
+            fos = new FileOutputStream(databaseFile);
+            oos = new ObjectOutputStream(fos);
+            fis = new FileInputStream(databaseFile);
+            ois = new ObjectInputStream(fis);
+
+        } catch (IOException ex) { //FIXME: Either log or rethrow this exception.
+            ex.printStackTrace(); //FIXME: Use a logger to log this exception.
+        }
+    }
 
     private void saveToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
+        try {
             oos.writeObject(database);
-        } catch (IOException e) {
-            e.printStackTrace();
+            oos.close();
+        } catch (IOException ex) { //FIXME: Either log or rethrow this exception.
+            ex.printStackTrace(); //FIXME: Use a logger to log this exception.
         }
-
     }
 
     private void readFromFile() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
+        try {
             database = (List<T>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            ois.close();
+        } catch (IOException | ClassNotFoundException ex) { //FIXME: Either log or rethrow this exception.
+            ex.printStackTrace(); //FIXME: Use a logger to log this exception.
         }
     }
 

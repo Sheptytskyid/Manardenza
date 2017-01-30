@@ -2,10 +2,8 @@ package com.manardenza.entity;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class Room extends AbstractObject implements Serializable{
+public class Room extends AbstractObject {
 
     private String name;
     private int person;

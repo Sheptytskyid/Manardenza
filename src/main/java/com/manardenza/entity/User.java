@@ -2,10 +2,8 @@ package com.manardenza.entity;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class User extends AbstractObject implements Serializable {
+public class User extends AbstractObject {
 
     private String firstName;
     private String lastName;
