@@ -3,19 +3,23 @@ package com.manardenza.service;
 import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
+import com.manardenza.login.CurrentUser;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class ReservationService {
 
     private static ReservationService instance;
     private ReservationDaoImpl reservationDao;
+    private CurrentUser currentUser;
 
     ReservationService() {
         this.reservationDao = ReservationDaoImpl.getInstance();
+        this.currentUser = CurrentUser.getInstance();
     }
 
     public static ReservationService getInstance() {
@@ -54,6 +58,11 @@ public final class ReservationService {
         rooms.removeAll(roomsToDelete);
 
         return rooms;
+    }
+
+    private List<Reservation> getUserUserReservations() {
+        return reservationDao.getAll().stream().
+                filter(reservation -> reservation.getReservedUser().equals(currentUser)).collect(Collectors.toList());
     }
 
 }
