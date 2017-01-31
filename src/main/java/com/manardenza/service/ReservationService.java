@@ -17,16 +17,8 @@ public final class ReservationService {
     private ReservationDaoImpl reservationDao;
     private CurrentUser currentUser;
 
-    ReservationService() {
-        this.reservationDao = ReservationDaoImpl.getInstance();
-        this.currentUser = CurrentUser.getInstance();
-    }
-
-    public static ReservationService getInstance() {
-        if (instance == null) {
-            instance = new ReservationService();
-        }
-        return instance;
+    public ReservationService(ReservationDaoImpl reservationDao) {
+        this.reservationDao = reservationDao;
     }
 
     public Long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {

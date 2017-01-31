@@ -11,18 +11,10 @@ import java.util.Map;
 
 public final class ReservationController {
 
-    private static ReservationController instance;
     private ReservationService reservationService;
 
-    private ReservationController() {
-        this.reservationService = ReservationService.getInstance();
-    }
-
-    public static ReservationController getInstance() {
-        if (instance == null) {
-            instance = new ReservationController();
-        }
-        return instance;
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
     }
 
     public Long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
