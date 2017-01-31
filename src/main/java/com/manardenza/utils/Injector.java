@@ -23,4 +23,6 @@ public class Injector {
     private static HotelController hotelController = new HotelController(hotelService);
     private static UserController userController = new UserController(userService);
 
+    private Injector() {
+    }
 }
