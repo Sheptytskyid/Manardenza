@@ -19,8 +19,8 @@ public final class DatabaseSeeder {
     private static final String MARRIOTT = "Marriott";
     private static final String HOLIDAY_INN = "Holiday Inn";
     private static final String REIKARTZ = "Reikartz";
-    private static final UserDaoImpl USERDAOIMPL = UserDaoImpl.getInstance();
-    private static final HotelDaoImpl HOTELDAOIMPL = HotelDaoImpl.getInstance();
+    private static final UserDaoImpl USERDAOIMPL = Injector.getUserDao();
+    private static final HotelDaoImpl HOTELDAOIMPL = Injector.getHotelDao();
 
     private static List<Room> roomsSeederList = new ArrayList<>();
 
