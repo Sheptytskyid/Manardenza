@@ -1,5 +1,6 @@
 package com.manardenza;
 
+import com.manardenza.utils.Injector;
 import org.slf4j.LoggerFactory;
 
 public class Main {
@@ -8,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        Injector injector = new Injector();
     }
 
     public int test() {
