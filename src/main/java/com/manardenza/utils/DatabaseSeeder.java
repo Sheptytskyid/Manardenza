@@ -11,18 +11,23 @@ import java.util.List;
 
 public final class DatabaseSeeder {
 
-    private static final String KIEV = "Kiev";
-    private static final String ODESSA = "Odessa";
-    private static final String LVOV = "Lvov";
-    private static final String DONETSK = "Donetsk";
-    private static final String ZAPOROZHYE = "Zaporozhye";
-    private static final String MARRIOTT = "Marriott";
-    private static final String HOLIDAY_INN = "Holiday Inn";
-    private static final String REIKARTZ = "Reikartz";
     private static final UserDaoImpl USERDAOIMPL = UserDaoImpl.getInstance();
     private static final HotelDaoImpl HOTELDAOIMPL = HotelDaoImpl.getInstance();
+    private static final List<String> citiesNameList = new ArrayList<>();
+    private static final List<String> hotelsNamesList = new ArrayList<>();
+    private static final List<Hotel> hotelsList = new ArrayList<>();
 
-    private static List<Room> roomsSeederList = new ArrayList<>();
+    private static List<Room> newRoomsList() {
+        List<Room> roomsSeederList = new ArrayList<>();
+        roomsSeederList.add(new Room("SINGLE ROOM", 1, 200));
+        roomsSeederList.add(new Room("DOUBLE ROOM", 2, 300));
+        roomsSeederList.add(new Room("KING BEDROOM", 2, 350));
+        roomsSeederList.add(new Room("INTERCONNECTING ROOMS", 3, 400));
+        roomsSeederList.add(new Room("INTERCONNECTING ROOMS", 4, 450));
+        roomsSeederList.add(new Room("DUPLEX", 4, 700));
+        roomsSeederList.add(new Room("SUITE ROOM", 6, 1000));
+        return roomsSeederList;
+    }
 
     public static void seedDatabase() {
         USERDAOIMPL.save(new User("Vasya", "Petrov"));
@@ -41,28 +46,21 @@ public final class DatabaseSeeder {
         USERDAOIMPL.save(new User("Scolastyka", "Machura"));
         USERDAOIMPL.save(new User("Ann", "Merryvether"));
 
-        roomsSeederList.add(new Room("SINGLE ROOM", 1, 200));
-        roomsSeederList.add(new Room("DOUBLE ROOM", 2, 300));
-        roomsSeederList.add(new Room("KING BEDROOM", 2, 350));
-        roomsSeederList.add(new Room("INTERCONNECTING ROOMS", 3, 400));
-        roomsSeederList.add(new Room("INTERCONNECTING ROOMS", 4, 450));
-        roomsSeederList.add(new Room("DUPLEX", 4, 700));
-        roomsSeederList.add(new Room("SUITE ROOM", 6, 1000));
+        citiesNameList.add("Kiev");
+        citiesNameList.add("Odessa");
+        citiesNameList.add("Lvov");
+        citiesNameList.add("Donetsk");
+        citiesNameList.add("Zaporozhye");
+        hotelsNamesList.add("Marriott");
+        hotelsNamesList.add("Holiday Inn");
+        hotelsNamesList.add("Reikartz");
 
-        HOTELDAOIMPL.save(new Hotel(MARRIOTT, KIEV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(MARRIOTT, ODESSA, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(MARRIOTT, LVOV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(MARRIOTT, DONETSK, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(MARRIOTT, ZAPOROZHYE, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(HOLIDAY_INN, KIEV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(HOLIDAY_INN, ODESSA, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(HOLIDAY_INN, LVOV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(HOLIDAY_INN, DONETSK, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(HOLIDAY_INN, ZAPOROZHYE, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(REIKARTZ, KIEV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(REIKARTZ, ODESSA, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(REIKARTZ, LVOV, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(REIKARTZ, DONETSK, roomsSeederList));
-        HOTELDAOIMPL.save(new Hotel(REIKARTZ, ZAPOROZHYE, roomsSeederList));
+        for (String hotelName : hotelsNamesList) {
+            for (String cityName : citiesNameList) {
+                hotelsList.add(new Hotel(hotelName, cityName,newRoomsList()));
+            }
+        }
+
+        HOTELDAOIMPL.saveAll(hotelsList);
     }
 }
