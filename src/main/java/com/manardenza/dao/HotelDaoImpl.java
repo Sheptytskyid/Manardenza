@@ -8,17 +8,8 @@ import java.util.stream.Collectors;
 
 public class HotelDaoImpl extends AbstractDao<Hotel> {
 
-    private static HotelDaoImpl instance;
-
-    private HotelDaoImpl() {
-        super(new File("src/main/resources/databaseFiles/databaseHotelsFile.bin"));
-    }
-
-    public static HotelDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new HotelDaoImpl();
-        }
-        return instance;
+    public HotelDaoImpl(File databaseFile) {
+        super(databaseFile);
     }
 
     public List<Hotel> getHotelsByName(String hotelName) {

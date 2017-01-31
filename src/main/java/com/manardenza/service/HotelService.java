@@ -1,8 +1,8 @@
 package com.manardenza.service;
 
 import com.manardenza.dao.HotelDaoImpl;
-import com.manardenza.entity.Room;
 import com.manardenza.entity.Hotel;
+import com.manardenza.entity.Room;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,18 +11,10 @@ import java.util.stream.Collectors;
 
 public final class HotelService {
 
-    private static HotelService instance;
     private HotelDaoImpl hotelDao;
 
-    private HotelService() {
-        this.hotelDao = HotelDaoImpl.getInstance();
-    }
-
-    public static HotelService getInstance() {
-        if (instance == null) {
-            instance = new HotelService();
-        }
-        return instance;
+    public HotelService(HotelDaoImpl hotelDao) {
+        this.hotelDao = hotelDao;
     }
 
     public List<Hotel> findHotelByName(String hotelName) {
