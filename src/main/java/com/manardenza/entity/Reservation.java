@@ -15,19 +15,4 @@ public class Reservation extends AbstractObject {
     private Room reservedRoom;
     private Hotel reservedHotel;
 
-    public boolean overlaps(Date newReservedFrom, Date newReservedTo) {
-        if (newReservedFrom.after(reservedFrom) && newReservedFrom.before(reservedTo)) {
-            return true;
-        }
-        if (newReservedTo.after(reservedFrom) && newReservedTo.before(reservedTo)) {
-            return true;
-        }
-        if (newReservedFrom.before(reservedFrom) && newReservedTo.after(reservedTo)) {
-            return true;
-        }
-        if (newReservedFrom.equals(reservedFrom) || newReservedTo.equals(reservedTo)) {
-            return true;
-        }
-        return false;
-    }
 }

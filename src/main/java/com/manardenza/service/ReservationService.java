@@ -6,7 +6,6 @@ import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.login.CurrentUser;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -50,18 +49,11 @@ public final class ReservationService {
     }
 
     private List<Room> selectAvailableRooms(Date reservedFrom, Date reservedTo, List<Room> rooms) {
-        List<Room> roomsToDelete = new ArrayList<>();
-        for (Room room : rooms) {
-            if (reservationDao.getAll().stream()
-                    .filter(reservation -> reservation.getReservedRoom().equals(room))
-                    .filter(reservation -> reservation.overlaps(reservedFrom, reservedTo))
-                    .count() > 0) {
-                roomsToDelete.add(room);
-            }
-        }
-        rooms.removeAll(roomsToDelete);
-
-        return rooms;
+        return rooms.stream().filter(room -> reservationDao.getAll().stream()
+                .filter(reservation -> reservation.getReservedRoom().equals(room))
+                .filter(reservation -> reservation.getReservedFrom().getTime() <= reservedTo.getTime()
+                        && reservedFrom.getTime() <= reservation.getReservedTo().getTime())
+                .count() > 0).collect(Collectors.toList());
     }
 
     public List<Reservation> getAllUserReservations() {
