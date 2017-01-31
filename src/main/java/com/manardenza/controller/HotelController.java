@@ -9,18 +9,10 @@ import java.util.Map;
 
 public class HotelController {
 
-    private static HotelController instance;
     private HotelService hotelService;
 
-    private HotelController() {
-        this.hotelService = HotelService.getInstance();
-    }
-
-    public static HotelController getInstance() {
-        if (instance == null) {
-            instance = new HotelController();
-        }
-        return instance;
+    public HotelController(HotelService hotelService) {
+        this.hotelService = hotelService;
     }
 
     public List<Hotel> findHotelByName(String hotelName) {

@@ -6,20 +6,12 @@ import com.manardenza.login.CurrentUser;
 
 public class UserService {
 
-    private static UserService instance;
     private UserDaoImpl userDao;
     private CurrentUser currentUser;
 
-    private UserService() {
-        this.userDao = UserDaoImpl.getInstance();
-        this.currentUser = CurrentUser.getInstance();
-    }
-
-    public static UserService getInstance() {
-        if (instance == null) {
-            instance = new UserService();
-        }
-        return instance;
+    public UserService(UserDaoImpl userDao, CurrentUser currentUser) {
+        this.userDao = userDao;
+        this.currentUser = currentUser;
     }
 
     public void loginUser(String firstName, String lastName) {

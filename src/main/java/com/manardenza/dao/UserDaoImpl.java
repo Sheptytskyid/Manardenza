@@ -6,17 +6,8 @@ import java.io.File;
 
 public class UserDaoImpl extends AbstractDao<User> {
 
-    private static UserDaoImpl instance;
-
-    private UserDaoImpl() {
-        super(new File("src/main/resources/databaseFiles/databaseUsersFile.bin"));
-    }
-
-    public static UserDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new UserDaoImpl();
-        }
-        return instance;
+    public UserDaoImpl(File databaseFile) {
+        super(databaseFile);
     }
 
     public User getUserByName(String firstName, String lastName) {

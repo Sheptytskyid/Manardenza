@@ -4,18 +4,10 @@ import com.manardenza.service.UserService;
 
 public class UserController {
 
-    private static UserController instance;
     private UserService userService;
 
-    private UserController() {
-        this.userService = UserService.getInstance();
-    }
-
-    public static UserController getInstance() {
-        if (instance == null) {
-            instance = new UserController();
-        }
-        return instance;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     public void loginUser(String firstName, String lastName) {
