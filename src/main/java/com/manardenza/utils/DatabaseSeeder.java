@@ -11,8 +11,8 @@ import java.util.List;
 
 public final class DatabaseSeeder {
 
-    private static final UserDaoImpl USERDAOIMPL = UserDaoImpl.getInstance();
-    private static final HotelDaoImpl HOTELDAOIMPL = HotelDaoImpl.getInstance();
+    private static final UserDaoImpl USERDAOIMPL = Injector.getUserDao();
+    private static final HotelDaoImpl HOTELDAOIMPL = Injector.getHotelDao();
     private static final List<String> citiesNameList = new ArrayList<>();
     private static final List<String> hotelsNamesList = new ArrayList<>();
     private static final List<Hotel> hotelsList = new ArrayList<>();
