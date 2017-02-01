@@ -3,7 +3,6 @@ package com.manardenza;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.User;
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Data
 public class TestUtils {
 
     public static final String HOTEL_NAME = "Mariott";
