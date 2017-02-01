@@ -15,6 +15,8 @@ import lombok.Getter;
 import java.io.File;
 
 public class Injector {
+
+    private static CurrentUser currentUser = CurrentUser.getInstance();
     private static File hotelsDatabaseFile = new File("src/main/resources/databaseFiles/databaseHotelsFile.bin");
     private static File usersDatabaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
     private static File reservationDatabaseFile = new File("src/main/resources/databaseFiles/databaseReservationsFile.bin");
@@ -24,12 +26,13 @@ public class Injector {
     private static UserDaoImpl userDao = new UserDaoImpl(usersDatabaseFile);
     @Getter
     private static ReservationDaoImpl reservationDao = new ReservationDaoImpl(reservationDatabaseFile);
-    private static UserService userService = new UserService(userDao, CurrentUser.getInstance());
+    private static UserService userService = new UserService(userDao, currentUser);
     private static ReservationService reservationService = new ReservationService(reservationDao);
     private static HotelService hotelService = new HotelService(hotelDao, reservationService);
-    private static HotelController hotelController = new HotelController(hotelService);
-    private static UserController userController = new UserController(userService);
-    private static ReservationController reservationController = new ReservationController(reservationService);
+    private static HotelController hotelController = new HotelController(hotelService, currentUser);
+    @Getter
+    private static UserController userController = new UserController(userService, currentUser);
+    private static ReservationController reservationController = new ReservationController(reservationService, currentUser);
 
     private Injector() {
     }

@@ -1,6 +1,8 @@
 package com.manardenza.dao;
 
+import com.manardenza.controller.HotelController;
 import com.manardenza.entity.AbstractObject;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +17,7 @@ public abstract class AbstractDao<T extends AbstractObject> {
 
     protected List<T> database = new ArrayList<>();
     private File databaseFile;
+    private org.slf4j.Logger log = LoggerFactory.getLogger(HotelController.class);
 
     protected AbstractDao(File databaseFile) {
         this.databaseFile = databaseFile;
@@ -23,16 +26,18 @@ public abstract class AbstractDao<T extends AbstractObject> {
     private void saveToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
             oos.writeObject(database);
-        } catch (IOException e) { //FIXME: Either log or rethrow this exception.
-            e.printStackTrace();//FIXME: Use a logger to log this exception.
+        } catch (IOException e) {
+            log.error("Error while attempting to write to database file", e);
+            //FIXME: rethrow to console.
         }
     }
 
     private void readFromFile() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
             database = (List<T>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) { //FIXME: Either log or rethrow this exception.
-            e.printStackTrace();//FIXME: Use a logger to log this exception.
+        } catch (IOException | ClassNotFoundException e) {
+            log.error("Error while attempting to read from database file", e);
+            //FIXME: rethrow to console.
         }
     }
 
