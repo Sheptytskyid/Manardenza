@@ -45,20 +45,20 @@ public class ReservationControllerTest {
     }
 
     @Test
-    public void CancelReservationCallsServiceMethod() throws Exception {
+    public void cancelReservationCallsServiceMethod() throws Exception {
         long id = 0;
         reservationController.cancelReservation(id);
         verify(reservationService, times(1)).cancelReservation(id);
     }
 
     @Test
-    public void CheckRoomReservationCallsServiceMethod() throws Exception {
+    public void checkRoomReservationCallsServiceMethod() throws Exception {
         reservationController.checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
         verify(reservationService, times(1)).checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
     }
 
     @Test
-    public void GetAllUserReservationsCallsServiceMethod() throws Exception {
+    public void getAllUserReservationsCallsServiceMethod() throws Exception {
 
     }
 
