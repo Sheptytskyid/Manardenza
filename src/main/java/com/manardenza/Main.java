@@ -12,6 +12,7 @@ public class Main {
     }
 
     public int test() {
+        logger.info("test");
         return 1;
     }
 }
