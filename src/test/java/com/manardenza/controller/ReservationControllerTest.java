@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.manardenza.TestUtils.HOTEL;
@@ -39,27 +40,27 @@ public class ReservationControllerTest {
     }
 
     @Test
-    public void BookRoomCallsServiceMethod() throws Exception {
+    public void bookRoomCallsServiceMethod() throws Exception {
         reservationController.bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
         verify(reservationService, times(1)).bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
     }
 
     @Test
-    public void CancelReservationCallsServiceMethod() throws Exception {
+    public void cancelReservationCallsServiceMethod() throws Exception {
         long id = 0;
         reservationController.cancelReservation(id);
         verify(reservationService, times(1)).cancelReservation(id);
     }
 
     @Test
-    public void CheckRoomReservationCallsServiceMethod() throws Exception {
+    public void checkRoomReservationCallsServiceMethod() throws Exception {
         reservationController.checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
         verify(reservationService, times(1)).checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
     }
 
     @Test
-    public void GetAllUserReservationsCallsServiceMethod() throws Exception {
-
+    public void getAllUserReservationsCallsServiceMethod() throws Exception {
+        reservationController.getAllUserReservations();
+        verify(reservationService, times(1)).getAllUserReservations();
     }
-
 }

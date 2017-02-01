@@ -20,10 +20,18 @@ public class TestUtils {
     public static final Date RESERVED_TO = new Date(117, 1, 15);
     public static final User USER = new User(FIRST_NAME, LAST_NAME);
     public static final Room ROOM = new Room("Room", 2, 300);
-    public static final List<Room> ROOMS_LIST = new ArrayList<>();
-    public static final Hotel HOTEL = new Hotel(HOTEL_NAME, CITY, ROOMS_LIST);
+    public static final Hotel HOTEL = new Hotel(HOTEL_NAME, CITY, getRoomsList());
     public static final Map<String, List<Room>> ROOMS_MAP = new HashMap<>();
 
-    private TestUtils() {}
+    public static final List<Room> getRoomsList() {
+        List<Room> testRoomsList = new ArrayList<>();
+        testRoomsList.add(new Room("SINGLE ROOM", 1, 200));
+        testRoomsList.add(new Room("DOUBLE ROOM", 2, 300));
 
+        return testRoomsList;
+    }
+
+    private TestUtils() {
+
+    }
 }
