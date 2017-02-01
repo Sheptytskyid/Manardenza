@@ -24,5 +24,6 @@ public class TestUtils {
     public static final Hotel HOTEL = new Hotel(HOTEL_NAME, CITY, ROOMS_LIST);
     public static final Map<String, List<Room>> ROOMS_MAP = new HashMap<>();
 
+    private TestUtils() {}
 
 }
