@@ -15,8 +15,9 @@ public final class HotelService {
     private HotelDaoImpl hotelDao;
     private ReservationService reservationService;
 
-    public HotelService(HotelDaoImpl hotelDao) {
+    public HotelService(HotelDaoImpl hotelDao, ReservationService reservationService) {
         this.hotelDao = hotelDao;
+        this.reservationService = reservationService;
     }
 
     public List<Hotel> findHotelByName(String hotelName) {
