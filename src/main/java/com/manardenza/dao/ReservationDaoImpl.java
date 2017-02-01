@@ -9,5 +9,4 @@ public class ReservationDaoImpl extends AbstractDao<Reservation> {
     public ReservationDaoImpl(File databaseFile) {
         super(databaseFile);
     }
-
 }
