@@ -8,10 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Date;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HotelControllerTest {
@@ -24,32 +25,27 @@ public class HotelControllerTest {
 
     @Before
     public void setUp() {
-        Mockito.when(currentUser.getUser()).thenReturn(new User("Test", "User"));
+        when(currentUser.getUser()).thenReturn(new User("Test", "User"));
     }
 
     @Test
-    public void checkIfControllerMethodFindHotelByNameCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
-        String hotelName = "Mariott";
-        hotelController.findHotelByName(hotelName);
-        Mockito.verify(hotelService, Mockito.times(1)).findHotelByName(hotelName);
+    public void FindHotelByNameCallsServiceMethod() throws Exception {
+        hotelController.findHotelByName(null);
+        verify(hotelService, times(1)).findHotelByName(null);
     }
 
     @Test
-    public void checkIfControllerMethodFindHotelByCityCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
-        String city = "Kiev";
-        hotelController.findHotelByCity(city);
-        Mockito.verify(hotelService, Mockito.times(1)).findHotelByCity(city);
+    public void FindHotelByCityCallsServiceMethod() throws Exception {
+        hotelController.findHotelByCity(null);
+        verify(hotelService, times(1)).findHotelByCity(null);
     }
 
     @Test
-    public void checkIfControllerMethodGetAvailableRoomsCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
-        String city = "Kiev";
+    public void GetAvailableRoomsCallsServiceMethod() throws Exception {
         int persons = 2;
-        int price = 2;
-        Date fromDate = new Date(117, 1, 1);
-        Date toDate = new Date(117, 1, 5);
-        hotelController.getAvailableRooms(city, persons, price, fromDate, toDate);
-        Mockito.verify(hotelService, Mockito.times(1)).getAvailableRooms(city, persons, price, fromDate, toDate);
+        int price = 300;
+        hotelController.getAvailableRooms(null, persons, price, null, null);
+        verify(hotelService, times(1)).getAvailableRooms(null, persons, price, null, null);
     }
 
 }

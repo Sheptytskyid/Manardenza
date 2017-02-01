@@ -8,8 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
@@ -22,21 +25,19 @@ public class UserControllerTest {
 
     @Before
     public void setUp() {
-        Mockito.when(currentUser.getUser()).thenReturn(new User("Name", "Surname"));
+        when(currentUser.getUser()).thenReturn(new User("Name", "Surname"));
     }
 
     @Test
-    public void loginUser() throws Exception {
-        String firstName = "Name";
-        String lastName = "Surname";
-        userController.loginUser(firstName, lastName);
-        Mockito.verify(userService, Mockito.times(1)).loginUser(firstName, lastName);
+    public void loginUserCallsServiceMethod() throws Exception {
+        userController.loginUser(null, null);
+        verify(userService, times(1)).loginUser(null, null);
     }
 
     @Test
-    public void logoutUser() throws Exception {
+    public void logoutUserCallsServiceMethod() throws Exception {
         userController.logoutUser();
-        Mockito.verify(userService, Mockito.times(1)).logoutUser();
+        verify(userService, times(1)).logoutUser();
     }
 
 }

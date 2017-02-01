@@ -10,14 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ReservationControllerTest {
@@ -25,42 +22,40 @@ public class ReservationControllerTest {
     private ReservationService reservationService;
     @Mock
     private CurrentUser currentUser;
+    @Mock
+    private Hotel hotel;
     @InjectMocks
     private ReservationController reservationController;
 
     @Before
     public void setUp() {
-        Mockito.when(currentUser.getUser()).thenReturn(new User("Test", "User"));
+        when(currentUser.getUser()).thenReturn(new User("Test", "User"));
+
     }
 
     @Test
-    public void checkIfControllerMethodBookRoomCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
-        Date reservedFrom = new Date(117, 1, 1);
-        Date reservedTo = new Date(117, 1, 5);
-        Room room = new Room("Test", 2, 300);
-        Hotel hotel = new Hotel("Test", "Kiev", new ArrayList<Room>());
-        reservationController.bookRoom(reservedFrom,reservedTo, room, hotel);
-        Mockito.verify(reservationService, Mockito.times(1)).bookRoom(reservedFrom,reservedTo, room, hotel);
+    public void BookRoomCallsServiceMethod() throws Exception {
+        Room room = new Room(null, 2, 2);
+        Hotel hotel = new Hotel("Mariott", null, null);
+        reservationController.bookRoom(null, null, room, hotel);
+        verify(reservationService, times(1)).bookRoom(null, null, room, hotel);
     }
 
     @Test
-    public void checkIfControllerMethodCancelReservationCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
+    public void CancelReservationCallsServiceMethod() throws Exception {
         long id = 0;
         reservationController.cancelReservation(id);
-        Mockito.verify(reservationService, Mockito.times(1)).cancelReservation(id);
+        verify(reservationService, times(1)).cancelReservation(id);
     }
 
     @Test
-    public void checkIfControllerMethodCheckRoomReservationCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
-        Date reservedFrom = new Date(117, 1, 1);
-        Date reservedTo = new Date(117, 1, 5);
-        Map<String, List<Room>> map = new HashMap<String, List<Room>>();
-        reservationController.checkRoomReservation(reservedFrom, reservedTo, map );
-        Mockito.verify(reservationService, Mockito.times(1)).checkRoomReservation(reservedFrom, reservedTo, map);
+    public void CheckRoomReservationCallsServiceMethod() throws Exception {
+        reservationController.checkRoomReservation(null, null, null);
+        verify(reservationService, times(1)).checkRoomReservation(null, null, null);
     }
 
     @Test
-    public void checkIfControllerMethodGetAllUserReservationsCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
+    public void GetAllUserReservationsCallsServiceMethod() throws Exception {
 
     }
 

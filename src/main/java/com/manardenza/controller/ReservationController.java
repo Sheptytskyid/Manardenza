@@ -25,10 +25,10 @@ public class ReservationController {
 
     public long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
         log.info(String.format("%s has requested reservation of room %d in hotel %s from %tD till %tD", currentUser
-            .getUser().getFullName(), room.getId(), hotel, reservedFrom, reservedTo));
+            .getUser().getFullName(), room.getId(), hotel.getName(), reservedFrom, reservedTo));
         long reservationId = reservationService.bookRoom(reservedFrom, reservedTo, room, hotel);
         log.info(String.format("%s has successfully reserved room %d in hotel %s from %tD till %tD", currentUser
-            .getUser().getFullName(), room.getId(), hotel, reservedFrom, reservedTo));
+            .getUser().getFullName(), room.getId(), hotel.getName(), reservedFrom, reservedTo));
         return reservationId;
     }
 
