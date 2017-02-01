@@ -1,7 +1,9 @@
 package com.manardenza.controller;
 
+import com.manardenza.entity.User;
 import com.manardenza.login.CurrentUser;
 import com.manardenza.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,6 +19,11 @@ public class UserControllerTest {
     private CurrentUser currentUser;
     @InjectMocks
     private UserController userController;
+
+    @Before
+    public void setUp() {
+        Mockito.when(currentUser.getUser()).thenReturn(new User("Name", "Surname"));
+    }
 
     @Test
     public void loginUser() throws Exception {

@@ -1,7 +1,9 @@
 package com.manardenza.controller;
 
+import com.manardenza.entity.User;
 import com.manardenza.login.CurrentUser;
 import com.manardenza.service.HotelService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,22 +22,27 @@ public class HotelControllerTest {
     @InjectMocks
     private HotelController hotelController;
 
+    @Before
+    public void setUp() {
+        Mockito.when(currentUser.getUser()).thenReturn(new User("Test", "User"));
+    }
+
     @Test
-    public void findHotelByName() throws Exception {
+    public void checkIfControllerMethodFindHotelByNameCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
         String hotelName = "Mariott";
         hotelController.findHotelByName(hotelName);
         Mockito.verify(hotelService, Mockito.times(1)).findHotelByName(hotelName);
     }
 
     @Test
-    public void findHotelByCity() throws Exception {
+    public void checkIfControllerMethodFindHotelByCityCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
         String city = "Kiev";
         hotelController.findHotelByCity(city);
         Mockito.verify(hotelService, Mockito.times(1)).findHotelByCity(city);
     }
 
     @Test
-    public void getAvailableRooms() throws Exception {
+    public void checkIfControllerMethodGetAvailableRoomsCorrectlyCallsTheCorrespondingServiceMethod() throws Exception {
         String city = "Kiev";
         int persons = 2;
         int price = 2;
