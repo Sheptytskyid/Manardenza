@@ -1,8 +1,12 @@
 package com.manardenza.entity;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractObject {
+@Data
+public abstract class AbstractObject implements Serializable{
 
     private long id;
 

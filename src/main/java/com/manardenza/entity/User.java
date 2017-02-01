@@ -12,4 +12,10 @@ public class User extends AbstractObject {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public String getFullName() {
+        StringBuilder fullName = new StringBuilder(firstName);
+        fullName.append(" ").append(lastName);
+        return fullName.toString();
+    }
 }
