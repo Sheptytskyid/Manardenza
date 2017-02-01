@@ -30,7 +30,7 @@ public final class ReservationController {
         return reservationService.checkRoomReservation(reservedFrom, reservedTo, rooms);
     }
 
-    private List<Reservation> getAllUserReservations() {
+    public List<Reservation> getAllUserReservations() {
         return reservationService.getAllUserReservations();
     }
 }

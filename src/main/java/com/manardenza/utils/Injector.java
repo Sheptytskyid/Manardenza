@@ -24,9 +24,9 @@ public class Injector {
     private static UserDaoImpl userDao = new UserDaoImpl(usersDatabaseFile);
     @Getter
     private static ReservationDaoImpl reservationDao = new ReservationDaoImpl(reservationDatabaseFile);
-    private static HotelService hotelService = new HotelService(hotelDao);
     private static UserService userService = new UserService(userDao, CurrentUser.getInstance());
     private static ReservationService reservationService = new ReservationService(reservationDao);
+    private static HotelService hotelService = new HotelService(hotelDao, reservationService);
     private static HotelController hotelController = new HotelController(hotelService);
     private static UserController userController = new UserController(userService);
     private static ReservationController reservationController = new ReservationController(reservationService);
