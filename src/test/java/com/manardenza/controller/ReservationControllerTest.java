@@ -1,8 +1,6 @@
 package com.manardenza.controller;
 
 import com.manardenza.entity.Hotel;
-import com.manardenza.entity.Room;
-import com.manardenza.entity.User;
 import com.manardenza.login.CurrentUser;
 import com.manardenza.service.ReservationService;
 import org.junit.Before;
@@ -12,12 +10,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.manardenza.TestUtils.HOTEL;
+import static com.manardenza.TestUtils.RESERVED_FROM;
+import static com.manardenza.TestUtils.RESERVED_TO;
+import static com.manardenza.TestUtils.ROOM;
+import static com.manardenza.TestUtils.ROOMS_MAP;
+import static com.manardenza.TestUtils.USER;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ReservationControllerTest {
+
     @Mock
     private ReservationService reservationService;
     @Mock
@@ -29,16 +34,14 @@ public class ReservationControllerTest {
 
     @Before
     public void setUp() {
-        when(currentUser.getUser()).thenReturn(new User("Test", "User"));
+        when(currentUser.getUser()).thenReturn(USER);
 
     }
 
     @Test
     public void BookRoomCallsServiceMethod() throws Exception {
-        Room room = new Room(null, 2, 2);
-        Hotel hotel = new Hotel("Mariott", null, null);
-        reservationController.bookRoom(null, null, room, hotel);
-        verify(reservationService, times(1)).bookRoom(null, null, room, hotel);
+        reservationController.bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
+        verify(reservationService, times(1)).bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
     }
 
     @Test
@@ -50,8 +53,8 @@ public class ReservationControllerTest {
 
     @Test
     public void CheckRoomReservationCallsServiceMethod() throws Exception {
-        reservationController.checkRoomReservation(null, null, null);
-        verify(reservationService, times(1)).checkRoomReservation(null, null, null);
+        reservationController.checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
+        verify(reservationService, times(1)).checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
     }
 
     @Test
