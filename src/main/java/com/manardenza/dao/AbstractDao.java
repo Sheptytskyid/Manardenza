@@ -3,7 +3,6 @@ package com.manardenza.dao;
 import com.manardenza.controller.HotelController;
 import com.manardenza.entity.AbstractObject;
 import com.manardenza.exceptions.DbFileReadException;
-import com.manardenza.exceptions.DbFileWriteException;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -29,9 +28,8 @@ public abstract class AbstractDao<T extends AbstractObject> {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
             oos.writeObject(database);
         } catch (IOException e) {
-            String message = "Error while attempting to read from database file";
-            log.error(message, e);
-            throw new DbFileWriteException(message, e);
+            log.error(e.getMessage(), e);
+            throw new DbFileReadException("Error while saving database file");
         }
     }
 
@@ -39,9 +37,8 @@ public abstract class AbstractDao<T extends AbstractObject> {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
             database = (List<T>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            String message = "Error while attempting to read from database file";
-            log.error(message, e);
-            throw new DbFileReadException(message, e);
+            log.error(e.getMessage(), e);
+            throw new DbFileReadException("Error while reading database file");
         }
     }
 
