@@ -1,9 +1,8 @@
 package com.manardenza.service;
 
+import com.manardenza.TestUtils;
 import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.entity.Reservation;
-import com.manardenza.entity.Room;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -15,7 +14,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static com.manardenza.TestUtils.HOTEL;
 import static com.manardenza.TestUtils.RESERVED_FROM;
@@ -31,14 +29,11 @@ public class ReservationServiceTest {
     @Mock
     private ReservationDaoImpl reservationDao;
 
+    @Mock
+    private Reservation reservation;
+
     @Captor
     ArgumentCaptor<Reservation> reservationCaptor;
-
-    @Captor
-    ArgumentCaptor<String> stringCaptor;
-
-    @Captor
-    ArgumentCaptor<Map<String, List<Room>>> mapCaptor;
 
     @InjectMocks
     private ReservationService reservationService;
@@ -69,7 +64,9 @@ public class ReservationServiceTest {
 
     @Test
     public void checkRoomReservation() throws Exception {
-        //FIXME; test logic
+        when(reservationDao.getAll()).thenReturn(TestUtils.getTestReservationList());
+        reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap());
+        assertEquals(reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap()), TestUtils.getTestRoomsToReturnMap());
     }
 
     @Test
