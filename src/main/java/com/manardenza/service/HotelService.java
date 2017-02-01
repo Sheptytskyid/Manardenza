@@ -4,6 +4,7 @@ import com.manardenza.dao.HotelDaoImpl;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Room;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
 public final class HotelService {
 
     private HotelDaoImpl hotelDao;
+    private ReservationService reservationService;
+
 
     public HotelService(HotelDaoImpl hotelDao) {
         this.hotelDao = hotelDao;
@@ -23,6 +26,12 @@ public final class HotelService {
 
     public List<Hotel> findHotelByCity(String cityName) {
         return hotelDao.getHotelsByCity(cityName);
+    }
+
+    public Map<String, List<Room>> getAvailableRooms(String city, int persons, int price,
+                                                     Date reservedFrom, Date reservedTo) {
+        return reservationService.checkRoomReservation(reservedFrom, reservedTo,
+                findPreliminaryRoom(city, persons, price));
     }
 
     public Map<String, List<Room>> findPreliminaryRoom(String city, int persons, int price) {
