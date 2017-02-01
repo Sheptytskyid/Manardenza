@@ -33,11 +33,6 @@ public class HotelController {
         return hotelService.findHotelByCity(cityName);
     }
 
-    //TODO: consider deleting this method if it won't be used in console
-    public Map<String, List<Room>> findPreliminaryRoom(String city, int persons, int price) {
-        return hotelService.findPreliminaryRoom(city, persons, price);
-    }
-
     public Map<String, List<Room>> getAvailableRooms(String city, int persons, int price,
                                                      Date reservedFrom, Date reservedTo) {
         log.info(String.format("User %s has searched for %d person rooms available from %tD till %tD in %s priced up "

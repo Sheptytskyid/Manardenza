@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public final class ReservationController {
+public class ReservationController {
 
     private ReservationService reservationService;
     private CurrentUser currentUser;
@@ -24,11 +24,11 @@ public final class ReservationController {
     }
 
     public long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
-        log.info(String.format("%s has requested reservation of room %s in hotel %s from %d till %d", currentUser
-            .getUser().getFullName(), room.getId(), reservedFrom, reservedTo));
+        log.info(String.format("%s has requested reservation of room %d in hotel %s from %tD till %tD", currentUser
+            .getUser().getFullName(), room.getId(), hotel.getName(), reservedFrom, reservedTo));
         long reservationId = reservationService.bookRoom(reservedFrom, reservedTo, room, hotel);
-        log.info(String.format("%s has successfully reserved room %s in hotel %s from %tD till %tD", currentUser
-            .getUser().getFullName(), room.getId(), reservedFrom, reservedTo));
+        log.info(String.format("%s has successfully reserved room %d in hotel %s from %tD till %tD", currentUser
+            .getUser().getFullName(), room.getId(), hotel.getName(), reservedFrom, reservedTo));
         return reservationId;
     }
 
@@ -40,8 +40,7 @@ public final class ReservationController {
             log.info(String.format("%s has successfully cancelled reservation %d", currentUser
                 .getUser().getFullName(), idReservation));
         } else {
-            log.info(String.format("Reservation %d cancellation failure", currentUser
-                .getUser().getFullName(), idReservation));
+            log.info(String.format("Reservation %d cancellation failure", idReservation));
         }
         return wasCancelled;
     }
