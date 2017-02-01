@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public final class ReservationService {
 
     private ReservationDaoImpl reservationDao;
-    private CurrentUser currentUser;
+    private CurrentUser currentUser = CurrentUser.getInstance();
 
     public ReservationService(ReservationDaoImpl reservationDao) {
         this.reservationDao = reservationDao;
@@ -28,13 +28,10 @@ public final class ReservationService {
     }
 
     public boolean cancelReservation(long idReservation) {
-        if (reservationDao.getAll().stream().anyMatch(p -> p.getId() == idReservation)) {
-            reservationDao.delete(reservationDao.getAll().stream()
-                    .filter(p -> p.getId() == idReservation).findFirst().get());
-            return true;
-        } else {
-            return false;
-        }
+        return reservationDao.delete(reservationDao.getAll().stream()
+                .filter(p -> p.getId() == idReservation)
+                .findFirst()
+                .get());
     }
 
     public Map<String, List<Room>> checkRoomReservation(Date reservedFrom, Date reservedTo,
@@ -46,10 +43,11 @@ public final class ReservationService {
     }
 
     private List<Room> selectAvailableRooms(Date reservedFrom, Date reservedTo, List<Room> rooms) {
-        return rooms.stream().filter(room -> reservationDao.getAll().stream()
-                .filter(reservation -> reservation.getReservedRoom().equals(room))
-                .filter(reservation -> reservation.overlaps(reservedFrom, reservedTo))
-                .count() > 0).collect(Collectors.toList());
+        return reservationDao.getAll().stream()
+                .filter(reservation -> rooms.contains(reservation.getReservedRoom()))
+                .filter(reservation -> !reservation.overlaps(reservedFrom, reservedTo))
+                .map(Reservation::getReservedRoom)
+                .collect(Collectors.toList());
     }
 
     public List<Reservation> getAllUserReservations() {
@@ -57,5 +55,4 @@ public final class ReservationService {
                 .filter(reservation -> reservation.getReservedUser().equals(currentUser.getUser()))
                 .collect(Collectors.toList());
     }
-
 }

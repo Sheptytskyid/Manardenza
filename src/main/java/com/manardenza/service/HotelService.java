@@ -36,6 +36,5 @@ public final class HotelService {
                 .filter(room -> room.getPerson() == persons)
                 .filter(room -> room.getPrice() <= price)
                 .collect(Collectors.toList());
-
     }
 }
