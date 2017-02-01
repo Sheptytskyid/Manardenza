@@ -1,18 +1,22 @@
 package com.manardenza.utils;
 
 import com.manardenza.dao.HotelDaoImpl;
+import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.dao.UserDaoImpl;
 import com.manardenza.entity.Hotel;
+import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.entity.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public final class DatabaseSeeder {
 
     private static final UserDaoImpl USERDAOIMPL = Injector.getUserDao();
     private static final HotelDaoImpl HOTELDAOIMPL = Injector.getHotelDao();
+    private static final ReservationDaoImpl RESERVATIONDAOIMPL = Injector.getReservationDao();
     private static final List<String> citiesNameList = new ArrayList<>();
     private static final List<String> hotelsNamesList = new ArrayList<>();
     private static final List<Hotel> hotelsList = new ArrayList<>();
@@ -27,6 +31,18 @@ public final class DatabaseSeeder {
         roomsSeederList.add(new Room("DUPLEX", 4, 700));
         roomsSeederList.add(new Room("SUITE ROOM", 6, 1000));
         return roomsSeederList;
+    }
+
+    private static List<Reservation> newReservationsList(int index) {
+        List<Reservation> reservationList = new ArrayList<>();
+        for (int j = 0; j < 12; j++) {
+            reservationList.add(new Reservation(new Date(117, j, 10),
+                    new Date(117, j, 15),
+                    USERDAOIMPL.getAll().get(index),
+                    HOTELDAOIMPL.getAll().get(index).getRooms().get(index),
+                    HOTELDAOIMPL.getAll().get(index)));
+        }
+        return reservationList;
     }
 
     public static void seedDatabase() {
@@ -62,5 +78,12 @@ public final class DatabaseSeeder {
         }
 
         HOTELDAOIMPL.saveAll(hotelsList);
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(0));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(1));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(2));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(3));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(4));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(5));
+        RESERVATIONDAOIMPL.saveAll(newReservationsList(6));
     }
 }
