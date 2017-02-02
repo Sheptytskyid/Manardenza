@@ -49,7 +49,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void cancelReservationDeletesreservation() throws Exception {
+    public void cancelReservationDeleteReservation() throws Exception {
         Reservation testReservation = new Reservation(RESERVED_FROM, RESERVED_TO, USER, ROOM, HOTEL);
         List<Reservation> testReservationList = new ArrayList<>();
         testReservationList.add(testReservation);
@@ -62,7 +62,8 @@ public class ReservationServiceTest {
     @Test
     public void abilityVerifyRoomsReservationBasedOnAlreadyRegisteredAndDates() throws Exception {
         when(reservationDao.getAll()).thenReturn(TestUtils.getTestReservationList());
-        assertEquals(TestUtils.getTestRoomsToReturnMap(), reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap()));
+        assertEquals(TestUtils.getSortedTestRoomsToReturnMap(),
+                reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getSortedTestRoomsMap()));
     }
 
     @Test
@@ -70,5 +71,4 @@ public class ReservationServiceTest {
         reservationService.getAllUserReservations();
         Mockito.verify(reservationDao, Mockito.times(1)).getAll();
     }
-
 }

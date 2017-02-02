@@ -22,14 +22,14 @@ public class TestUtils {
     public static final Date RESERVED_TO = new Date(117, 1, 15);
     public static final User USER = new User(FIRST_NAME, LAST_NAME);
     public static final Room ROOM = new Room("DOUBLE ROOM", 2, 300);
-    public static final Hotel HOTEL = new Hotel(HOTEL_NAME, CITY, getRoomsSeedList());
+    public static final Hotel HOTEL = new Hotel(HOTEL_NAME, CITY, getSortedTestRoomsList());
     public static final Map<String, List<Room>> ROOMS_MAP = new HashMap<>();
-    public static final List<Room> roomSeedTestList = getRoomsSeedList();
+    public static final List<Room> SORTED_TEST_ROOMS_LIST = getSortedTestRoomsList();
 
     private TestUtils() {
     }
 
-    public static List<Room> getRoomsSeedList() {
+    public static List<Room> getSortedTestRoomsList() {
         List<Room> testList = new ArrayList<>();
         testList.add(new Room(ROOM_NAME, 2, 300));
         testList.add(new Room(ROOM_NAME, 2, 300));
@@ -44,29 +44,29 @@ public class TestUtils {
 
     public static List<Reservation> getTestReservationList() {
         List<Reservation> testReservationList = new ArrayList<>();
-        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, roomSeedTestList.get(0), HOTEL));
-        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, roomSeedTestList.get(1), HOTEL));
-        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, roomSeedTestList.get(2), HOTEL));
-        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, roomSeedTestList.get(3), HOTEL));
+        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, SORTED_TEST_ROOMS_LIST.get(0), HOTEL));
+        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, SORTED_TEST_ROOMS_LIST.get(1), HOTEL));
+        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, SORTED_TEST_ROOMS_LIST.get(2), HOTEL));
+        testReservationList.add(new Reservation(RESERVED_FROM, RESERVED_TO, USER, SORTED_TEST_ROOMS_LIST.get(3), HOTEL));
 
         return testReservationList;
     }
 
     public static List<Room> getRoomsListToReturn() {
         List<Room> roomsListToReturm = new ArrayList<>();
-        roomsListToReturm.add(roomSeedTestList.get(4));
-        roomsListToReturm.add(roomSeedTestList.get(5));
-        roomsListToReturm.add(roomSeedTestList.get(6));
+        roomsListToReturm.add(SORTED_TEST_ROOMS_LIST.get(4));
+        roomsListToReturm.add(SORTED_TEST_ROOMS_LIST.get(5));
+        roomsListToReturm.add(SORTED_TEST_ROOMS_LIST.get(6));
         return roomsListToReturm;
     }
 
-    public static Map<String, List<Room>> getTestRoomsMap() {
+    public static Map<String, List<Room>> getSortedTestRoomsMap() {
         Map<String, List<Room>> testRoomsMap = new HashMap<>();
-        testRoomsMap.put(HOTEL_NAME, roomSeedTestList);
+        testRoomsMap.put(HOTEL_NAME, SORTED_TEST_ROOMS_LIST);
         return testRoomsMap;
     }
 
-    public static Map<String, List<Room>> getTestRoomsToReturnMap() {
+    public static Map<String, List<Room>> getSortedTestRoomsToReturnMap() {
         Map<String, List<Room>> testRoomsMap = new HashMap<>();
         testRoomsMap.put(HOTEL_NAME, getRoomsListToReturn());
         return testRoomsMap;
