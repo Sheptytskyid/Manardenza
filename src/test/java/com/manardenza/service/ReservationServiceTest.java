@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ReservationServiceTest {
 
-
     @Captor
     ArgumentCaptor<Reservation> reservationCaptor;
 
@@ -40,13 +39,6 @@ public class ReservationServiceTest {
     private CurrentUser currentUser;
     @Mock
     private ReservationDaoImpl reservationDao;
-
-    public ReservationServiceTest() {
-        this.reservationDao = reservationDao;
-        this.currentUser = currentUser;
-    }
-
-
 
     @Before
     public void setUp() {

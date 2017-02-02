@@ -15,10 +15,11 @@ import java.util.stream.Collectors;
 public class ReservationService {
 
     private ReservationDaoImpl reservationDao;
-    private CurrentUser currentUser = CurrentUser.getInstance();
+    private CurrentUser currentUser;
 
-    public ReservationService(ReservationDaoImpl reservationDao) {
+    public ReservationService(ReservationDaoImpl reservationDao, CurrentUser currentUser) {
         this.reservationDao = reservationDao;
+        this.currentUser = currentUser;
     }
 
     public Long bookRoom(Date reservedFrom, Date reservedTo, Room room, Hotel hotel) {
