@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 
-import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -23,7 +22,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
@@ -63,19 +61,6 @@ public class AbstractDaoTest {
     @Test
     public void save() throws Exception {
         assertEquals(testReservation, reservationDao.save(testReservation));
-    }
-
-    @Test
-    public void delete() throws Exception {
-        testReservationsList.add(testReservation);
-        assertTrue(reservationDao.delete(testReservation));
-        Mockito.verify(oosMock, Mockito.times(1)).writeObject(testReservation);
-    }
-
-    @Test
-    public void saveAll() throws Exception {
-        assertTrue(reservationDao.saveAll(testReservationsList));
-        Mockito.verify(oosMock, Mockito.times(1)).writeObject(testReservation);
     }
 
     @Test
