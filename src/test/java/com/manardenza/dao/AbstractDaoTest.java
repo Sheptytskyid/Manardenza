@@ -33,12 +33,12 @@ public class AbstractDaoTest {
     @Mock
     private File databaseFile;
     @InjectMocks
-    private ReservationDaoImpl reservationDao = PowerMockito.mock(ReservationDaoImpl.class);
+    private ReservationDaoImpl reservationDao;
     private ObjectInputStream oisMock = PowerMockito.mock(ObjectInputStream.class);
     private ObjectOutputStream oosMock = PowerMockito.mock(ObjectOutputStream.class);
     private FileInputStream inputStreamMock = PowerMockito.mock(FileInputStream.class);
     private FileOutputStream outputStreamMock = PowerMockito.mock(FileOutputStream.class);
-    private List<Reservation> testReservation = new ArrayList<>();
+    private List<Reservation> testReservationsList = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
@@ -50,7 +50,9 @@ public class AbstractDaoTest {
 
     @Test
     public void save() throws Exception {
-
+        Reservation testReservation = new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
+                TestUtils.USER, TestUtils.ROOM, TestUtils.HOTEL);
+        assertEquals(testReservation, reservationDao.save(testReservation));
     }
 
     @Test
@@ -60,24 +62,22 @@ public class AbstractDaoTest {
 
     @Test
     public void saveAll() throws Exception {
-//        ArrayList<Reservation> listToSaveReservations = new ArrayList<>();
-//        when(reservationDao.database.addAll(testReservation)).thenReturn(true);
-//        reservationDao.saveAll(testReservation);
-//        //assertEquals(true, reservationDao.database.addAll(testReservation));
-//        PowerMockito.verifyPrivate()
+        ArrayList<Reservation> listToSaveReservations = new ArrayList<>();
+        when(reservationDao.database.addAll(testReservationsList)).thenReturn(true);
+        reservationDao.saveAll(testReservationsList);
+        assertEquals(true, reservationDao.database.addAll(testReservationsList));
     }
 
     @Test
     public void getAll() throws Exception {
-        testReservation.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
+        testReservationsList.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
                 new User(TestUtils.FIRST_NAME, TestUtils.LAST_NAME), TestUtils.ROOM, TestUtils.HOTEL));
-        testReservation.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
+        testReservationsList.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
                 new User(TestUtils.FIRST_NAME, TestUtils.LAST_NAME), TestUtils.ROOM, TestUtils.HOTEL));
-        testReservation.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
+        testReservationsList.add(new Reservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
                 new User("Test1", "User1"), TestUtils.ROOM, TestUtils.HOTEL));
-        List<Reservation> expectedReservationList = new ArrayList<>();
-        expectedReservationList.addAll(testReservation);
-        when(oisMock.readObject()).thenReturn(testReservation);
-        assertEquals(expectedReservationList, testReservation);
+        when(oisMock.readObject()).thenReturn(testReservationsList);
+        reservationDao.getAll();
+        assertEquals(testReservationsList, reservationDao.getAll());
     }
 }

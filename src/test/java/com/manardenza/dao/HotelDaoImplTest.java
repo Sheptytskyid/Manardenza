@@ -46,10 +46,10 @@ public class HotelDaoImplTest {
         whenNew(FileInputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(inputStreamMock);
         whenNew(FileOutputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(outputStreamMock);
 
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
+        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.SORTED_TEST_ROOMS_LIST));
+        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.SORTED_TEST_ROOMS_LIST));
+        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.SORTED_TEST_ROOMS_LIST));
+        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.SORTED_TEST_ROOMS_LIST));
     }
 
     @Test
