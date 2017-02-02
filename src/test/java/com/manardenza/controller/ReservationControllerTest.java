@@ -1,6 +1,5 @@
 package com.manardenza.controller;
 
-import com.manardenza.entity.Hotel;
 import com.manardenza.login.CurrentUser;
 import com.manardenza.service.ReservationService;
 import org.junit.Before;
@@ -27,8 +26,6 @@ public class ReservationControllerTest {
     private ReservationService reservationService;
     @Mock
     private CurrentUser currentUser;
-    @Mock
-    private Hotel hotel;
     @InjectMocks
     private ReservationController reservationController;
 
@@ -39,27 +36,27 @@ public class ReservationControllerTest {
     }
 
     @Test
-    public void BookRoomCallsServiceMethod() throws Exception {
+    public void bookRoomCallsServiceMethod() throws Exception {
         reservationController.bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
         verify(reservationService, times(1)).bookRoom(RESERVED_FROM, RESERVED_TO, ROOM, HOTEL);
     }
 
     @Test
-    public void CancelReservationCallsServiceMethod() throws Exception {
+    public void cancelReservationCallsServiceMethod() throws Exception {
         long id = 0;
         reservationController.cancelReservation(id);
         verify(reservationService, times(1)).cancelReservation(id);
     }
 
     @Test
-    public void CheckRoomReservationCallsServiceMethod() throws Exception {
+    public void checkRoomReservationCallsServiceMethod() throws Exception {
         reservationController.checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
         verify(reservationService, times(1)).checkRoomReservation(RESERVED_FROM, RESERVED_TO, ROOMS_MAP);
     }
 
     @Test
     public void GetAllUserReservationsCallsServiceMethod() throws Exception {
-
+        reservationController.getAllUserReservations();
+        verify(reservationService, times(1)).getAllUserReservations();
     }
-
 }
