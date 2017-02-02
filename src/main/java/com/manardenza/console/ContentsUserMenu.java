@@ -190,7 +190,7 @@ public class ContentsUserMenu {
         outputDataInConsole("For room reservation please fill out the following form");
         bookRoomMenu();
         outputSplitLine();
-        return foundRooms;
+        return foundRooms; 
     }
 
     private Long bookRoomMenu() throws IOException {

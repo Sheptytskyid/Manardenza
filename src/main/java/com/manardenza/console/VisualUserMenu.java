@@ -57,7 +57,7 @@ public class VisualUserMenu {
 
     static Integer readerMenuFromConsole(String action) throws IOException {
         boolean flag = true;
-        int number = 0;
+        int number = 0; 
         outputDataInConsole(action);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (flag) {
