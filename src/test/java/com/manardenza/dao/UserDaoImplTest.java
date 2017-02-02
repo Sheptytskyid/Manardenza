@@ -1,7 +1,6 @@
 package com.manardenza.dao;
 
-import com.manardenza.TestUtils;
-import com.manardenza.entity.Hotel;
+import com.manardenza.entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,18 +24,19 @@ import static org.junit.Assert.assertEquals;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(HotelDaoImpl.class)
-public class HotelDaoImplTest {
+@PrepareForTest(UserDaoImpl.class)
+public class UserDaoImplTest {
 
     @Mock
     private File databaseFile;
     @InjectMocks
-    private HotelDaoImpl hotelDao;
+    private UserDaoImpl userDao;
+    private static final String FIRST_NAME = "Test";
+    private static final String LAST_NAME = "User";
     private ObjectInputStream oisMock = PowerMockito.mock(ObjectInputStream.class);
     private ObjectOutputStream oosMock = PowerMockito.mock(ObjectOutputStream.class);
     private FileInputStream inputStreamMock = PowerMockito.mock(FileInputStream.class);
     private FileOutputStream outputStreamMock = PowerMockito.mock(FileOutputStream.class);
-    private List<Hotel> testHotelsList = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
@@ -45,30 +45,18 @@ public class HotelDaoImplTest {
         whenNew(ObjectInputStream.class).withArguments(Matchers.any()).thenReturn(oisMock);
         whenNew(FileInputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(inputStreamMock);
         whenNew(FileOutputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(outputStreamMock);
-
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
     }
 
     @Test
-    public void getHotelsByNameCorrectHotelsListReturn() throws Exception {
-        List<Hotel> expectedHotels = new ArrayList<>();
-        expectedHotels.add(testHotelsList.get(0));
-        expectedHotels.add(testHotelsList.get(1));
-        PowerMockito.when(oisMock.readObject()).thenReturn(testHotelsList);
-        List<Hotel> foundHotels = hotelDao.getHotelsByName(TestUtils.HOTEL_NAME);
-        assertEquals(expectedHotels, foundHotels);
-    }
-
-    @Test
-    public void getHotelsByCityCorrectHotelsListReturn() throws Exception {
-        List<Hotel> expectedHotels = new ArrayList<>();
-        expectedHotels.add(testHotelsList.get(2));
-        expectedHotels.add(testHotelsList.get(3));
-        PowerMockito.when(oisMock.readObject()).thenReturn(testHotelsList);
-        List<Hotel> foundHotels = hotelDao.getHotelsByCity(TestUtils.CITY);
-        assertEquals(expectedHotels, foundHotels);
+    public void getUserByNameCorrectUserReturn() throws Exception {
+        List<User> testUsersList = new ArrayList<>();
+        testUsersList.add(new User(FIRST_NAME, LAST_NAME));
+        testUsersList.add(new User(FIRST_NAME, "Not Correct Last Name"));
+        testUsersList.add(new User("Not Correct First Name", LAST_NAME));
+        testUsersList.add(new User("Not Correct First Name", "Not Correct Last Name"));
+        PowerMockito.when(oisMock.readObject()).thenReturn(testUsersList);
+        User findUser = userDao.getUserByName(FIRST_NAME, LAST_NAME);
+        User expectedUser = testUsersList.get(0);
+        assertEquals(expectedUser, findUser);
     }
 }
