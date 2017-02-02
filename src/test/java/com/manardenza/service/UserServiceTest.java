@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -19,7 +18,6 @@ public class UserServiceTest {
 
     private static final String FIRST_NAME = "Test";
     private static final String LAST_NAME = "User";
-    private static final String FUL_NAME = FIRST_NAME + " " + LAST_NAME;
 
     @Mock
     private CurrentUser currentUser;

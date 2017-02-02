@@ -29,9 +29,6 @@ public class ReservationServiceTest {
     @Mock
     private ReservationDaoImpl reservationDao;
 
-    @Mock
-    private Reservation reservation;
-
     @Captor
     ArgumentCaptor<Reservation> reservationCaptor;
 
@@ -63,14 +60,13 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void checkRoomReservation() throws Exception {
+    public void abilityVerifyRoomsReservationBasedOnAlreadyRegisteredAndDates() throws Exception {
         when(reservationDao.getAll()).thenReturn(TestUtils.getTestReservationList());
-        reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap());
-        assertEquals(reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap()), TestUtils.getTestRoomsToReturnMap());
+        assertEquals(TestUtils.getTestRoomsToReturnMap(), reservationService.checkRoomReservation(RESERVED_FROM, RESERVED_TO, TestUtils.getTestRoomsMap()));
     }
 
     @Test
-    public void getAllUserReservationsFtomReservationDao() throws Exception {
+    public void getAllUserReservationsFromReservationDao() throws Exception {
         reservationService.getAllUserReservations();
         Mockito.verify(reservationDao, Mockito.times(1)).getAll();
     }
