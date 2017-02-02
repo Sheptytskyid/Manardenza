@@ -36,6 +36,7 @@ public class HotelDaoImplTest {
     private ObjectOutputStream oosMock;
     private FileInputStream inputStreamMock;
     private FileOutputStream outputStreamMock;
+    private List<Hotel> testHotelsList = new ArrayList<>();
     @Before
     public void setUp() throws Exception {
         oisMock = mock(ObjectInputStream.class);
@@ -47,14 +48,15 @@ public class HotelDaoImplTest {
         whenNew(ObjectInputStream.class).withArguments(Matchers.any()).thenReturn(oisMock);
         whenNew(FileInputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(inputStreamMock);
         whenNew(FileOutputStream.class).withParameterTypes(String.class).withArguments(Matchers.any()).thenReturn(outputStreamMock);
+
+        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
+        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, "Not Correct City", TestUtils.ROOMS_LIST));
+        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
+        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
     }
+    
     @Test
     public void getHotelsByName() throws Exception {
-        List<Hotel> testHotelsList = new ArrayList<>();
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, TestUtils.CITY, TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel(TestUtils.HOTEL_NAME, TestUtils.CITY, TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
-        testHotelsList.add(new Hotel("Not Correct Name", TestUtils.CITY, TestUtils.ROOMS_LIST));
         List<Hotel> expectedHotels = new ArrayList<>();
         expectedHotels.add(testHotelsList.get(0));
         expectedHotels.add(testHotelsList.get(1));
@@ -65,6 +67,11 @@ public class HotelDaoImplTest {
 
     @Test
     public void getHotelsByCity() throws Exception {
-
+        List<Hotel> expectedHotels = new ArrayList<>();
+        expectedHotels.add(testHotelsList.get(2));
+        expectedHotels.add(testHotelsList.get(3));
+        PowerMockito.when(oisMock.readObject()).thenReturn(testHotelsList);
+        List<Hotel> foundHotels = hotelDao.getHotelsByCity(TestUtils.CITY);
+        assertEquals(expectedHotels, foundHotels);
     }
 }
