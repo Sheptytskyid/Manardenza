@@ -210,12 +210,13 @@ public class ContentsUserMenu {
                     } catch (IOException e) {
                         outputDataInConsole("Entered incorrect number room");
                     }
-                    reserveId = reservationController.bookRoom(numberRoom);
+                    /*reserveId = reservationController.bookRoom(numberRoom);*/
                     outputDataInConsole("Guest room " + reserveId.intValue() + " reserved!");
                     outputSplitLine();
+                    break;
                 case (2):
-                    bookFlaf = false;
                     serviceMenu();
+                    bookFlaf = false;
                     break;
                 default:
                     bookFlaf = false;
