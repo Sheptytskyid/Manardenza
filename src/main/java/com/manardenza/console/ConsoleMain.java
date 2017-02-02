@@ -1,17 +1,16 @@
 package com.manardenza.console;
 
-import java.io.IOException;
-
 public class ConsoleMain {
 
-    private ContentsUserMenu contentsUserMenu;
+    private static ConsoleMain instance;
 
-    public ConsoleMain(ContentsUserMenu contentsUserMenu) {
-        this.contentsUserMenu = contentsUserMenu;
+    private ConsoleMain() {
     }
 
-    public void consoleMain() throws IllegalAccessException, InstantiationException, IOException {
-        contentsUserMenu.mainMenu();
-        contentsUserMenu.serviceMenu();
+    public static ConsoleMain getInstance() {
+        if (instance == null) {
+            instance = new ConsoleMain();
+        }
+        return instance;
     }
 }
