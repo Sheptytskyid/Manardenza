@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public final class ReservationService {
+public class ReservationService {
 
     private ReservationDaoImpl reservationDao;
     private CurrentUser currentUser = CurrentUser.getInstance();
