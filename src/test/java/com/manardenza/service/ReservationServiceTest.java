@@ -3,6 +3,9 @@ package com.manardenza.service;
 import com.manardenza.TestUtils;
 import com.manardenza.dao.ReservationDaoImpl;
 import com.manardenza.entity.Reservation;
+import com.manardenza.entity.User;
+import com.manardenza.login.CurrentUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -29,11 +32,28 @@ public class ReservationServiceTest {
     @Mock
     private ReservationDaoImpl reservationDao;
 
+    @Mock
+    private CurrentUser currentUser;
+
     @Captor
     ArgumentCaptor<Reservation> reservationCaptor;
 
     @InjectMocks
     private ReservationService reservationService;
+    private final List<Reservation> testReservationList = new ArrayList<>();
+
+    @Before
+    public void setUp() {
+        Reservation testReservationToDelete = new Reservation(RESERVED_FROM, RESERVED_TO, USER, ROOM, HOTEL);
+        Reservation testNotCorrectReservation1 = new Reservation(RESERVED_FROM, RESERVED_TO,
+                new User("Some1", "User1"), ROOM, HOTEL);
+        Reservation testNotCorrectReservation2 = new Reservation(RESERVED_FROM, RESERVED_TO,
+                new User("Some2", "User2"), ROOM, HOTEL);
+
+        testReservationList.add(testReservationToDelete);
+        testReservationList.add(testNotCorrectReservation1);
+        testReservationList.add(testNotCorrectReservation2);
+    }
 
     @Test
     public void bookRoomCreatedReservation() throws Exception {
@@ -50,13 +70,11 @@ public class ReservationServiceTest {
 
     @Test
     public void cancelReservationDeleteReservation() throws Exception {
-        Reservation testReservation = new Reservation(RESERVED_FROM, RESERVED_TO, USER, ROOM, HOTEL);
-        List<Reservation> testReservationList = new ArrayList<>();
-        testReservationList.add(testReservation);
+        Reservation testReservationToDelete = testReservationList.get(0);
         when(reservationDao.getAll()).thenReturn(testReservationList);
 
-        reservationService.cancelReservation(testReservation.getId());
-        Mockito.verify(reservationDao, Mockito.times(1)).delete(testReservation);
+        reservationService.cancelReservation(testReservationToDelete.getId());
+        Mockito.verify(reservationDao, Mockito.times(1)).delete(testReservationToDelete);
     }
 
     @Test
@@ -68,7 +86,11 @@ public class ReservationServiceTest {
 
     @Test
     public void getAllUserReservationsFromReservationDao() throws Exception {
+        List<Reservation> testUserReservationList = new ArrayList<>();
+        testUserReservationList.add(testReservationList.get(0));
+        when(currentUser.getUser()).thenReturn(testReservationList.get(0).getReservedUser());
+        when(reservationDao.getAll()).thenReturn(testReservationList);
         reservationService.getAllUserReservations();
-        Mockito.verify(reservationDao, Mockito.times(1)).getAll();
+        assertEquals(testUserReservationList, reservationService.getAllUserReservations());
     }
 }
