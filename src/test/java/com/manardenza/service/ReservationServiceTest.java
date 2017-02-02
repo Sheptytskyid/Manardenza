@@ -29,11 +29,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ReservationServiceTest {
 
-    @Mock
-    private ReservationDaoImpl reservationDao;
-
-    @Mock
-    private CurrentUser currentUser;
 
     @Captor
     ArgumentCaptor<Reservation> reservationCaptor;
@@ -41,6 +36,17 @@ public class ReservationServiceTest {
     @InjectMocks
     private ReservationService reservationService;
     private final List<Reservation> testReservationList = new ArrayList<>();
+    @Mock
+    private CurrentUser currentUser;
+    @Mock
+    private ReservationDaoImpl reservationDao;
+
+    public ReservationServiceTest() {
+        this.reservationDao = reservationDao;
+        this.currentUser = currentUser;
+    }
+
+
 
     @Before
     public void setUp() {
@@ -90,7 +96,6 @@ public class ReservationServiceTest {
         testUserReservationList.add(testReservationList.get(0));
         when(currentUser.getUser()).thenReturn(testReservationList.get(0).getReservedUser());
         when(reservationDao.getAll()).thenReturn(testReservationList);
-        reservationService.getAllUserReservations();
         assertEquals(testUserReservationList, reservationService.getAllUserReservations());
     }
 }
