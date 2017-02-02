@@ -36,19 +36,19 @@ public class HotelControllerTest {
     }
 
     @Test
-    public void FindHotelByNameCallsServiceMethod() throws Exception {
+    public void findHotelByNameCallsServiceMethod() throws Exception {
         hotelController.findHotelByName(TestUtils.HOTEL_NAME);
         verify(hotelService, times(1)).findHotelByName(TestUtils.HOTEL_NAME);
     }
 
     @Test
-    public void FindHotelByCityCallsServiceMethod() throws Exception {
+    public void findHotelByCityCallsServiceMethod() throws Exception {
         hotelController.findHotelByCity(TestUtils.CITY);
         verify(hotelService, times(1)).findHotelByCity(TestUtils.CITY);
     }
 
     @Test
-    public void GetAvailableRoomsCallsServiceMethod() throws Exception {
+    public void getAvailableRoomsCallsServiceMethod() throws Exception {
         int persons = 2;
         int price = 300;
         hotelController.getAvailableRooms(TestUtils.CITY, persons, price, TestUtils.RESERVED_FROM, TestUtils
@@ -56,5 +56,4 @@ public class HotelControllerTest {
         verify(hotelService, times(1)).getAvailableRooms(TestUtils.CITY, persons, price, TestUtils.RESERVED_FROM,
             TestUtils.RESERVED_TO);
     }
-
 }

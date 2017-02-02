@@ -1,8 +1,10 @@
 package com.manardenza.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Room extends AbstractObject {
 
     private String name;
