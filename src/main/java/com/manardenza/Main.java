@@ -1,6 +1,5 @@
 package com.manardenza;
 
-import com.manardenza.controller.HotelController;
 import com.manardenza.utils.DatabaseSeeder;
 import org.slf4j.LoggerFactory;
 
