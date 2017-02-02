@@ -17,8 +17,11 @@ import java.io.File;
 public class Injector {
 
     private static CurrentUser currentUser = CurrentUser.getInstance();
+    @Getter
     private static File hotelsDatabaseFile = new File("src/main/resources/databaseFiles/databaseHotelsFile.bin");
+    @Getter
     private static File usersDatabaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
+    @Getter
     private static File reservationDatabaseFile = new File("src/main/resources/databaseFiles/databaseReservationsFile.bin");
     @Getter
     private static HotelDaoImpl hotelDao = new HotelDaoImpl(hotelsDatabaseFile);

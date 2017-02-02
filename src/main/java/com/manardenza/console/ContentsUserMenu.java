@@ -8,15 +8,13 @@ import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import static com.manardenza.console.VisualUserMenu.inputDataFromUser;
 import static com.manardenza.console.VisualUserMenu.outputDataInConsole;
+import static com.manardenza.console.VisualUserMenu.outputListInConsole;
 import static com.manardenza.console.VisualUserMenu.outputSplitLine;
 import static com.manardenza.console.VisualUserMenu.readerMenuFromConsole;
 import static com.manardenza.console.VisualUserMenu.showUserMenu;
@@ -185,9 +183,10 @@ public class ContentsUserMenu {
             outputDataInConsole("Room with such parameters not found");
         } else {
             outputDataInConsole("The list of found rooms:\n ");
-            foundRooms.forEach((hotel, rooms) -> rooms.forEach(room -> outputDataInConsole(hotel + room.toString())));
+            outputListInConsole(foundRooms.entrySet());
         }
         outputDataInConsole("For room reservation please fill out the following form");
+
         bookRoomMenu();
         outputSplitLine();
         return foundRooms; 

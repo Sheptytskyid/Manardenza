@@ -1,5 +1,7 @@
 package com.manardenza.console;
 
+import com.manardenza.entity.AbstractObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +9,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class VisualUserMenu {
 
@@ -17,6 +22,18 @@ public class VisualUserMenu {
 
     public static void outputDataInConsole(String message) {
         System.out.println(message);
+    }
+
+    public static <E extends AbstractObject> void outputListInConsole(Set<Map.Entry<String, List<E>>> set) {
+        int key = 1;
+        for (Map.Entry<String, List<E>> entry : set) {
+            System.out.print(key++);
+            System.out.println(" " + entry.getKey());
+            for (int item = 0; item < entry.getValue().size(); item++) {
+                System.out.print("\t" + (item + 1));
+                System.out.println(" " + entry.getValue().get(item));
+            }
+        }
     }
 
     static void showUserMenu(String massage) {
@@ -57,7 +74,7 @@ public class VisualUserMenu {
 
     static Integer readerMenuFromConsole(String action) throws IOException {
         boolean flag = true;
-        int number = 0; 
+        int number = 0;
         outputDataInConsole(action);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (flag) {
@@ -73,7 +90,7 @@ public class VisualUserMenu {
     }
 
     static Object inputDataFromUser(String message, boolean flagInt, boolean flagLong, boolean flagStr,
-                             boolean flagDate) throws IOException {
+                                    boolean flagDate) throws IOException {
         Integer number = 0;
         Long numLong = 0L;
         String answer = null;
