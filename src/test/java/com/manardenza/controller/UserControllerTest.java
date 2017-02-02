@@ -41,5 +41,4 @@ public class UserControllerTest {
         userController.logoutUser();
         verify(userService, times(1)).logoutUser();
     }
-
 }

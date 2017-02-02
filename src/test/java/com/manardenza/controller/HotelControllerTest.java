@@ -56,5 +56,4 @@ public class HotelControllerTest {
         verify(hotelService, times(1)).getAvailableRooms(TestUtils.CITY, persons, price, TestUtils.RESERVED_FROM,
             TestUtils.RESERVED_TO);
     }
-
 }
