@@ -6,26 +6,33 @@ import com.manardenza.controller.UserController;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
+import com.manardenza.utils.Injector;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.manardenza.console.VisualUserMenu.inputDataFromUser;
 import static com.manardenza.console.VisualUserMenu.outputDataInConsole;
+import static com.manardenza.console.VisualUserMenu.outputListInConsole;
 import static com.manardenza.console.VisualUserMenu.outputSplitLine;
 import static com.manardenza.console.VisualUserMenu.readerMenuFromConsole;
 import static com.manardenza.console.VisualUserMenu.showUserMenu;
+import static jdk.nashorn.internal.runtime.JSType.isNumber;
+import static org.mockito.asm.tree.InsnList.check;
 
 public class ContentsUserMenu {
 
     private HotelController hotelController;
     private ReservationController reservationController;
     private UserController userController;
+    private List listData;
 
     public ContentsUserMenu(HotelController hotelController,
                             ReservationController reservationController, UserController userController) {
@@ -132,28 +139,58 @@ public class ContentsUserMenu {
     private List<Hotel> findHotelByNameMenu() {
         String hotelName = null;
         try {
-            hotelName = String.valueOf(inputDataFromUser("Enter hotel name: ", false,
-                    false, true, false));
+            hotelName = String.valueOf(inputDataFromUser("Enter hotel name (to exit enter \"0\"): ",
+                    false, false, true, false));
         } catch (IOException e) {
             outputDataInConsole("Entered incorrect name of the hotel");
         }
-        outputDataInConsole("The list of found hotels by name: " + hotelName);
+        if (exitMenu(hotelName)) {
+            try {
+                serviceMenu();
+            } catch (IOException e) {
+                outputDataInConsole("Don't loaded Service menu" + e);
+            }
+        }
         outputSplitLine();
         List<Hotel> hotelList = hotelController.findHotelByName(hotelName);
-        hotelList.forEach(item -> outputDataInConsole(item.toString()));
+        if (hotelList.isEmpty()) {
+            outputDataInConsole("Hotel " + hotelName + " not found.");
+            findHotelByNameMenu();
+        } else {
+            outputDataInConsole("The list of found hotels by name: " + hotelName);
+            hotelList.forEach(item -> outputDataInConsole(item.toString()));
+        }
         return hotelList;
+    }
+
+    private boolean exitMenu(String answerUser) {
+        return (isNumber(answerUser) && Integer.valueOf(answerUser) == 0) ? true : false;
     }
 
     private List<Hotel> findHotelByCityMenu() {
         String cityName = null;
         try {
-            cityName = String.valueOf(inputDataFromUser("Enter city name: ", false,
-                    false, true, false));
+            cityName = String.valueOf(inputDataFromUser("Enter city name (to exit enter \"1\"): ",
+                    false, false, true, false));
         } catch (IOException e) {
             outputDataInConsole("Entered incorrect name of the city");
         }
-        outputDataInConsole("List of hotels in the city found : " + cityName);
+        outputSplitLine();
         List<Hotel> hotelList = hotelController.findHotelByCity(cityName);
+        if (exitMenu(cityName)) {
+            try {
+                serviceMenu();
+            } catch (IOException e) {
+                outputDataInConsole("Don't loaded Service menu" + e);
+            }
+        }
+        if (hotelList.isEmpty()) {
+            outputDataInConsole("Hotel in " + cityName + " not found.");
+            findHotelByCityMenu();
+        } else {
+            outputDataInConsole("List of hotels in the city found : " + cityName);
+            hotelList.forEach(item -> outputDataInConsole(item.toString()));
+        }
         hotelList.forEach(item -> outputDataInConsole(item.toString()));
         return hotelList;
     }
@@ -185,33 +222,50 @@ public class ContentsUserMenu {
             outputDataInConsole("Room with such parameters not found");
         } else {
             outputDataInConsole("The list of found rooms:\n ");
-            foundRooms.forEach((hotel, rooms) -> rooms.forEach(room -> outputDataInConsole(hotel + room.toString())));
+            outputListInConsole(foundRooms.entrySet());
         }
-        outputDataInConsole("For room reservation please fill out the following form");
-        bookRoomMenu();
         outputSplitLine();
-        return foundRooms; 
+        bookRoomMenu(reservedFrom, reservedTo, foundRooms);
+        outputDataInConsole("For room reservation please fill out the following form");
+        return foundRooms;
     }
 
-    private Long bookRoomMenu() throws IOException {
-        Long reserveId = 0L;
+    private void bookRoomMenu(Date reservedFrom, Date reservedTo, Map<String, List<Room>> foundRooms) throws IOException {
+        long reserveId = 0L;
         boolean bookFlaf = true;
+        int numberHotel;
+        Hotel hotelSet = null;
+        Room roomSet = null;
         while (bookFlaf) {
             outputDataInConsole("Do you have booking room?");
             showUserMenu("Booking menu");
             Integer bookRoom = (Integer) inputDataFromUser("Enter number: ", true,
                     false, false, false);
-            Integer numberRoom = null;
             switch (bookRoom) {
                 case (1):
                     try {
-                        numberRoom = (Integer) inputDataFromUser("Enter the room number: ", true,
-                                false, false, false);
+                        Integer hotelNumber = (Integer) inputDataFromUser("Enter number hotel: ",
+                                true, false, false, false);
+                        Integer roomNumber = (Integer) inputDataFromUser("Enter number room: ",
+                                true, false, false, false);
+                        if (hotelNumber > foundRooms.size()) {
+                            outputDataInConsole("Incorrect number, please enter correct number Hotel: ");
+                            continue;
+                        }
+                        if (roomNumber > foundRooms.values().size()) {
+                            outputDataInConsole("Incorrect number, please enter correct number Room: ");
+                            continue;
+                        } else {
+                            String hotel = new ArrayList<>(foundRooms.keySet()).get(0);
+                            hotelSet = Injector.getHotelController().findHotelByName(hotel).get(--hotelNumber);
+                            roomSet = foundRooms.get(hotel).get(--roomNumber);
+                            reserveId = Injector.getReservationController().bookRoom(reservedFrom,
+                                    reservedTo, roomSet, hotelSet);
+                        }
                     } catch (IOException e) {
-                        outputDataInConsole("Entered incorrect number room");
+                        outputDataInConsole("Entered incorrect number hotel");
                     }
-                    /*reserveId = reservationController.bookRoom(numberRoom);*/
-                    outputDataInConsole("Guest room " + reserveId.intValue() + " reserved!");
+                    outputDataInConsole("Guest room reserved!\n You ID reservation: " + reserveId);
                     outputSplitLine();
                     break;
                 case (2):
@@ -219,16 +273,15 @@ public class ContentsUserMenu {
                     bookFlaf = false;
                     break;
                 default:
-                    bookFlaf = false;
+                    continue;
             }
         }
-        return reserveId;
     }
 
     private List<Reservation> getAllUserReservationsMenu() {
         outputSplitLine();
         List<Reservation> reservList = reservationController.getAllUserReservations();
-        reservList.forEach(item -> outputDataInConsole(item.toString()));
+        reservList.forEach(item -> outputDataInConsole(item.toString() + "\n"));
         return reservList;
     }
 
@@ -262,5 +315,16 @@ public class ContentsUserMenu {
                         false, false, false, true));
             }
         }
+    }
+
+    public Integer outInputDataToConsole(List<String> listData) {
+        this.listData = listData;
+        return null;
+    }
+
+    public int bookRoom() throws IOException {
+        Map<String, List<Room>> stringListMap = findRoomMenu();
+        stringListMap.entrySet().forEach(System.out::println);
+        return 0;
     }
 }
