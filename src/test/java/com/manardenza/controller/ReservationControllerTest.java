@@ -43,7 +43,9 @@ public class ReservationControllerTest {
 
     @Test
     public void cancelReservationCallsServiceMethod() throws Exception {
-        assertFalse(reservationService.cancelReservation(1));
+        long id = 0;
+        reservationController.cancelReservation(id);
+        verify(reservationService, times(1)).cancelReservation(id);
     }
 
     @Test
