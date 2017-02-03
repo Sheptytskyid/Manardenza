@@ -1,7 +1,5 @@
 package com.manardenza.console;
 
-import java.io.IOException;
-
 public class ConsoleMain {
 
     private ContentsUserMenu contentsUserMenu;
@@ -10,8 +8,11 @@ public class ConsoleMain {
         this.contentsUserMenu = contentsUserMenu;
     }
 
-    public void consoleMain() throws IllegalAccessException, InstantiationException, IOException {
-        contentsUserMenu.mainMenu();
-        contentsUserMenu.serviceMenu();
+    public void consoleMain() {
+        ListMenu.makeMenus();
+        while (true) {
+            contentsUserMenu.mainMenu();
+            contentsUserMenu.serviceMenu();
+        }
     }
 }

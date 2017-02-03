@@ -6,261 +6,236 @@ import com.manardenza.controller.UserController;
 import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.Collection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static com.manardenza.console.VisualUserMenu.inputDataFromUser;
-import static com.manardenza.console.VisualUserMenu.outputDataInConsole;
+import static com.manardenza.console.ListMenu.getAuthorizationHeader;
+import static com.manardenza.console.ListMenu.getAuthorizationMenu;
+import static com.manardenza.console.ListMenu.getBookingHeader;
+import static com.manardenza.console.ListMenu.getBookingMenu;
+import static com.manardenza.console.ListMenu.getServiceHeader;
+import static com.manardenza.console.ListMenu.getServiceMenu;
+import static com.manardenza.console.ListMenu.getSiteHeader;
 import static com.manardenza.console.VisualUserMenu.outputSplitLine;
-import static com.manardenza.console.VisualUserMenu.readerMenuFromConsole;
-import static com.manardenza.console.VisualUserMenu.showUserMenu;
+import static com.manardenza.console.VisualUserMenu.printListInConsole;
+import static com.manardenza.console.VisualUserMenu.printMapInConsole;
+
 
 public class ContentsUserMenu {
+
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(ContentsUserMenu.class);
+
 
     private HotelController hotelController;
     private ReservationController reservationController;
     private UserController userController;
+    private VisualUserMenu visualUserMenu;
 
     public ContentsUserMenu(HotelController hotelController,
-                            ReservationController reservationController, UserController userController) {
+                            ReservationController reservationController, UserController userController,
+                            VisualUserMenu visualUserMenu) {
         this.hotelController = hotelController;
         this.reservationController = reservationController;
         this.userController = userController;
+        this.visualUserMenu = visualUserMenu;
     }
 
-    public void mainMenu() throws IOException {
-        outputSplitLine();
-        outputDataInConsole("\t\tWelcome to manardenza.com");
-        outputSplitLine();
-        outputDataInConsole("\n\tAuthorization");
-        showUserMenu("Main menu");
-        int actionMain = readerMenuFromConsole("Choose action: ");
-        switch (actionMain) {
-            case (1):
-                registrationUserMenu();
-                break;
-            case (2):
-                outputDataInConsole("\tBuy!");
-                System.exit(0);
-                break;
-            default:
-                outputDataInConsole("Incorrect menu item");
-                mainMenu();
-                break;
-        }
+    public void mainMenu() {
+        printListInConsole(getSiteHeader(), null);
+        printListInConsole(getAuthorizationHeader(), getAuthorizationMenu());
+        Integer action;
+        do {
+            action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Choose action: ", InputType.INTEGER));
+            switch (action) {
+                case (1):
+                    registrationUserMenu();
+                    break;
+                case (2):
+                    System.out.println("\tBye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Incorrect menu item selected!\n");
+                    break;
+            }
+        } while (!visualUserMenu.validateIntegerSize(getAuthorizationMenu().size(), action));
     }
 
-    public void serviceMenu() throws IOException {
-        boolean flagMenu = true;
-        while (flagMenu) {
-            outputSplitLine();
-            outputDataInConsole("\n\tService menu");
-            showUserMenu("Service menu");
-            int actionService = readerMenuFromConsole("Choose action: ");
-            switch (actionService) {
+    private void registrationUserMenu() {
+        String firstName = visualUserMenu.getValidInputFromUser("Enter your first name: ", InputType.STRING);
+        String lastName = visualUserMenu.getValidInputFromUser("Enter your last name: ", InputType.STRING);
+        userController.loginUser(firstName, lastName);
+        System.out.println(firstName + ", You have successfully logged in!\n\n\t Welcome to our site!\n");
+    }
+
+    public void serviceMenu() {
+        while (true) {
+            printListInConsole(getServiceHeader(), getServiceMenu());
+            Integer action;
+            action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Choose action: ", InputType.INTEGER));
+            switch (action) {
                 case (1):
                     outputSplitLine();
-                    outputDataInConsole("For find hotel by name complete the following form");
                     findHotelByNameMenu();
-                    outputSplitLine();
                     break;
                 case (2):
                     outputSplitLine();
-                    outputDataInConsole("For find hotel by city complete the following form");
-                    outputDataInConsole(findHotelByCityMenu().toString());
-                    outputSplitLine();
+                    printListInConsole(null, findHotelByCityMenu());
                     break;
                 case (3):
                     outputSplitLine();
-                    outputDataInConsole("To find the room fill in the following form");
                     findRoomMenu();
-                    outputSplitLine();
                     break;
                 case (4):
                     outputSplitLine();
-                    outputDataInConsole("Your reserved rooms: ");
                     getAllUserReservationsMenu();
                     break;
                 case (5):
                     outputSplitLine();
-                    outputDataInConsole("To cancel a reservation of the room, fill in the following form");
-                    cancelReservationMenu();
-                    outputSplitLine();
                     break;
                 case (6):
                     outputSplitLine();
-                    outputDataInConsole("\tThank you for using our service.");
+                    userController.logoutUser();
+                    return;
+                case (7):
                     outputSplitLine();
-                    flagMenu = false;
-                    logoutUserMenu();
-                    continue;
+                    System.out.println("\tThank you for using our service.");
+                    System.exit(0);
                 default:
-                    outputDataInConsole("Incorrect menu item");
-                    serviceMenu();
-                    continue;
+                    outputSplitLine();
+                    System.out.println("Incorrect menu item selected");
+
             }
         }
-    }
-
-    private void registrationUserMenu() {
-        String firstName = null;
-        String lastName = null;
-        outputSplitLine();
-        try {
-            firstName = String.valueOf(inputDataFromUser("Enter name: ", false,
-                    false, true, false));
-            lastName = String.valueOf(inputDataFromUser("Enter last name: ", false,
-                    false, true, false));
-            userController.loginUser(firstName, lastName);
-        } catch (IOException e) {
-            outputDataInConsole("Is invalid user data");
-        }
-        outputDataInConsole(firstName + ", You have successfully logged in!\n\n\t Welcome to our site!\n");
-    }
-
-    private void logoutUserMenu() throws IOException {
-        userController.logoutUser();
-        mainMenu();
     }
 
     private List<Hotel> findHotelByNameMenu() {
-        String hotelName = null;
-        try {
-            hotelName = String.valueOf(inputDataFromUser("Enter hotel name: ", false,
-                    false, true, false));
-        } catch (IOException e) {
-            outputDataInConsole("Entered incorrect name of the hotel");
+        while (true) {
+            String hotelName = visualUserMenu.getValidInputFromUser("Enter hotel name (enter \"0\" to return back to " +
+                "menu): ", InputType
+                .STRING);
+            if (hotelName.equals("0")) {
+                return null;
+            }
+            outputSplitLine();
+            List<Hotel> hotelList = hotelController.findHotelByName(hotelName);
+            if (hotelList.isEmpty()) {
+                System.out.println("Hotel " + hotelName + " not found.");
+            } else {
+                System.out.println("The list of found hotels by name: " + hotelName);
+                printListInConsole(null, hotelList);
+            }
+            return hotelList;
         }
-        outputDataInConsole("The list of found hotels by name: " + hotelName);
-        outputSplitLine();
-        List<Hotel> hotelList = hotelController.findHotelByName(hotelName);
-        hotelList.forEach(item -> outputDataInConsole(item.toString()));
-        return hotelList;
     }
 
     private List<Hotel> findHotelByCityMenu() {
-        String cityName = null;
-        try {
-            cityName = String.valueOf(inputDataFromUser("Enter city name: ", false,
-                    false, true, false));
-        } catch (IOException e) {
-            outputDataInConsole("Entered incorrect name of the city");
+        while (true) {
+            String city = visualUserMenu.getValidInputFromUser("Enter city (enter \"0\" to return back to menu): ",
+                InputType
+                    .STRING);
+            if (city.equals("0")) {
+                return null;
+            }
+            outputSplitLine();
+            List<Hotel> hotelList = hotelController.findHotelByCity(city);
+            if (hotelList.isEmpty()) {
+                System.out.println("Hotel in " + city + " not found.");
+            } else {
+                System.out.println("The list of found hotels in: " + city);
+                printListInConsole(null, hotelList);
+            }
+            return hotelList;
         }
-        outputDataInConsole("List of hotels in the city found : " + cityName);
-        List<Hotel> hotelList = hotelController.findHotelByCity(cityName);
-        hotelList.forEach(item -> outputDataInConsole(item.toString()));
-        return hotelList;
     }
 
-    private Map<String, List<Room>> findRoomMenu() throws IOException {
-        String city = null;
-        Integer person = null;
-        Integer price = null;
-        Date reservedFrom = null;
-        Date reservedTo = null;
+    private Map<String, List<Room>> findRoomMenu() {
+        String city = visualUserMenu.getValidInputFromUser("Enter city: ", InputType.STRING);
+        Integer persons = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of persons: ",
+            InputType.INTEGER));
+        Integer price = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter maximum price rate: ", InputType
+            .INTEGER));
+        String reservedFrom = visualUserMenu.getValidInputFromUser("Enter arrival date in the format dd.mm.yyyy: ",
+            InputType.DATE);
+        String reservedTo = visualUserMenu.getValidInputFromUser("Enter the departure date in the format dd.mm.yyyy: " +
+            "", InputType.DATE);
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        Date arrival = new Date(0, 0, 0);
+        Date departure = new Date(0, 0, 1);
         try {
-            city = String.valueOf(inputDataFromUser("Enter city name: ", false,
-                    false, true, false));
-            person = (Integer) inputDataFromUser("Enter the number of persons: ", true,
-                    false, false, false);
-            price = (Integer) inputDataFromUser("Enter maximum price rate: ", true,
-                    false, false, false);
-            reservedFrom = (Date) (inputDataFromUser("Enter arrival date in the format dd.mm.yyyy: ",
-                    false, false, false, true));
-            reservedTo = (Date) (inputDataFromUser("Enter the departure date in the format dd.mm.yyyy: ",
-                    false, false, false, true));
-            compareDate(reservedFrom, reservedTo);
-        } catch (IOException e) {
-            outputDataInConsole("Enter arrival date in the format");
+            arrival = df.parse(reservedFrom);
+            departure = df.parse(reservedTo);
+        } catch (ParseException e) {
+            log.error("Error parsing input date to Date format", e);
         }
-        Map<String, List<Room>> foundRooms = hotelController.getAvailableRooms(city, person, price,
-                reservedFrom, reservedTo);
+        Map<String, List<Room>> foundRooms = hotelController.getAvailableRooms(city, persons, price, arrival,
+            departure);
         if (foundRooms.values().isEmpty()) {
-            outputDataInConsole("Room with such parameters not found");
+            System.out.println("Room with such parameters not found");
         } else {
-            outputDataInConsole("The list of found rooms:\n ");
-            foundRooms.forEach((hotel, rooms) -> rooms.forEach(room -> outputDataInConsole(hotel + room.toString())));
+            System.out.println("The list of found rooms:\n ");
+            printMapInConsole(foundRooms);
+            outputSplitLine();
+            bookRoomMenu(arrival, departure, foundRooms);
         }
-        outputDataInConsole("For room reservation please fill out the following form");
-        bookRoomMenu();
-        outputSplitLine();
-        return foundRooms; 
+        return foundRooms;
     }
 
-    private Long bookRoomMenu() throws IOException {
-        Long reserveId = 0L;
-        boolean bookFlaf = true;
-        while (bookFlaf) {
-            outputDataInConsole("Do you have booking room?");
-            showUserMenu("Booking menu");
-            Integer bookRoom = (Integer) inputDataFromUser("Enter number: ", true,
-                    false, false, false);
-            Integer numberRoom = null;
-            switch (bookRoom) {
-                case (1):
-                    try {
-                        numberRoom = (Integer) inputDataFromUser("Enter the room number: ", true,
-                                false, false, false);
-                    } catch (IOException e) {
-                        outputDataInConsole("Entered incorrect number room");
-                    }
-                    /*reserveId = reservationController.bookRoom(numberRoom);*/
-                    outputDataInConsole("Guest room " + reserveId.intValue() + " reserved!");
-                    outputSplitLine();
-                    break;
-                case (2):
-                    serviceMenu();
-                    bookFlaf = false;
-                    break;
-                default:
-                    bookFlaf = false;
-            }
-        }
-        return reserveId;
-    }
+    private void bookRoomMenu(Date reservedFrom, Date reservedTo, Map<String, List<Room>> foundRooms) {
+        List<String> foundHotelNames = new ArrayList<>();
+        foundRooms.forEach((key, value) -> foundHotelNames.add(key));
+        long reserveId = 0L;
+        System.out.println("Do you want to make a reservation?");
+        printListInConsole(getBookingHeader(), getBookingMenu());
+        Integer action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ", InputType
+            .INTEGER));
+        switch (action) {
+            case (1):
+                Integer hotelIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ",
+                    InputType.INTEGER)) - 1;
 
-    private List<Reservation> getAllUserReservationsMenu() {
-        outputSplitLine();
-        List<Reservation> reservList = reservationController.getAllUserReservations();
-        reservList.forEach(item -> outputDataInConsole(item.toString()));
-        return reservList;
-    }
+                Integer roomIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ",
+                    InputType.INTEGER)) - 1;
+                String selectedHotelName = foundHotelNames.get(hotelIndex);
+                Hotel selectedHotel = hotelController.findHotelByName(selectedHotelName).get(0);
+                Room selectedRoom = foundRooms.get(selectedHotelName).get(roomIndex);
+                reserveId = reservationController.bookRoom(reservedFrom,
+                    reservedTo, selectedRoom, selectedHotel);
 
-    private void cancelReservationMenu() {
-        Long idReservation = 0L;
-
-        try {
-            idReservation = (Long) inputDataFromUser("Enter your reservation number: ", false,
-                    true, false, false);
-            boolean reservId = reservationController.cancelReservation(idReservation);
-            if (reservId) {
-                outputDataInConsole("Reserve a room removed!");
+                System.out.println("Room reserved successfully!\n You reservation ID: " + reserveId);
                 outputSplitLine();
-            } else {
-                outputDataInConsole("Entered incorrect number reservation!");
-                cancelReservationMenu();
-            }
-        } catch (IOException e) {
-            outputDataInConsole("Room reservations missing");
+                break;
+            default:
+                return;
         }
     }
 
-    private void compareDate(Date dateFrom, Date dateTo) throws IOException {
-        boolean compareDate = true;
-        while (compareDate) {
-            if (dateFrom.compareTo(dateTo) <= 0) {
-                compareDate = false;
-            } else {
-                outputDataInConsole("Room reserved at least a day!");
-                dateTo = (Date) (inputDataFromUser("Enter arrival date in the format dd.mm.yyyy: ",
-                        false, false, false, true));
+    private void getAllUserReservationsMenu() {
+        outputSplitLine();
+        List<Reservation> reservations = reservationController.getAllUserReservations();
+        printListInConsole(null, reservations);
+        cancelReservationMenu(reservations);
+    }
+
+    private void cancelReservationMenu(List<Reservation> reservations) {
+        Integer reservationIndex;
+        do {
+            reservationIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter your reservation number " +
+                "(enter " +
+                "\"0\" to return back to menu): ", InputType
+                .INTEGER));
+            if (reservationIndex.equals("0")) {
+                return;
             }
-        }
+        } while (!visualUserMenu.validateIntegerSize(reservations.size(), reservationIndex));
+        reservationController.cancelReservation(reservations.get(reservationIndex - 1).getId());
+        System.out.println("Reservation successfully cancelled");
     }
 }
