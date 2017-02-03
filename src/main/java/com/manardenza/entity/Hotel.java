@@ -16,4 +16,13 @@ public class Hotel extends AbstractObject {
         this.city = city;
         this.rooms = rooms;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Hotel");
+        sb.append("name = '").append(name).append('\'' + "\t")
+                .append("city = '").append(city).append('\'' + "\t\n")
+                .append("Rooms: \n'").append(rooms).append("\t\n");
+        return sb.toString();
+    }
 }
