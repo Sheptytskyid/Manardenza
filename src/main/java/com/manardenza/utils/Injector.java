@@ -40,4 +40,10 @@ public class Injector {
 
     private Injector() {
     }
+
+    static {
+        hotelsDatabaseFile.getParentFile().mkdirs();
+        usersDatabaseFile.getParentFile().mkdirs();
+        reservationDatabaseFile.getParentFile().mkdirs();
+    }
 }

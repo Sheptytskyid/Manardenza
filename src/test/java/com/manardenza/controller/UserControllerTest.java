@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
+
     @Mock
     private UserService userService;
     @Mock
