@@ -1,10 +1,12 @@
 package com.manardenza.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Formatter;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Room extends AbstractObject {
 
     private String name;

@@ -25,8 +25,7 @@ public class Injector {
     @Getter
     private static File usersDatabaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
     @Getter
-    private static File reservationDatabaseFile = new File("src/main/resources/databaseFiles/databaseReservationsFile" +
-        ".bin");
+    private static File reservationDatabaseFile = new File("src/main/resources/databaseFiles/databaseReservationsFile.bin");
     @Getter
     private static HotelDaoImpl hotelDao = new HotelDaoImpl(hotelsDatabaseFile);
     @Getter
@@ -53,5 +52,11 @@ public class Injector {
     private static ConsoleMain consoleMain = new ConsoleMain(contentsUserMenu);
 
     private Injector() {
+    }
+
+    static {
+        hotelsDatabaseFile.getParentFile().mkdirs();
+        usersDatabaseFile.getParentFile().mkdirs();
+        reservationDatabaseFile.getParentFile().mkdirs();
     }
 }

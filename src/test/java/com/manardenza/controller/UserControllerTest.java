@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
+
     @Mock
     private UserService userService;
     @Mock
@@ -41,5 +42,4 @@ public class UserControllerTest {
         userController.logoutUser();
         verify(userService, times(1)).logoutUser();
     }
-
 }
