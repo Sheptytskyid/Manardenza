@@ -119,7 +119,7 @@
                     <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
                     <configuration>
                         <excludes>
-                            <exclude>**/com/manardenza/?Main</exclude>
+
                             <exclude>**/com/manardenza/console/**/*</exclude>
                             <exclude>**/com/manardenza/utils/**/*</exclude>
                         </excludes>
