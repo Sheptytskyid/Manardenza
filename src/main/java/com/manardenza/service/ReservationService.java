@@ -31,7 +31,7 @@ public class ReservationService {
         return reservationDao.delete(reservationDao.getAll().stream()
                 .filter(p -> p.getId() == idReservation)
                 .findFirst()
-                .get());
+                .orElse(null));
     }
 
     public Map<String, List<Room>> checkRoomReservation(Date reservedFrom, Date reservedTo,
