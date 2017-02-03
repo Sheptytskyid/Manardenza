@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
@@ -33,7 +35,6 @@ public class UserDaoImplTest {
     private File databaseFile;
     @InjectMocks
     private UserDaoImpl userDao;
-    private AbstractDao abstractDao;
     private static final String FIRST_NAME = "Test";
     private static final String LAST_NAME = "User";
     private ObjectInputStream oisMock = PowerMockito.mock(ObjectInputStream.class);
@@ -41,7 +42,6 @@ public class UserDaoImplTest {
     private FileInputStream inputStreamMock = PowerMockito.mock(FileInputStream.class);
     private FileOutputStream outputStreamMock = PowerMockito.mock(FileOutputStream.class);
     List<User> testUsersList = new ArrayList<>();
- ;
 
     @Before
     public void setUp() throws Exception {
@@ -55,6 +55,8 @@ public class UserDaoImplTest {
         testUsersList.add(new User(FIRST_NAME, "Not Correct Last Name"));
         testUsersList.add(new User("Not Correct First Name", LAST_NAME));
         testUsersList.add(new User("Not Correct First Name", "Not Correct Last Name"));
+
+        userDao.database = testUsersList;
     }
 
     @Test
@@ -67,12 +69,30 @@ public class UserDaoImplTest {
 
     @Test
     public void newUserSavingToDatabaseAvailability() throws Exception {
+        userDao.save(TestUtils.USER);
         assertEquals(TestUtils.USER, userDao.save(TestUtils.USER));
+        Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        User testUserToDelete = new User("Test", "User");
+        testUserToDelete.setId(564646464);
+        userDao.save(testUserToDelete);
+        assertEquals(true, userDao.delete(TestUtils.USER));
+        Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
     }
 
     @Test
     public void getAllUsersListFromDatabaseAvailability() throws Exception {
         when(oisMock.readObject()).thenReturn(testUsersList);
         assertEquals(testUsersList, userDao.getAll());
+    }
+
+    @Test
+    public void saveAll() throws Exception {
+        userDao.saveAll(testUsersList);
+        assertEquals(true, userDao.saveAll(testUsersList));
+        Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
     }
 }
