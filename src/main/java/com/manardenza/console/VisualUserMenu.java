@@ -1,11 +1,10 @@
 package com.manardenza.console;
 
+import com.manardenza.Main;
 import com.manardenza.entity.AbstractObject;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +33,12 @@ public class VisualUserMenu {
         for (Map.Entry<String, List<E>> entry : map.entrySet()) {
             System.out.print(key++);
             System.out.println(" " + entry.getKey());
+            if (entry.getValue().size()==0) {
+                System.out.println("\tNo available rooms found.");
+            }
             for (int item = 0; item < entry.getValue().size(); item++) {
                 System.out.print("\t" + (item + 1));
-                System.out.println(" " + entry.getValue().get(item));
+                System.out.print(" " + entry.getValue().get(item));
             }
         }
     }
@@ -45,14 +47,14 @@ public class VisualUserMenu {
     public String getValidInputFromUser(String message, InputType type) {
         System.out.println(message);
         String input = "";
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            input = reader.readLine();
+        try {
+            input = Main.getReader().readLine();
             while (!type.getIsValid().test(input)) {
                 System.out.println(type.getErrorMessage());
-                input = reader.readLine();
+                input = Main.getReader().readLine();
             }
         } catch (IOException e) {
-            log.info(String.format("Error reading user input from console"));
+            log.error(String.format("Error reading user input from console"));
         }
         return input;
     }

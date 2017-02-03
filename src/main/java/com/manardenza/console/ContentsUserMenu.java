@@ -18,6 +18,8 @@ import java.util.Map;
 
 public class ContentsUserMenu {
 
+    public static final String ERROR_INCORRECT_MENU_ITEM_SELECTED = "ERROR: Incorrect menu item selected \n";
+    public static final String ERROR_INVALID_NAME_FORMAT = "ERROR: Invalid name format!\n";
     private static org.slf4j.Logger log = LoggerFactory.getLogger(ContentsUserMenu.class);
 
 
@@ -50,15 +52,29 @@ public class ContentsUserMenu {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Incorrect menu item selected!\n");
+                    System.out.println(ERROR_INCORRECT_MENU_ITEM_SELECTED);
                     break;
             }
         } while (!visualUserMenu.validateIntegerSize(ListMenu.getAuthorizationMenu().size(), action));
     }
 
     private void registrationUserMenu() {
-        String firstName = visualUserMenu.getValidInputFromUser("Enter your first name: ", InputType.STRING);
-        String lastName = visualUserMenu.getValidInputFromUser("Enter your last name: ", InputType.STRING);
+        String firstName = "";
+        String lastName = "";
+        boolean repeat = true;
+        do {
+            firstName = visualUserMenu.getValidInputFromUser("Enter your first name: ", InputType.STRING);
+            if (firstName.contains(" ")) {
+                System.out.println(ERROR_INVALID_NAME_FORMAT);
+                continue;
+            }
+            lastName = visualUserMenu.getValidInputFromUser("Enter your last name: ", InputType.STRING);
+            if (lastName.contains(" ")) {
+                System.out.println(ERROR_INVALID_NAME_FORMAT);
+                continue;
+            }
+            repeat = false;
+        } while (repeat);
         userController.loginUser(firstName, lastName);
         System.out.println(firstName + ", You have successfully logged in!\n\n\t Welcome to our site!\n");
     }
@@ -98,7 +114,7 @@ public class ContentsUserMenu {
                     System.exit(0);
                 default:
                     VisualUserMenu.outputSplitLine();
-                    System.out.println("Incorrect menu item selected");
+                    System.out.println(ERROR_INCORRECT_MENU_ITEM_SELECTED);
 
             }
         }
@@ -148,31 +164,40 @@ public class ContentsUserMenu {
         String city = visualUserMenu.getValidInputFromUser("Enter city: ", InputType.STRING);
         Integer persons = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of persons: ",
             InputType.INTEGER));
-        Integer price = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter maximum price rate: ", InputType
+        Integer price = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter maximum price: ", InputType
             .INTEGER));
-        String reservedFrom = visualUserMenu.getValidInputFromUser("Enter arrival date in the format dd.mm.yyyy: ",
-            InputType.DATE);
-        String reservedTo = visualUserMenu.getValidInputFromUser("Enter the departure date in the format dd.mm.yyyy: " +
-            "", InputType.DATE);
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-        Date arrival = new Date(0, 0, 0);
-        Date departure = new Date(0, 0, 1);
-        try {
-            arrival = df.parse(reservedFrom);
-            departure = df.parse(reservedTo);
-        } catch (ParseException e) {
-            log.error("Error parsing input date to Date format", e);
-        }
+        boolean correctDates = true;
+        String reservedFrom;
+        String reservedTo;
+        Date arrival;
+        Date departure;
+        do {
+            reservedFrom = visualUserMenu.getValidInputFromUser("Enter arrival date in the format \"dd.mm.yyyy\": ",
+
+                InputType.DATE);
+            reservedTo = visualUserMenu.getValidInputFromUser("Enter the departure date in the format \"dd.mm" +
+                ".yyyy\": " +
+                "", InputType.DATE);
+            DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+            arrival = new Date(0, 0, 0);
+            departure = new Date(0, 0, 1);
+            try {
+                arrival = df.parse(reservedFrom);
+                departure = df.parse(reservedTo);
+            } catch (ParseException e) {
+                log.error("Error parsing input date to Date format", e);
+            }
+            if (arrival.after(departure) || arrival.before(new Date())) {
+                System.out.println("Arrival date must exceed current date but must come before departure!");
+                correctDates = false;
+            }
+        } while(!correctDates);
         Map<String, List<Room>> foundRooms = hotelController.getAvailableRooms(city, persons, price, arrival,
             departure);
-        if (foundRooms.values().isEmpty()) {
-            System.out.println("Room with such parameters not found");
-        } else {
-            System.out.println("The list of found rooms:\n ");
-            VisualUserMenu.printMapInConsole(foundRooms);
-            VisualUserMenu.outputSplitLine();
-            bookRoomMenu(arrival, departure, foundRooms);
-        }
+        System.out.println("The list of rooms found:\n ");
+        VisualUserMenu.printMapInConsole(foundRooms);
+        VisualUserMenu.outputSplitLine();
+        bookRoomMenu(arrival, departure, foundRooms);
         return foundRooms;
     }
 
@@ -182,27 +207,35 @@ public class ContentsUserMenu {
         long reserveId = 0L;
         System.out.println("Do you want to make a reservation?");
         VisualUserMenu.printListInConsole(ListMenu.getBookingHeader(), ListMenu.getBookingMenu());
-        Integer action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ", InputType
-            .INTEGER));
-        switch (action) {
-            case (1):
-                Integer hotelIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ",
-                    InputType.INTEGER)) - 1;
+        Integer action;
+        do {
+            action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Choose action: ", InputType
+                .INTEGER));
+            switch (action) {
+                case (1):
+                    Integer hotelIndex;
+                    Integer roomIndex;
+                    do {
+                        hotelIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of " +
+                            "hotel: ", InputType.INTEGER));
+                    } while (!visualUserMenu.validateIntegerSize(foundHotelNames.size(), hotelIndex));
+                    String selectedHotelName = foundHotelNames.get(hotelIndex - 1);
+                    do {
+                        roomIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of " +
+                            "room: ", InputType.INTEGER));
+                    } while (!visualUserMenu.validateIntegerSize(foundRooms.get(selectedHotelName).size(), roomIndex));
+                    Hotel selectedHotel = hotelController.findHotelByName(selectedHotelName).get(0);
+                    Room selectedRoom = foundRooms.get(selectedHotelName).get(roomIndex - 1);
+                    reserveId = reservationController.bookRoom(reservedFrom,
+                        reservedTo, selectedRoom, selectedHotel);
 
-                Integer roomIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ",
-                    InputType.INTEGER)) - 1;
-                String selectedHotelName = foundHotelNames.get(hotelIndex);
-                Hotel selectedHotel = hotelController.findHotelByName(selectedHotelName).get(0);
-                Room selectedRoom = foundRooms.get(selectedHotelName).get(roomIndex);
-                reserveId = reservationController.bookRoom(reservedFrom,
-                    reservedTo, selectedRoom, selectedHotel);
-
-                System.out.println("Room reserved successfully!\n You reservation ID: " + reserveId);
-                VisualUserMenu.outputSplitLine();
-                break;
-            default:
-                return;
-        }
+                    System.out.println("Room reserved successfully!\n You reservation ID: " + reserveId);
+                    VisualUserMenu.outputSplitLine();
+                    break;
+                default:
+                    return;
+            }
+        } while (!visualUserMenu.validateIntegerSize(ListMenu.getBookingMenu().size(), action));
     }
 
     private void getAllUserReservationsMenu() {

@@ -26,30 +26,30 @@ public class ListMenu {
 
 
     public static void makeMenus () {
-        siteHeader.add("****************************************");
+        siteHeader.add("**************************************************************");
         siteHeader.add("\t\tWelcome to manardenza.com");
-        siteHeader.add("****************************************");
+        siteHeader.add("**************************************************************");
         siteHeader.add(" ");
 
         authorizationHeader.add("\n\tAuthorization");
         authorizationMenu.add("Login");
         authorizationMenu.add("Exit");
 
-        serviceHeader.add("****************************************");
+        serviceHeader.add("**************************************************************");
         serviceHeader.add("\n\tService menu");
-        serviceMenu.add("Search for hotels by city");
         serviceMenu.add("Search for hotels by name");
+        serviceMenu.add("Search for hotels by city");
         serviceMenu.add("Search for rooms");
         serviceMenu.add("Make a Reservation");
         serviceMenu.add("Show reservations, cancel a reservation");
         serviceMenu.add("Log out");
         serviceMenu.add("Exit");
 
-        bookingHeader.add("****************************************");
-        bookingMenu.add("Make a reservation");
-        bookingMenu.add("No reserve");
+        bookingHeader.add("**************************************************************");
+        bookingMenu.add("Yes");
+        bookingMenu.add("No");
 
-        findRoomHeader.add("****************************************");
+        findRoomHeader.add("**************************************************************");
         findRoomMenu.add("Enter city name: ");
         findRoomMenu.add("Enter the number of persons: ");
         findRoomMenu.add("Enter maximum price rate: ");
