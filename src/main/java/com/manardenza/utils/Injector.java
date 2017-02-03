@@ -17,8 +17,11 @@ import java.io.File;
 public class Injector {
 
     private static CurrentUser currentUser = CurrentUser.getInstance();
+    @Getter
     private static File hotelsDatabaseFile = new File("src/main/resources/databaseFiles/databaseHotelsFile.bin");
+    @Getter
     private static File usersDatabaseFile = new File("src/main/resources/databaseFiles/databaseUsersFile.bin");
+    @Getter
     private static File reservationDatabaseFile = new File("src/main/resources/databaseFiles/databaseReservationsFile.bin");
     @Getter
     private static HotelDaoImpl hotelDao = new HotelDaoImpl(hotelsDatabaseFile);
@@ -26,8 +29,9 @@ public class Injector {
     private static UserDaoImpl userDao = new UserDaoImpl(usersDatabaseFile);
     @Getter
     private static ReservationDaoImpl reservationDao = new ReservationDaoImpl(reservationDatabaseFile);
+    @Getter
     private static UserService userService = new UserService(userDao, currentUser);
-    private static ReservationService reservationService = new ReservationService(reservationDao);
+    private static ReservationService reservationService = new ReservationService(reservationDao, currentUser);
     private static HotelService hotelService = new HotelService(hotelDao, reservationService);
     private static HotelController hotelController = new HotelController(hotelService, currentUser);
     @Getter
@@ -35,5 +39,11 @@ public class Injector {
     private static ReservationController reservationController = new ReservationController(reservationService, currentUser);
 
     private Injector() {
+    }
+
+    static {
+        hotelsDatabaseFile.getParentFile().mkdirs();
+        usersDatabaseFile.getParentFile().mkdirs();
+        reservationDatabaseFile.getParentFile().mkdirs();
     }
 }
