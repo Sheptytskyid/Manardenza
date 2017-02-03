@@ -103,13 +103,11 @@
                 <version>0.7.8</version>
                 <configuration>
                     <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-                    <configuration>
                         <excludes>
-                            <exclude>**/?Main</exclude>
+                            <exclude>**/Main.java</exclude>
                             <exclude>**/console/**</exclude>
                             <exclude>**/utils/**</exclude>
                         </excludes>
-                    </configuration>
                 </configuration>
                 <executions>
                     <execution>
