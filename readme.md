@@ -28,6 +28,7 @@ The our product is open-sourced software licensed under the MIT license.
 * **Git**
 * **Maven**
 * **JDK 8**
+* **Lombok plugin**
 
 ## Continuous integration tools used
 * **Travis CI**
