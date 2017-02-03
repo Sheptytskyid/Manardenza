@@ -16,18 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.manardenza.console.ListMenu.getAuthorizationHeader;
-import static com.manardenza.console.ListMenu.getAuthorizationMenu;
-import static com.manardenza.console.ListMenu.getBookingHeader;
-import static com.manardenza.console.ListMenu.getBookingMenu;
-import static com.manardenza.console.ListMenu.getServiceHeader;
-import static com.manardenza.console.ListMenu.getServiceMenu;
-import static com.manardenza.console.ListMenu.getSiteHeader;
-import static com.manardenza.console.VisualUserMenu.outputSplitLine;
-import static com.manardenza.console.VisualUserMenu.printListInConsole;
-import static com.manardenza.console.VisualUserMenu.printMapInConsole;
-
-
 public class ContentsUserMenu {
 
     private static org.slf4j.Logger log = LoggerFactory.getLogger(ContentsUserMenu.class);
@@ -48,8 +36,8 @@ public class ContentsUserMenu {
     }
 
     public void mainMenu() {
-        printListInConsole(getSiteHeader(), null);
-        printListInConsole(getAuthorizationHeader(), getAuthorizationMenu());
+        VisualUserMenu.printListInConsole(ListMenu.getSiteHeader(), null);
+        VisualUserMenu.printListInConsole(ListMenu.getAuthorizationHeader(), ListMenu.getAuthorizationMenu());
         Integer action;
         do {
             action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Choose action: ", InputType.INTEGER));
@@ -65,7 +53,7 @@ public class ContentsUserMenu {
                     System.out.println("Incorrect menu item selected!\n");
                     break;
             }
-        } while (!visualUserMenu.validateIntegerSize(getAuthorizationMenu().size(), action));
+        } while (!visualUserMenu.validateIntegerSize(ListMenu.getAuthorizationMenu().size(), action));
     }
 
     private void registrationUserMenu() {
@@ -77,39 +65,39 @@ public class ContentsUserMenu {
 
     public void serviceMenu() {
         while (true) {
-            printListInConsole(getServiceHeader(), getServiceMenu());
+            VisualUserMenu.printListInConsole(ListMenu.getServiceHeader(), ListMenu.getServiceMenu());
             Integer action;
             action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Choose action: ", InputType.INTEGER));
             switch (action) {
                 case (1):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     findHotelByNameMenu();
                     break;
                 case (2):
-                    outputSplitLine();
-                    printListInConsole(null, findHotelByCityMenu());
+                    VisualUserMenu.outputSplitLine();
+                    VisualUserMenu.printListInConsole(null, findHotelByCityMenu());
                     break;
                 case (3):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     findRoomMenu();
                     break;
                 case (4):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     getAllUserReservationsMenu();
                     break;
                 case (5):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     break;
                 case (6):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     userController.logoutUser();
                     return;
                 case (7):
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     System.out.println("\tThank you for using our service.");
                     System.exit(0);
                 default:
-                    outputSplitLine();
+                    VisualUserMenu.outputSplitLine();
                     System.out.println("Incorrect menu item selected");
 
             }
@@ -124,13 +112,13 @@ public class ContentsUserMenu {
             if (hotelName.equals("0")) {
                 return null;
             }
-            outputSplitLine();
+            VisualUserMenu.outputSplitLine();
             List<Hotel> hotelList = hotelController.findHotelByName(hotelName);
             if (hotelList.isEmpty()) {
                 System.out.println("Hotel " + hotelName + " not found.");
             } else {
                 System.out.println("The list of found hotels by name: " + hotelName);
-                printListInConsole(null, hotelList);
+                VisualUserMenu.printListInConsole(null, hotelList);
             }
             return hotelList;
         }
@@ -144,13 +132,13 @@ public class ContentsUserMenu {
             if (city.equals("0")) {
                 return null;
             }
-            outputSplitLine();
+            VisualUserMenu.outputSplitLine();
             List<Hotel> hotelList = hotelController.findHotelByCity(city);
             if (hotelList.isEmpty()) {
                 System.out.println("Hotel in " + city + " not found.");
             } else {
                 System.out.println("The list of found hotels in: " + city);
-                printListInConsole(null, hotelList);
+                VisualUserMenu.printListInConsole(null, hotelList);
             }
             return hotelList;
         }
@@ -181,8 +169,8 @@ public class ContentsUserMenu {
             System.out.println("Room with such parameters not found");
         } else {
             System.out.println("The list of found rooms:\n ");
-            printMapInConsole(foundRooms);
-            outputSplitLine();
+            VisualUserMenu.printMapInConsole(foundRooms);
+            VisualUserMenu.outputSplitLine();
             bookRoomMenu(arrival, departure, foundRooms);
         }
         return foundRooms;
@@ -193,7 +181,7 @@ public class ContentsUserMenu {
         foundRooms.forEach((key, value) -> foundHotelNames.add(key));
         long reserveId = 0L;
         System.out.println("Do you want to make a reservation?");
-        printListInConsole(getBookingHeader(), getBookingMenu());
+        VisualUserMenu.printListInConsole(ListMenu.getBookingHeader(), ListMenu.getBookingMenu());
         Integer action = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter number: ", InputType
             .INTEGER));
         switch (action) {
@@ -210,7 +198,7 @@ public class ContentsUserMenu {
                     reservedTo, selectedRoom, selectedHotel);
 
                 System.out.println("Room reserved successfully!\n You reservation ID: " + reserveId);
-                outputSplitLine();
+                VisualUserMenu.outputSplitLine();
                 break;
             default:
                 return;
@@ -218,9 +206,9 @@ public class ContentsUserMenu {
     }
 
     private void getAllUserReservationsMenu() {
-        outputSplitLine();
+        VisualUserMenu.outputSplitLine();
         List<Reservation> reservations = reservationController.getAllUserReservations();
-        printListInConsole(null, reservations);
+        VisualUserMenu.printListInConsole(null, reservations);
         cancelReservationMenu(reservations);
     }
 
