@@ -75,11 +75,11 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void availabilityToDeleteRegisteredObjectFromDatabase() throws Exception {
         User testUserToDelete = new User("Test", "User");
         testUserToDelete.setId(564646464);
-        userDao.save(testUserToDelete);
-        assertEquals(true, userDao.delete(TestUtils.USER));
+        userDao.database.add(testUserToDelete);
+        assertEquals(true, userDao.database.remove(TestUtils.USER));
         Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
     }
 
@@ -90,7 +90,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void saveAll() throws Exception {
+    public void databaseAvailabilitySavingUsersLists() throws Exception {
         userDao.saveAll(testUsersList);
         assertEquals(true, userDao.saveAll(testUsersList));
         Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
