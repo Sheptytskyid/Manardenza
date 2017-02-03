@@ -7,6 +7,7 @@ import com.manardenza.entity.Hotel;
 import com.manardenza.entity.Reservation;
 import com.manardenza.entity.Room;
 import com.manardenza.utils.Injector;
+import com.sun.javafx.geom.Edge;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -164,13 +165,13 @@ public class ContentsUserMenu {
     }
 
     private boolean exitMenu(String answerUser) {
-        return (isNumber(answerUser) && Integer.valueOf(answerUser) == 0) ? true : false;
+        return (answerUser.equals("0"));
     }
 
     private List<Hotel> findHotelByCityMenu() {
         String cityName = null;
         try {
-            cityName = String.valueOf(inputDataFromUser("Enter city name (to exit enter \"1\"): ",
+            cityName = String.valueOf(inputDataFromUser("Enter city name (to exit enter \"0\"): ",
                     false, false, true, false));
         } catch (IOException e) {
             outputDataInConsole("Entered incorrect name of the city");
@@ -185,7 +186,7 @@ public class ContentsUserMenu {
             }
         }
         if (hotelList.isEmpty()) {
-            outputDataInConsole("Hotel in " + cityName + " not found.");
+            outputDataInConsole("City in " + cityName + " not found.");
             findHotelByCityMenu();
         } else {
             outputDataInConsole("List of hotels in the city found : " + cityName);
@@ -223,10 +224,10 @@ public class ContentsUserMenu {
         } else {
             outputDataInConsole("The list of found rooms:\n ");
             outputListInConsole(foundRooms.entrySet());
+            outputSplitLine();
+            bookRoomMenu(reservedFrom, reservedTo, foundRooms);
+            outputDataInConsole("For room reservation please fill out the following form");
         }
-        outputSplitLine();
-        bookRoomMenu(reservedFrom, reservedTo, foundRooms);
-        outputDataInConsole("For room reservation please fill out the following form");
         return foundRooms;
     }
 
@@ -248,6 +249,14 @@ public class ContentsUserMenu {
                                 true, false, false, false);
                         Integer roomNumber = (Integer) inputDataFromUser("Enter number room: ",
                                 true, false, false, false);
+                        int countRooms;
+                        for (Map.Entry<String, List<Room>> e : foundRooms.entrySet()) {
+                            for (Room e1 : e.getValue()) {
+
+                            }
+//                                System.out.println(e.getKey() + " = "+ e1.Out());
+                        }
+
                         if (hotelNumber > foundRooms.size()) {
                             outputDataInConsole("Incorrect number, please enter correct number Hotel: ");
                             continue;
@@ -257,10 +266,10 @@ public class ContentsUserMenu {
                             continue;
                         } else {
                             String hotel = new ArrayList<>(foundRooms.keySet()).get(0);
-                            hotelSet = Injector.getHotelController().findHotelByName(hotel).get(--hotelNumber);
-                            roomSet = foundRooms.get(hotel).get(--roomNumber);
-                            reserveId = Injector.getReservationController().bookRoom(reservedFrom,
-                                    reservedTo, roomSet, hotelSet);
+//                            hotelSet = Injector.getHotelController().findHotelByName(hotel).get(--hotelNumber);
+//                            roomSet = foundRooms.get(hotel).get(--roomNumber);
+//                            reserveId = Injector.getReservationController().bookRoom(reservedFrom,
+//                                    reservedTo, roomSet, hotelSet);
                         }
                     } catch (IOException e) {
                         outputDataInConsole("Entered incorrect number hotel");
@@ -289,9 +298,16 @@ public class ContentsUserMenu {
         Long idReservation = 0L;
 
         try {
-            idReservation = (Long) inputDataFromUser("Enter your reservation number: ", false,
+            idReservation = (Long) inputDataFromUser("Enter your reservation number (to exit enter \"0\"): ", false,
                     true, false, false);
             boolean reservId = reservationController.cancelReservation(idReservation);
+            if (idReservation == 0) {
+                try {
+                    serviceMenu();
+                } catch (IOException e) {
+                    outputDataInConsole("Don't loaded Service menu" + e);
+                }
+            }
             if (reservId) {
                 outputDataInConsole("Reserve a room removed!");
                 outputSplitLine();

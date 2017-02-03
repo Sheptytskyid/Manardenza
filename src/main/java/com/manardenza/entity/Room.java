@@ -16,6 +16,7 @@ public class Room extends AbstractObject {
         this.person = person;
         this.price = price;
     }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
