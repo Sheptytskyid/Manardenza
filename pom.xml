@@ -101,6 +101,13 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.8</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/Main.java</exclude>
+                        <exclude>**/console/**</exclude>
+                        <exclude>**/utils/**</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
