@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertTrue;
 import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
@@ -77,10 +77,8 @@ public class UserDaoImplTest {
     @Test
     public void availabilityToDeleteRegisteredObjectFromDatabase() throws Exception {
         User testUserToDelete = new User("Test", "User");
-        testUserToDelete.setId(564646464);
-        userDao.database.add(testUserToDelete);
-        assertEquals(true, userDao.database.remove(TestUtils.USER));
-        Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
+        assertTrue(userDao.delete(testUserToDelete));
+        Mockito.verify(oosMock, Mockito.times(1)).writeObject(userDao.database);
     }
 
     @Test
@@ -92,7 +90,7 @@ public class UserDaoImplTest {
     @Test
     public void databaseAvailabilitySavingUsersLists() throws Exception {
         userDao.saveAll(testUsersList);
-        assertEquals(true, userDao.saveAll(testUsersList));
+        assertTrue(userDao.saveAll(testUsersList));
         Mockito.verify(oosMock, Mockito.times(2)).writeObject(userDao.database);
     }
 }
