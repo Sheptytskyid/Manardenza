@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class HotelControllerTest {
 
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Mock

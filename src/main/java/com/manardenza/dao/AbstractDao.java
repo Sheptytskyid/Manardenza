@@ -22,7 +22,6 @@ public abstract class AbstractDao<T extends AbstractObject> {
 
     protected AbstractDao(File databaseFile) {
         this.databaseFile = databaseFile;
-        databaseFile.getParentFile().mkdirs();
     }
 
     private void saveToFile() {
