@@ -102,12 +102,11 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.8</version>
                 <configuration>
-                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-                        <excludes>
-                            <exclude>**/Main.java</exclude>
-                            <exclude>**/console/**</exclude>
-                            <exclude>**/utils/**</exclude>
-                        </excludes>
+                    <excludes>
+                        <exclude>**/Main.java</exclude>
+                        <exclude>**/console/**</exclude>
+                        <exclude>**/utils/**</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
