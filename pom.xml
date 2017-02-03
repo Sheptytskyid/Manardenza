@@ -106,7 +106,6 @@
                         <exclude>**/Main.java</exclude>
                         <exclude>**/console/**</exclude>
                         <exclude>**/utils/**</exclude>
-                        <exclude>**/entity/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
