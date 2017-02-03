@@ -119,9 +119,9 @@
                     <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
                     <configuration>
                         <excludes>
-                            <exclude>**/src/main/java/com/manardenza/?Main</exclude>
-                            <exclude>**/src/main/java/com/manardenza/console/**/*</exclude>
-                            <exclude>**/src/main/java/com/manardenza/utils/**/*</exclude>
+                            <exclude>**/com/manardenza/?Main</exclude>
+                            <exclude>**/com/manardenza/console/**/*</exclude>
+                            <exclude>**/com/manardenza/utils/**/*</exclude>
                         </excludes>
                     </configuration>
                 </configuration>
