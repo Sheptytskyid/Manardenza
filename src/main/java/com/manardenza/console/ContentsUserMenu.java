@@ -230,7 +230,6 @@ public class ContentsUserMenu {
                         reservedTo, selectedRoom, selectedHotel);
 
                     System.out.println("Room reserved successfully!\n You reservation ID: " + reserveId);
-                    VisualUserMenu.outputSplitLine();
                     break;
                 default:
                     return;

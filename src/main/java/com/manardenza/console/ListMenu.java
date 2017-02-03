@@ -40,7 +40,6 @@ public class ListMenu {
         serviceMenu.add("Search for hotels by name");
         serviceMenu.add("Search for hotels by city");
         serviceMenu.add("Search for rooms");
-        serviceMenu.add("Make a Reservation");
         serviceMenu.add("Show reservations, cancel a reservation");
         serviceMenu.add("Log out");
         serviceMenu.add("Exit");
