@@ -22,12 +22,12 @@ The our product is open-sourced software licensed under the MIT license.
 * **Enver Abseliamov**
 * **Maxim Semyonov**
 * **Zakhar Kyrychenko**
-
 ## Software requirements
 * **Intellij IDEA**
 * **Git**
 * **Maven**
 * **JDK 8**
+* **Lombok plugin**
 
 ## Continuous integration tools used
 * **Travis CI**
