@@ -2,15 +2,17 @@ package com.manardenza.console;
 
 public class ConsoleMain {
 
-    private static ConsoleMain instance;
+    private ContentsUserMenu contentsUserMenu;
 
-    private ConsoleMain() {
+    public ConsoleMain(ContentsUserMenu contentsUserMenu) {
+        this.contentsUserMenu = contentsUserMenu;
     }
 
-    public static ConsoleMain getInstance() {
-        if (instance == null) {
-            instance = new ConsoleMain();
+    public void consoleMain() {
+        ListMenu.makeMenus();
+        while (true) {
+            contentsUserMenu.mainMenu();
+            contentsUserMenu.serviceMenu();
         }
-        return instance;
     }
 }

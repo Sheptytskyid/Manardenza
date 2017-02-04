@@ -14,13 +14,13 @@ public class HotelDaoImpl extends AbstractDao<Hotel> {
 
     public List<Hotel> getHotelsByName(String hotelName) {
         return getAll().stream()
-                .filter(hotel -> hotel.getName().equals(hotelName))
+                .filter(hotel -> hotel.getName().equalsIgnoreCase(hotelName))
                 .collect(Collectors.toList());
     }
 
     public List<Hotel> getHotelsByCity(String hotelCity) {
         return getAll().stream()
-                .filter(hotel -> hotel.getCity().equals(hotelCity))
+                .filter(hotel -> hotel.getCity().equalsIgnoreCase(hotelCity))
                 .collect(Collectors.toList());
     }
 }
