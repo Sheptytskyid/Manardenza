@@ -18,4 +18,15 @@ public class Reservation extends AbstractObject {
     public boolean overlaps(Date newReservedFrom, Date newReservedTo) {
         return reservedFrom.getTime() <= newReservedTo.getTime() && newReservedFrom.getTime() <= reservedTo.getTime();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(reservedUser).append("\n")
+                .append(reservedHotel.getName()).append("\t\n")
+                .append("Room = '").append(reservedRoom)
+                .append("Reserved from = ").append(reservedFrom).append("\n")
+                .append("Reserved to = ").append(reservedTo).append("\n");
+        return sb.toString();
+    }
 }
