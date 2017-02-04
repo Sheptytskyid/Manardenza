@@ -191,11 +191,11 @@ public class ContentsUserMenu {
         }
         Map<String, List<Room>> foundRooms = hotelController.getAvailableRooms(city, persons, price, arrival,
             departure);
-        if(!foundRooms.isEmpty()){
-        System.out.println("The list of rooms found:\n ");
-        VisualUserMenu.printMapInConsole(foundRooms);
-        VisualUserMenu.outputSplitLine();
-        bookRoomMenu(arrival, departure, foundRooms);
+        if (!foundRooms.isEmpty()) {
+            System.out.println("The list of rooms found:\n ");
+            VisualUserMenu.printMapInConsole(foundRooms);
+            VisualUserMenu.outputSplitLine();
+            bookRoomMenu(arrival, departure, foundRooms);
         } else {
             VisualUserMenu.outputSplitLine();
             System.out.println("No available rooms found!");
