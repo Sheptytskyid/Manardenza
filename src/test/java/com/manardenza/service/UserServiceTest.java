@@ -25,7 +25,6 @@ public class UserServiceTest {
     private UserDaoImpl userDao;
     @InjectMocks
     private UserService userService;
-
     private User user = new User(FIRST_NAME, LAST_NAME);
 
     @Before
@@ -49,7 +48,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void logoutUser() throws Exception {
+    public void logoutUserFromSystemCurrentUserSetNull() throws Exception {
         userService.logoutUser();
         Mockito.verify(currentUser, Mockito.times(1)).setUser(null);
     }

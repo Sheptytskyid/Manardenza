@@ -32,7 +32,6 @@ public class ReservationControllerTest {
     @Before
     public void setUp() {
         when(currentUser.getUser()).thenReturn(USER);
-
     }
 
     @Test

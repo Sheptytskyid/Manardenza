@@ -31,19 +31,23 @@ public class HotelService {
     public Map<String, List<Room>> getAvailableRooms(String city, int persons, int price,
                                                      Date reservedFrom, Date reservedTo) {
         return reservationService.checkRoomReservation(reservedFrom, reservedTo,
-                findPreliminaryRoom(city, persons, price));
+            findPreliminaryRoom(city, persons, price));
     }
 
     public Map<String, List<Room>> findPreliminaryRoom(String city, int persons, int price) {
         Map<String, List<Room>> map = new HashMap<>();
-        hotelDao.getHotelsByCity(city).forEach(hotel -> map.put(hotel.getName(), findRoom(hotel, persons, price)));
+        hotelDao.getHotelsByCity(city).forEach(hotel -> {
+            if (!findRoom(hotel, persons, price).isEmpty()) {
+                map.put(hotel.getName(), findRoom(hotel, persons, price));
+            }
+        });
         return map;
     }
 
     private List<Room> findRoom(Hotel hotel, int persons, int price) {
         return hotel.getRooms().stream()
-                .filter(room -> room.getPerson() == persons)
-                .filter(room -> room.getPrice() <= price)
-                .collect(Collectors.toList());
+            .filter(room -> room.getPerson() == persons)
+            .filter(room -> room.getPrice() <= price)
+            .collect(Collectors.toList());
     }
 }
