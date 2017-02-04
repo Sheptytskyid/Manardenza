@@ -23,9 +23,9 @@ public class Room extends AbstractObject {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
-
         String template = "%-30s %-15s %-10s";
         formatter.format(template, "type = " + name, "person = " + person, "price = " + price + "\n");
+        formatter.close();
         return stringBuilder.toString();
     }
 }

@@ -26,6 +26,9 @@ public class ListMenu {
     @Getter
     private static List<String> findRoomMenu = new ArrayList<>();
 
+    private ListMenu() {
+    }
+
     public static void makeMenus() {
         siteHeader.add("**************************************************************");
         siteHeader.add("\t\tWelcome to manardenza.com");
@@ -41,7 +44,7 @@ public class ListMenu {
         serviceMenu.add("Search for hotels by name");
         serviceMenu.add("Search for hotels by city");
         serviceMenu.add("Search for rooms");
-        serviceMenu.add("Show reservations, cancel a reservation");
+        serviceMenu.add("Cancel reservation");
         serviceMenu.add("Log out");
         serviceMenu.add("Exit");
 
