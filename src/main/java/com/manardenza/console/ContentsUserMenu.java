@@ -151,7 +151,6 @@ public class ContentsUserMenu {
                 System.out.println("Hotel in " + city + " not found.");
             } else {
                 System.out.println("The list of found hotels in: " + city);
-                VisualUserMenu.printListInConsole(null, hotelList);
             }
             return hotelList;
         }
