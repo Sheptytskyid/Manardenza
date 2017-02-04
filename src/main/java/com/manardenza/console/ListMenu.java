@@ -4,7 +4,9 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class ListMenu {
+
     @Getter
     private static List<String> siteHeader = new ArrayList<>();
     @Getter
@@ -24,8 +26,7 @@ public class ListMenu {
     @Getter
     private static List<String> findRoomMenu = new ArrayList<>();
 
-
-    public static void makeMenus () {
+    public static void makeMenus() {
         siteHeader.add("**************************************************************");
         siteHeader.add("\t\tWelcome to manardenza.com");
         siteHeader.add("**************************************************************");

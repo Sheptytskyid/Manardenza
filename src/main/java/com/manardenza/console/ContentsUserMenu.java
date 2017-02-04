@@ -64,12 +64,12 @@ public class ContentsUserMenu {
         boolean repeat = true;
         do {
             firstName = visualUserMenu.getValidInputFromUser("Enter your first name: ", InputType.STRING);
-            if (firstName.contains(" ")) {
+            if (firstName.contains(" ") || firstName.isEmpty()) {
                 System.out.println(ERROR_INVALID_NAME_FORMAT);
                 continue;
             }
             lastName = visualUserMenu.getValidInputFromUser("Enter your last name: ", InputType.STRING);
-            if (lastName.contains(" ")) {
+            if (lastName.contains(" ") || lastName.isEmpty()) {
                 System.out.println(ERROR_INVALID_NAME_FORMAT);
                 continue;
             }
@@ -103,15 +103,13 @@ public class ContentsUserMenu {
                     break;
                 case (5):
                     VisualUserMenu.outputSplitLine();
-                    break;
-                case (6):
-                    VisualUserMenu.outputSplitLine();
                     userController.logoutUser();
                     return;
-                case (7):
+                case (6):
                     VisualUserMenu.outputSplitLine();
                     System.out.println("\tThank you for using our service.");
                     System.exit(0);
+                    break;
                 default:
                     VisualUserMenu.outputSplitLine();
                     System.out.println(ERROR_INCORRECT_MENU_ITEM_SELECTED);
@@ -122,9 +120,8 @@ public class ContentsUserMenu {
 
     private List<Hotel> findHotelByNameMenu() {
         while (true) {
-            String hotelName = visualUserMenu.getValidInputFromUser("Enter hotel name (enter \"0\" to return back to " +
-                "menu): ", InputType
-                .STRING);
+            String hotelName = visualUserMenu.getValidInputFromUser("Enter hotel name (enter \"0\" to return back to "
+                + "menu): ", InputType.STRING);
             if (hotelName.equals("0")) {
                 return null;
             }
@@ -166,18 +163,17 @@ public class ContentsUserMenu {
             InputType.INTEGER));
         Integer price = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter maximum price: ", InputType
             .INTEGER));
-        boolean correctDates = true;
         String reservedFrom;
         String reservedTo;
         Date arrival;
         Date departure;
-        do {
+        for ( ; ; ) {
             reservedFrom = visualUserMenu.getValidInputFromUser("Enter arrival date in the format \"dd.mm.yyyy\": ",
 
                 InputType.DATE);
-            reservedTo = visualUserMenu.getValidInputFromUser("Enter the departure date in the format \"dd.mm" +
-                ".yyyy\": " +
-                "", InputType.DATE);
+            reservedTo = visualUserMenu.getValidInputFromUser("Enter the departure date in the format \"dd.mm"
+                + ".yyyy\": "
+                + "", InputType.DATE);
             DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
             arrival = new Date(0, 0, 0);
             departure = new Date(0, 0, 1);
@@ -189,9 +185,10 @@ public class ContentsUserMenu {
             }
             if (arrival.after(departure) || arrival.before(new Date())) {
                 System.out.println("Arrival date must exceed current date but must come before departure!");
-                correctDates = false;
+                continue;
             }
-        } while(!correctDates);
+            break;
+        }
         Map<String, List<Room>> foundRooms = hotelController.getAvailableRooms(city, persons, price, arrival,
             departure);
         System.out.println("The list of rooms found:\n ");
@@ -216,13 +213,13 @@ public class ContentsUserMenu {
                     Integer hotelIndex;
                     Integer roomIndex;
                     do {
-                        hotelIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of " +
-                            "hotel: ", InputType.INTEGER));
+                        hotelIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of "
+                            + "hotel: ", InputType.INTEGER));
                     } while (!visualUserMenu.validateIntegerSize(foundHotelNames.size(), hotelIndex));
                     String selectedHotelName = foundHotelNames.get(hotelIndex - 1);
                     do {
-                        roomIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of " +
-                            "room: ", InputType.INTEGER));
+                        roomIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter the number of "
+                           + "room: ", InputType.INTEGER));
                     } while (!visualUserMenu.validateIntegerSize(foundRooms.get(selectedHotelName).size(), roomIndex));
                     Hotel selectedHotel = hotelController.findHotelByName(selectedHotelName).get(0);
                     Room selectedRoom = foundRooms.get(selectedHotelName).get(roomIndex - 1);
@@ -238,8 +235,11 @@ public class ContentsUserMenu {
     }
 
     private void getAllUserReservationsMenu() {
-        VisualUserMenu.outputSplitLine();
         List<Reservation> reservations = reservationController.getAllUserReservations();
+        if (reservations.isEmpty()) {
+            System.out.println("No reservations found");
+            return;
+        }
         VisualUserMenu.printListInConsole(null, reservations);
         cancelReservationMenu(reservations);
     }
@@ -247,11 +247,11 @@ public class ContentsUserMenu {
     private void cancelReservationMenu(List<Reservation> reservations) {
         Integer reservationIndex;
         do {
-            reservationIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter your reservation number " +
-                "(enter " +
-                "\"0\" to return back to menu): ", InputType
+            reservationIndex = Integer.parseInt(visualUserMenu.getValidInputFromUser("Enter your reservation number "
+                + "(enter "
+                + "\"0\" to return back to menu): ", InputType
                 .INTEGER));
-            if (reservationIndex.equals("0")) {
+            if (reservationIndex == 0) {
                 return;
             }
         } while (!visualUserMenu.validateIntegerSize(reservations.size(), reservationIndex));

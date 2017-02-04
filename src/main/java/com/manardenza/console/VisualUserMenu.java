@@ -33,7 +33,7 @@ public class VisualUserMenu {
         for (Map.Entry<String, List<E>> entry : map.entrySet()) {
             System.out.print(key++);
             System.out.println(" " + entry.getKey());
-            if (entry.getValue().size()==0) {
+            if (entry.getValue().size() == 0) {
                 System.out.println("\tNo available rooms found.");
             }
             for (int item = 0; item < entry.getValue().size(); item++) {

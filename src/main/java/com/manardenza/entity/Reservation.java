@@ -24,22 +24,9 @@ public class Reservation extends AbstractObject {
         final StringBuilder sb = new StringBuilder();
         sb.append(reservedUser).append("\n")
                 .append(reservedHotel.getName()).append("\t\n")
-                .append("Room = '").append(reservedRoom).append("\n")
+                .append("Room = '").append(reservedRoom)
                 .append("Reserved from = ").append(reservedFrom).append("\n")
                 .append("Reserved to = ").append(reservedTo).append("\n");
         return sb.toString();
     }
-
-
-// TODO: Remove this
-//    @Override
-//    public String toString() {
-//        final StringBuilder sb = new StringBuilder();
-//        sb.append("User = '").append(reservedUser).append('\'' + "\t\n")
-//                .append("Hotel = '").append(reservedHotel).append("\t\n")
-//                .append("Room = '").append(reservedRoom).append('\'' + "\t\n")
-//                .append("Reserved from = '").append(reservedFrom).append('\'' + "\t")
-//                .append("Reserved to = '").append(reservedTo).append('\'' + "\t\n");
-//        return sb.toString();
-//    }
 }
