@@ -30,8 +30,7 @@ The our product is open-sourced software licensed under the MIT license.
 * **Maven**
 * **JDK 8**
 * **Lombok plugin**
-* **Loggack plugin**
-
+* 
 ## Continuous integration tools used
 * **Travis CI**
 * **Trello**
