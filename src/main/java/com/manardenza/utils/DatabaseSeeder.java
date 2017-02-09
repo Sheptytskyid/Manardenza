@@ -63,6 +63,7 @@ public final class DatabaseSeeder {
             USERDAOIMPL.save(new User("Sergey", "Godovany"));
             USERDAOIMPL.save(new User("Scolastyka", "Machura"));
             USERDAOIMPL.save(new User("Ann", "Merryvether"));
+            USERDAOIMPL.save(new User("Denys", "Sheptytskyi"));
         }
         if (!dbFileAlreadySeeded(Injector.getHotelsDatabaseFile())) {
             citiesNameList.add("Kiev");
