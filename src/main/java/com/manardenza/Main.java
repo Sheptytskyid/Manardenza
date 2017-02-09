@@ -19,4 +19,8 @@ public class Main {
         Injector.getConsoleMain().consoleMain();
         reader.close();
     }
+
+    public static void test1() {
+        System.out.println("Test");
+    }
 }
