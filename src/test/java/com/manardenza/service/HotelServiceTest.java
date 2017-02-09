@@ -39,7 +39,6 @@ public class HotelServiceTest {
         Mockito.verify(reservationService, Mockito.times(1))
                 .checkRoomReservation(TestUtils.RESERVED_FROM, TestUtils.RESERVED_TO,
                 hotelService.findPreliminaryRoom(TestUtils.CITY, 2, 300));
-
     }
 
     @Test

@@ -15,6 +15,7 @@ import static com.manardenza.TestUtils.RESERVED_TO;
 import static com.manardenza.TestUtils.ROOM;
 import static com.manardenza.TestUtils.ROOMS_MAP;
 import static com.manardenza.TestUtils.USER;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
